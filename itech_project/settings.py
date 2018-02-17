@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'antifu',
+    'registratoin',
 ]
 
 MIDDLEWARE = [
@@ -104,6 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {'min_length': 6,}
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -112,6 +114,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHashers',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHashers',
+)
 
 
 # Internationalization
@@ -126,6 +135,15 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# registration variables
+# if true, users can register
+REGISTRATION_OPEN = True
+# amount of time given for validation
+ACCOUNT_ACTIVATION_DAYS = 14
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = '/antifu/'
+LOGIN_URL = '/accounts/login/'
 
 
 # Static files (CSS, JavaScript, Images)

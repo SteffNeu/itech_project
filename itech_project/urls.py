@@ -25,8 +25,9 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
 	url(r'^antifu/', include('antifu.urls')),
 	# above maps any URLs starting
-	# with rango/ to be handled bytearray
-	# the rango application
+	# with antifu/ to be handled bytearray
+	# the antifu application
 	url(r'^admin/', admin.site.urls),
-    #url(r'^accounts/', include('registration.backends.simple.urls')),
+    # urls for adding the account settings of django:
+    url(r'^accounts/', include('registration.backends.simple.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
