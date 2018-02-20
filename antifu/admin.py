@@ -1,8 +1,8 @@
 from django.contrib import admin
-from antifu.models import Category
+from antifu.models import Category,Comment,Post,User
 
-class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields =  {'slug':('name',)}
 
 # Register your models here.
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(Category)
+admin.site.register(Comment)
+admin.site.register(Post)
