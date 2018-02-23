@@ -2,16 +2,12 @@
 {% extends 'antifu/base.html' %}
 {% load staticfiles %}
     {% block title_block %}
-        AntiFu
+        Home
     {% endblock %}
 
     {% block body_block %}
-        <h1>Suck it!</h1>
-        <div>
-         hello there, general kenobi!
-        {{ message }}
-         <img src="{% static "images/Hackerman.png" %}"/>
-        </div>
+     			<img src="{%static "images/Hackerman.png"%}"alt ="Picture of me" />
     {% endblock %}
+
 
 

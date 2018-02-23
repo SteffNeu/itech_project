@@ -1,3 +1,7 @@
+{% extends 'antifu/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
 <ul>
   {% if cats %}
     {% for c in cats %}
@@ -7,3 +11,5 @@
     <li><strong>There are no categories on this webpage. What are you even doing here? It is over. The game has ended.</strong></li>
   {% endif %}
 </ul>
+
+{% endblock %}
