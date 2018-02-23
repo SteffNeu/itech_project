@@ -16,7 +16,7 @@ def show_category(request, category_name_slug):
     return HttpResponse("yeah bish")
 
 def aboutUs(request):
-    return HttpResponse("yeah bish")
+    return render(request, 'antifu/aboutUs.html')
 
 def personalHelp(request):
     return HttpResponse("yeah bish")

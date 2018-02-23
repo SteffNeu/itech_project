@@ -1,11 +1,10 @@
-
-
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 {% load staticfiles %}
-{% load antifu_template_tags %}
 
-<html>
-	<head lang="en">
+<html lang="en">
+	<head >
+        <link rel="stylesheet" type="text/css" href="static/css/base.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<meta charset="UTF-8" />
 		<title>
 			Antifu -
@@ -15,34 +14,53 @@
 		</title>
 	</head>
 	<body>
-		<div>
-			{% block body_block %}
 
-			{% endblock %}
+        <div>
+            <h4 class="w3-center">Making the world a better place one comment at the time</h4>
+        </div>
+
+
+        <div class="w3-container w3-light-blue">
+            <ul class="w3-right-align">
+            {%  if user.is_authenticated%}
+                <li class="w3-bar-item w3-button"><a>Hello {{ user }}!</a></li>
+                <li class="w3-bar-item w3-button"> <a href="{% url 'auth_logout' %}">Logout</a></li>
+                <li class="w3-bar-item w3-button"> <a href="{% url 'home' %}">Add A New Category</a></li>
+            {% else %}
+                <li class="w3-bar-item w3-button"><a>Welcome, please register!</a></li>
+                <li class="w3-bar-item w3-button"><a href="{% url 'auth_login' %}">Sign in</a></li>
+                <li class="w3-bar-item w3-button"> <a href="{% url 'registration_register' %}">Register</a></li>
+            {% endif %}
+            </ul>
+        </div>
+
+
+		<div>
+
+            <div class="w3-sidebar w3-bar-block w3-light-grey" style="width: 15%">
+            {% block side_block %}
+                <h3 class="w3-bar-item">Menu</h3>
+                {% if user.is_authenticated %}
+                    <a class="w3-bar-item w3-button"><a href="#">My Profile</a></a>
+                    <a class="w3-bar-item w3-button"> <a href="#">Settings</a></a>
+                {% endif %}
+                    <a class="w3-bar-item w3-button"> <a href="{% url 'home' %}">Home</a></a>
+                    <a class="w3-bar-item w3-button"> <a href="{% url 'aboutUs' %}">About Us</a></a>
+                    <a class="w3-bar-item w3-button"> <a href="#">Contact Us</a></a>
+                    <a class="w3-bar-item w3-button"> <a href="{% url 'personalHelp' %}">Personal Help</a> </a>
+            {% endblock %}
+            </div>
 		</div>
 
-		<div>
-			{% block sidebar_block %}
-				<!--{% get_category_list category %}
-			{% endblock %}
-		</div>
+        <div style="margin-left: 15%">
+            <div class="w3-container">
+                {% block body_block %}
 
-		<hr />
-		<div>
-			<ul>
-				{% if user.is_authenticated %}
-					<li><a href="{%url 'restricted' %}">Restricted Page</a></li>
-					<li> <a href="{% url 'auth_logout' %}">Logout</a></li>
-					<li> <a href="{% url 'home' %}">Add A New Category</a></li>
-				{% else %}
-					<li><a href="{% url 'auth_login' %}">Sign in</a></li>
-					<li> <a href="{% url 'registration_register' %}">Register</a></li>
-				{% endif %}
-				<li> <a href="{% url 'home' %}">About</a></li>
-				<li> <a href="{% url 'home' %}">Home</a></li>
-			</ul>
-		</div>
+                {% endblock %}
+            </div>
+        </div>
+
 	</body>
 </html>
--->
+
 

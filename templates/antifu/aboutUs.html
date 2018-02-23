@@ -1,0 +1,11 @@
+{% extends 'antifu/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    About Us
+{% endblock %}
+{% block side_block%}
+    <img src="{%static "images/kungfury.jpg"%}"alt ="Picture of me" />
+{% endblock %}
+{% block body_block %}
+    <a href="{% url 'home' %}">6x Take her back!</a>
+{% endblock %}
