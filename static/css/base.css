@@ -1,3 +1,6 @@
 
 /*navigation bar*/
-
+#baseHeader {
+  background: #7FFFD4; /* for browser that don't support gradient*/
+  background: linear-gradient(-90deg, #1bffff, #2e3192);
+}

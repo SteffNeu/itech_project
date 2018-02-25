@@ -5,6 +5,7 @@ from antifu import views
 urlpatterns = [
 	url(r'^$', views.home, name='home'),
 	url(r'^aboutUs/$', views.aboutUs, name='aboutUs'),
+	url(r'^contactUs/$', views.contactUs, name='contactUs'),
 	url(r'^personalHelp/$', views.personalHelp, name='personalHelp'),
 	# url(r'^add_category/$', views.add_category, name='add_category'),
 	url(r'^category/(?P<category_name_slug>[\w\-]+)/$',

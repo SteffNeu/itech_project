@@ -18,5 +18,8 @@ def show_category(request, category_name_slug):
 def aboutUs(request):
     return render(request, 'antifu/aboutUs.html')
 
+def contactUs(request):
+    return render(request, 'antifu/contactUs.html')
+
 def personalHelp(request):
-    return HttpResponse("yeah bish")
+    return render(request, 'antifu/personalHelp.html')
