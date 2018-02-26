@@ -4,3 +4,8 @@
   background: #7FFFD4; /* for browser that don't support gradient*/
   background: linear-gradient(-90deg, #1bffff, #2e3192);
 }
+
+.navbar-background {
+  background: #7FFFD4!important; /* for browser that don't support gradient*/
+  background: linear-gradient(-90deg, #1bffff, #2e3192)!important;
+}
