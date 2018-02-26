@@ -3,10 +3,13 @@
 
 <html lang="en">
 	<head >
-        <link rel="stylesheet" type="text/css" href="static/css/base.css">
+        <link rel="stylesheet" type="text/css" href="{%static "css/base.css"%}">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+				{% block link_block %}
+				{% endblock %}
 		<meta charset="UTF-8" />
 		<title>
 			Antifu -
@@ -17,12 +20,6 @@
 	</head>
 	<body>
 		<header classs="main-header" id="baseHeader">
-			<style>
-				#baseHeader {
-					background: #7FFFD4; /* for browser that don't support gradient*/
-					background: linear-gradient(-90deg, #1bffff, #2e3192);
-				}
-			</style>
 			<div class="container">
         <div class="row" > <!--w3-light-blue-->
 					<div class="col-sm-3 col-xs-3 header-left">
@@ -65,6 +62,7 @@
                     <a class="w3-bar-item w3-button"> <a href="{% url 'aboutUs' %}">About Us</a></a>
                     <a class="w3-bar-item w3-button"> <a href="#">Contact Us</a></a>
                     <a class="w3-bar-item w3-button"> <a href="{% url 'personalHelp' %}">Personal Help</a> </a>
+                    <a class="w3-bar-item w3-button"> <a href="{% url 'FAQ' %}">FAQ</a> </a>
             {% endblock %}
             </div>
 		</div>

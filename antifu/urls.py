@@ -7,6 +7,7 @@ urlpatterns = [
 	url(r'^aboutUs/$', views.aboutUs, name='aboutUs'),
 	url(r'^contactUs/$', views.contactUs, name='contactUs'),
 	url(r'^personalHelp/$', views.personalHelp, name='personalHelp'),
+	url(r'^faq/$', views.faq, name='FAQ'),
 	# url(r'^add_category/$', views.add_category, name='add_category'),
 	url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
 		views.show_category, name='show_category'),

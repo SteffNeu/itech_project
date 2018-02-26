@@ -1,0 +1,35 @@
+{% extends 'antifu/base.html' %}
+{% load staticfiles %}
+{% block link_block %}
+  <link rel="stylesheet" type="text/css" href="{%static "css/faq.css"%}">
+  <script src="{%static "js/faq.js" %}"></script>
+{% endblock %}
+{% block title_block %}
+    Frequently asked qustions - FAQ
+{% endblock %}
+{% block body_block %}
+<div class="faq_container">
+  <div class="faq">
+    <div class="faq_question">How do I censor my posts properly?</div>
+    <div class="faq_answer_container">
+      <div class="faq_answer">Answer goes here</div>
+    </div>
+  </div>
+</div>
+<div class="faq_container">
+  <div class="faq">
+    <div class="faq_question">How does the rating of the posts go?</div>
+    <div class="faq_answer_container">
+      <div class="faq_answer">Answer goes here</div>
+    </div>
+  </div>
+</div>
+<div class="faq_container">
+  <div class="faq">
+    <div class="faq_question">How do I report an inappropriate post or comment?</div>
+    <div class="faq_answer_container">
+      <div class="faq_answer">Answer goes here</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

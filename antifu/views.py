@@ -23,3 +23,6 @@ def contactUs(request):
 
 def personalHelp(request):
     return render(request, 'antifu/personalHelp.html')
+
+def faq(request):
+    return render(request, 'antifu/FAQ.html')
