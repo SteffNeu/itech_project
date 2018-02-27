@@ -29,17 +29,33 @@
 					</div>
 
 					<div class = "col-sm-6 xs-hidden header-center">
-						<h4 class="text-center">Making the world a better place one comment at the time</h4>
+                        <h4 class="text-center">Making the world a better place one comment at the time</h4>
 					</div>
 
-					<div class="col-sm-3 col-xs-9 header-right">
-
+					<div class="col-sm-3 col-xs-9 header-center">
+                        <nav class="footer navbar navbar-inverse navbar-background " style="border: none!important;">
+                            <div class="container-fluid">
+                                <ul class="nav navbar-nav" style="float: left;">
+                                   <li class="dropdown"><span class="glyphicon glyphicon-align-justify text-white"></span></li>
+                                </ul>
+                                <ul class="nav navbar-nav" style="float: right;">
+                                   {% if user.is_authenticated %}
+                                       <li><a class="text-white" href="{% url 'auth_logout' %}">Logout</a> </li>
+                                   {% else %}
+                                       <li><a class="text-white" href="{% url 'auth_login' %}">Login</a> </li>
+                                       <li><a class="text-white" href="{% url 'registration_register' %}">Sign Up</a> </li>
+                                   {% endif %}
+                                </ul>
+                             </div>
+                        </nav>
 					</div>
             </div>
 
         </div>
 
 		</header>
+
+
 
 		<div>
             {% block body_block %}
@@ -50,11 +66,11 @@
         <div>
             <nav class="footer navbar-fixed-bottom navbar navbar-inverse navbar-background">
                 <div class="container-fluid">
-                    <ul class="nav navbar-nav text-w">
-                       <li><a href="{% url 'contactUs' %}">Contact Us</a></li>
-                       <li><a href="{% url 'aboutUs' %}">About Us</a></li>
-                       <li><a href="{% url 'personalHelp' %}">Personal Help</a></li>
-                       <li><a href="{% url 'FAQ' %}">FAQ</a></li>
+                    <ul class="nav navbar-nav" style="float:inside">
+                       <li><a class="text-white" href="{% url 'contactUs' %}">Contact Us</a></li>
+                       <li><a class="text-white" href="{% url 'aboutUs' %}">About Us</a></li>
+                       <li><a class="text-white" href="{% url 'personalHelp' %}">Personal Help</a></li>
+                       <li><a class="text-white override-hover" href="{% url 'FAQ' %}">FAQ</a></li>
                     </ul>
                  </div>
             </nav>
