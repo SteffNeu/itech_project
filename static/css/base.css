@@ -7,8 +7,41 @@
 }
 
 .navbar-background {
-  background: ##0b7ac8!important; /* for browser that don't support gradient*/ /*TODO change to this color*/
-  background: linear-gradient(-90deg, #1bffff, #2e3192)!important;
+  background: transparent; /* for browser that don't support gradient*/ /*TODO change to this color*/
+  background: transparent;
+}
+
+header .navbar {
+  border: none!important;
+  font-size: 20px;
+}
+.navbar-bottom a{
+  overflow: hidden;
+  div {
+    display: inline;
+  }
+}
+
+@media (max-width:550px){
+  .navbar-bottom a {
+    font-size: 0px !important;
+  }
+  .navbar-bottom a span {
+    font-size: 20px !important;
+  }
+}
+
+@grid-breakpoints{
+  // Extra small screen / phone
+  xs: 500px,
+  // Small screen / phone
+  sm: 689px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 992px,
+  // Extra large screen / wide desktop
+  xl: 1200px
 }
 
 .text-white{

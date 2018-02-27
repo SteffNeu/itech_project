@@ -1,4 +1,6 @@
+{% extends 'antifu/base.html' %}
 {% block body_block %}
+  <div class="container text-center">
     <h1>Login</h1>
     <form method="post" action=".">
         {% csrf_token %}
@@ -10,4 +12,5 @@
         Not a member?
         <a href="{% url 'registration_register' %}">Register</a>
     </p>
+  </div>
 {% endblock %}
