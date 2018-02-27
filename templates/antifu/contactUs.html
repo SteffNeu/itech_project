@@ -1,8 +1,50 @@
 {% extends 'antifu/base.html' %}
 {% load staticfiles %}
 {% block title_block %}
-    About Us
+    Contact Us
+{% endblock %}
+{% block header_block %}
+  Contact Us
 {% endblock %}
 {% block body_block %}
-    <a href="{% url 'home' %}">6x Take her back!</a>
+    <div class="contact-section" id="contact">
+      <div class="container">
+        If you have any questions or suggestions towards our webpage we would be happy to be contacted by you.
+      </div>
+			<div class="container">
+				<form>
+					<div class="col-md-6 form-line">
+			  			<div class="form-group">
+			  				<label for="exampleInputUsername">Your name</label>
+					    	<input type="text" class="form-control" id="" placeholder=" Enter Name">
+				  		</div>
+				  		<div class="form-group">
+					    	<label for="exampleInputEmail">Email Address</label>
+					    	<input type="email" class="form-control" id="exampleInputEmail" placeholder=" Enter valid Email">
+					  	</div>
+              <div class="form-group">
+                <label for="contactReason">Select contact reason:</label>
+                <select class="form-control" id="contactReason">
+                  <option disabled selected value> -- select a reason of contact -- </option>
+                  <option>Ideas of Improvment</option>
+                  <option>Problems with the Webpage</option>
+                  <option>You want information from us</option>
+                  <option>Other</option>
+                </select>
+              </div>
+			  		</div>
+			  		<div class="col-md-6">
+			  			<div class="form-group">
+			  				<label for ="description"> Message</label>
+			  			 	<textarea  class="form-control" id="description" placeholder="Enter Your Message"></textarea>
+			  			</div>
+			  			<div>
+
+			  				<button type="button" class="btn btn-default submit">Send Message</button> <!-- possible to insert icon into button like this: <i class="fa fa-paper-plane" aria-hidden="true"></i> -->
+			  			</div>
+
+					</div>
+				</form>
+			</div>
+    </div>
 {% endblock %}

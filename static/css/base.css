@@ -1,12 +1,13 @@
 
 /*navigation bar*/
 #baseHeader {
-  background: #7FFFD4; /* for browser that don't support gradient*/
+  background: #0b7ac8; /* for browser that don't support gradient*/
   background: linear-gradient(-90deg, #1bffff, #2e3192);
+  color: white;
 }
 
 .navbar-background {
-  background: #7FFFD4!important; /* for browser that don't support gradient*/
+  background: ##0b7ac8!important; /* for browser that don't support gradient*/ /*TODO change to this color*/
   background: linear-gradient(-90deg, #1bffff, #2e3192)!important;
 }
 
@@ -16,4 +17,12 @@
 
 .override-hover a:hover{
   color: red!important;
+}
+
+#contact{
+  height: 550px;
+}
+
+#navbarItems li a {
+    color: white;
 }
