@@ -6,14 +6,44 @@
   color: white;
 }
 
+.container-all {
+  margin-top: 20px;
+  margin-right: 30px;
+  margin-bottom: 50px;
+  margin-left: 30px;
+}
+
 .navbar-background {
-  background: transparent; /* for browser that don't support gradient*/ /*TODO change to this color*/
   background: transparent;
+  border: none!important;
 }
 
 header .navbar {
   border: none!important;
   font-size: 20px;
+  margin-top: 20px;
+  margin-right: 5px;
+  margin-bottom: 20px;
+
+  .navbar-right {
+    float: right;
+  }
+
+  img {
+    margin-top: 20px;
+  }
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #021d31
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+
+#baseBottom{
+  background:  #0b7ac8;
+  border: none!important;
 }
 .navbar-bottom a{
   overflow: hidden;

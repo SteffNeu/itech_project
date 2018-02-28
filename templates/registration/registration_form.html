@@ -1,8 +1,32 @@
+{% extends 'antifu/base.html' %}
+{% load staticfiles %}
+{% block link_block %}
+  <link rel="stylesheet" type="text/css" href="{%static "css/registration.css"%}">
+{% endblock %}
+
+{% block title_block %}
+  Registration
+{% endblock %}
+
 {% block body_block %}
-    <h1>Register Here</h1>
+<div class="container-registration text-center rounded-container">
+  <br />
+  <h1>Register Here</h1>
+  <br />
+  <div class="container form-container text-center">
     <form method="post" action=".">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit" />
     </form>
+  </div>
+  <br />
+  <p>
+      Already a member?
+      <a href="{% url 'auth_login' %}" class="btn btn-primary" role="button">Login</a>
+  </p>
+  <br />
+</div>
+
+
 {% endblock %}
