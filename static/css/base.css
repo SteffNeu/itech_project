@@ -18,20 +18,34 @@
   border: none!important;
 }
 
-header .navbar {
+.navbar-inverse {
   border: none!important;
   font-size: 20px;
-  margin-top: 20px;
   margin-right: 5px;
   margin-bottom: 20px;
+  height: 105px;
 
   .navbar-right {
     float: right;
   }
+}
+.navbar-brand img{
+    margin-top: -10px;
+    margin-left: 5px;
+    margin-bottom:5px;
+    margin-right: 5px;
+}
 
-  img {
-    margin-top: 20px;
-  }
+.navbar-collapse {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.navbar-toggle {
+  margin-top: 15px;
+  margin-right: 25px;
+  background: transparent;
+  border : none!important;
 }
 
 h1 {
@@ -44,12 +58,37 @@ h1 {
 #baseBottom{
   background:  #0b7ac8;
   border: none!important;
+  display: inline-block;
+  float : none;
 }
+
+.navbar-fixed-bottom{
+  display: inline-block;
+  float : none;
+  vertical-align: top;
+}
+
 .navbar-bottom a{
   overflow: hidden;
   div {
     display: inline;
   }
+}
+.navbar-nav-bottom {
+  width: 100%;
+
+}
+.navbar-nav-bottom>li {
+  float: none;
+  display: inline-block;
+}
+.navbar-nav-bottom {
+  width: 100%;
+
+}
+.navbar-nav-bottom>li {
+  float: none;
+  display: inline-block;
 }
 
 @media (max-width:550px){
