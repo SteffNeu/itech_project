@@ -26,7 +26,7 @@ from antifu.forms import UserForm
 
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
-        return '/antifu/'
+        return '/antifu/profile_registration'
 
 
 urlpatterns = [
@@ -38,7 +38,8 @@ urlpatterns = [
 	url(r'^admin/', admin.site.urls),
     # urls for adding the account settings of django:
     url(r'^accounts/register/$',
-        RegistrationView.as_view(form_class=UserForm),
+        MyRegistrationView.as_view(form_class=UserForm),
         name='registration_register', ),
     url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^antifu/profile_registration',views.register_profile,name='register_profile')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
