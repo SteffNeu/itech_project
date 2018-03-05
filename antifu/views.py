@@ -1,20 +1,26 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from antifu.models import Category, UserProfile
 from antifu.forms import UserProfileForm
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
+
+from datetime import datetime
+
 # Create your views here.
 def home(request):
-    # this is just an example for integration
-    category_list = Category.objects.order_by('-likes')[:5]
+    context_dict = {}
+
+    category_list = Category.objects.all()
     context_dict = {'categories': category_list}
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
     return render(request, 'antifu/home.html', context_dict)
+
 
 def show_category(request, category_name_slug):
     return HttpResponse("yeah bish")

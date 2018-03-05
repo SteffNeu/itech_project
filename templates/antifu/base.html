@@ -7,6 +7,8 @@
 				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+				<script src="{% static "js/antifu-jquery.js" %}"></script>
+				<script src="{% static "js/antifu-ajax.js" %}"></script>
   			<script 			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
 				</script>
 				{% block link_block %}
@@ -42,46 +44,44 @@
 		 </h3>
 			<div class="collapse navbar-collapse" id="AntifuMenu">
 				<ul class="nav navbar-nav  navbar-right">
+					<div class="row">
+					 {% if user.is_authenticated %}
+						 <li>
+							 <a class="text-white" href="{% url 'auth_logout' %}">
+								 <span class="glyphicon glyphicon-log-out"></span>
+								 <span class="text hidden-xs  hidden-sm"> Logout</span>
+							 </a>
+						 </li>
+					{% else %}
+						<li>
+							 <a class="text-white" href="{% url 'auth_login' %}">
+								 <span class="glyphicon glyphicon-log-in"></span>
+								 <span class="text hidden-xs hidden-sm"> Login</span>
+							 </a>
+						 </li>
+						 <li>
+							 <a class="text-white" href="{% url 'registration_register' %}">
+								 <span class="glyphicon glyphicon-user"></span>
+								 <span class="text hidden-xs  hidden-sm"> Sign Up</span>
+							 </a>
+						 </li>
+					{% endif %}
+				</div>
+				<div class="row">
 					<li class="text-white">
 						<a class="search"><span class="glyphicon glyphicon-search text-white"></span></a>
 					</li>
 					<li class="dropdown">
-					  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 							<span class="glyphicon glyphicon-list-alt g"></span>
 							<span class="text hidden-sm"> Categories</span>
 							<span class="caret"></span>
 						</a>
 						<ul  class="dropdown-menu">
-							{% if categories %}
-							{% for category in categories %}
-								<li><a href ="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
-							{% endfor %}
-							{% else %}
-								<li><strong>No Categories</strong></li>
-							{% endif %}
+							<li><strong>No Categories</strong></li>
 						</ul>
 					</li>
-				 {% if user.is_authenticated %}
-					 <li>
-						 <a class="text-white" href="{% url 'auth_logout' %}">
-							 <span class="glyphicon glyphicon-log-out"></span>
-							 <span class="text hidden-xs  hidden-sm"> Logout</span>
-						 </a>
-					 </li>
-				{% else %}
-					<li>
-						 <a class="text-white" href="{% url 'auth_login' %}">
-							 <span class="glyphicon glyphicon-log-in"></span>
-							 <span class="text hidden-xs hidden-sm"> Login</span>
-						 </a>
-					 </li>
-					 <li>
-						 <a class="text-white" href="{% url 'registration_register' %}">
-							 <span class="glyphicon glyphicon-user"></span>
-							 <span class="text hidden-xs  hidden-sm"> Sign Up</span>
-						 </a>
-					 </li>
-				{% endif %}
+				</div>
 				</ul>
 			</div>
 		  </div>
