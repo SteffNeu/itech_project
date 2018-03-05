@@ -29,6 +29,7 @@ class Category(models.Model):
 
 
 class Comment(models.Model):
+    id = models.AutoField(primary_key=True)
     comment = models.TextField(max_length=1024)
     loveliness = models.IntegerField(default=0)
     burnfactor = models.IntegerField(default=0)
