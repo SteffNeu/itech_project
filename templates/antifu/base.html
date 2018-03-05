@@ -47,15 +47,13 @@
 					<div class="row">
 					 {% if user.is_authenticated %}
 						 <li>
-							 <a class="text-white" href="{% url 'profile' user.username %}">
-								 <span class="glyphicon"></span>
-								 <span class="text hidden-xs  hidden-sm"> Welcome, {{ user.username }}</span>
-							 </a>
-						 </li>
-						 <li>
 							 <a class="text-white" href="{% url 'auth_logout' %}">
 								 <span class="glyphicon glyphicon-log-out"></span>
 								 <span class="text hidden-xs  hidden-sm"> Logout</span>
+							 </a>
+							 <a class="text-white" href="{% url 'profile' user.username %}">
+								 <span class="glyphicon"></span>
+								 <span class="text hidden-xs  hidden-sm"> Welcome, {{ user.username }}</span>
 							 </a>
 						 </li>
 					{% else %}
