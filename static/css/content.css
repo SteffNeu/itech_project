@@ -1,0 +1,62 @@
+
+.comment_container{
+    margin-top: 5px;
+}
+
+.thin-border{
+    border : solid;
+    border-width: thin;
+    border-color: black !important;
+}
+
+.small_profile{
+    border : solid;
+    border-width: thin;
+    width:40px;
+    height:40px;
+}
+
+.post_image{
+	height:100%;
+}
+
+.comment_rating{
+    text-align: center;
+}
+
+.btn {
+    border: none !important;
+	background:none;
+}
+
+.report{
+    text-align: center;
+}
+
+.edit{
+    text-align: center;
+}
+
+.top{
+    margin-top: 5px;
+}
+
+.colouring{
+    color: white !important;
+    background-color: dodgerblue !important;
+}
+
+.c_number{
+	color: white;
+}
+
+.oaBack{
+	background-color:dodgerblue !important;
+}
+
+.post_tags{
+    border : solid;
+    border-width: thin;
+    border-color: black !important;
+	border-top:none!important;
+}
