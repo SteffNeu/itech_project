@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<head>
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.bundle.min.js"></script>
+	<script src="js/bootstrap-dropdownhover.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
+</head>
+
+<body>
+<div class="comment_container oaBack">
+	<div class="comment">
+	<div class="container">
+		<div class="row">
+			<div class="user_info col-sm-1">
+				<div class="row">
+					<div class="comment_profile_pic col-sm-1">
+						<img class="small_profile" src="{% static "" %}" alt="No Image"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="comment_user col-sm-1">
+						Username
+					</div>
+				</div>
+			</div>
+			<div id="postnr" class="comment_content thin-border col-sm-9">
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.		
+			</div>
+			<div class="options col-sm-1">
+				<div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+				  <span class="glyphicon glyphicon-option-horizontal"></span>
+				  </button>
+				  <ul class="dropdown-menu">
+					<li class="report"><span class="glyphicon glyphicon-alert" role="button"> Report</span></li>
+					<li class="edit"><span class="glyphicon glyphicon-pencil" role="button"> Edit</span></li>
+				  </ul>
+				</div>
+			</div>
+		</div>
+		<div class="row top">
+			<div class="spaceholder col-sm-1"></div>
+			<div class="comment_rating col-sm-1">
+				<div class="row">
+					<div id="love" class="comment_rating c_icon glyphicon glyphicon-heart col-sm-1" role="button"></div>
+				</div>
+				<div class="row">				
+					<div id="love_count" class="comment_rating c_number col-sm-1">3</div>
+				</div>
+			</div>
+			<div class="comment_rating col-sm-1">
+				<div class="row">
+					<div id="burn" class="comment_rating c_icon glyphicon glyphicon-fire col-sm-1" role="button"></div>
+				</div>
+				<div class="row">
+					<div id="burn_count" class="comment_rating c_number col-sm-1">8</div>
+				</div>
+				</div>
+			<div class="comment_rating col-sm-1">
+				<div class="row">
+					<div id="logic" class="comment_rating c_icon glyphicon glyphicon-eye-open col-sm-1" role="button"></div>
+				</div>
+				<div class="row">
+					<div id="logic_count" class="comment_rating c_number col-sm-1">12</div>
+				</div>
+									
+			</div>
+			<div class="comment_rating col-sm-1">
+				<div class="row">
+					<div id="target" class="comment_rating c_icon glyphicon glyphicon-screenshot col-sm-1" role="button"></div>
+				</div>
+				<div class="row">
+					<div id="target_count" class="comment_rating c_number col-sm-1">6</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	</div>
+</div>
+
+
+
+<script>
+
+$('.report').click( function(){
+	alert("selected report")
+});
+$('.edit').click( function(source){
+	alert("selected edit")	
+});
+
+$('.c_icon').click( function(source){
+	var id = source.target.id+"_count";
+	var count = document.getElementById(id).innerHTML;
+	count++;
+	document.getElementById(id).innerHTML = count;
+});
+
+
+</script>
+</body>
