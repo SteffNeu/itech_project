@@ -9,12 +9,13 @@ from django.shortcuts import redirect
 # Create your views here.
 def home(request):
     # this is just an example for integration
-    category_list = Category.objects.order_by('-likes')[:5]
-    context_dict = {'categories': category_list}
+    #category_list = Category.objects.order_by('-likes')[:5]
+    #context_dict = {'categories': category_list}
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
-    return render(request, 'antifu/home.html', context_dict)
+    #return render(request, 'antifu/home.html', context_dict)
+    return render(request, 'antifu/home.html',)
 
 def show_category(request, category_name_slug):
     return HttpResponse("yeah bish")
@@ -32,10 +33,14 @@ def faq(request):
     return render(request, 'antifu/FAQ.html')
 
 @login_required
-def register_profile(request):
-
+def register_profile(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return redirect('/antifu/')
+    userprofile = UserProfile.objects.get_or_create(user=user)[0]
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
 
         if profile_form.is_valid():
             profile = profile_form.save(commit=True)
