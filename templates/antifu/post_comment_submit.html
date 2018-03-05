@@ -1,7 +1,7 @@
-<!--
-  input post design
 
-  <!-- Comments Form ->
+  {% get_post %}
+
+  <!-- Comments Form -->
   <div class="card my-4">
     <h5 class="card-header">Leave a Comment:</h5>
     <div class="card-body">
@@ -10,9 +10,11 @@
           <textarea class="form-control" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <!-- add a way to save comments-->
       </form>
     </div>
   </div>
 
-  input comment design
--->
+  {% for c in posts %}
+    {% get_comment%}
+  {% endfor %}
