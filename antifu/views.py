@@ -75,5 +75,8 @@ def profile(request, username):
         else:
             print(form.errors)
 
-    return render(request, 'antifu/profile.html',
+    return render(request, 'profile/profile.html',
         {'userprofile': userprofile, 'selecteduser': user, 'form': form})
+
+def myContents(request):
+    return render(request, 'profile/MyContentsTab.html', {})

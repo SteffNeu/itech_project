@@ -41,5 +41,4 @@ urlpatterns = [
         MyRegistrationView.as_view(form_class=UserForm),
         name='registration_register', ),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^antifu/profile_registration',views.register_profile,name='register_profile')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

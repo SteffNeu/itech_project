@@ -63,6 +63,7 @@ class UserProfile(models.Model):
     comments = models.ForeignKey(Comment, null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
+    totalLove = models.IntegerField(default=0)
 
     def __str__(self):
         return self.user.username
