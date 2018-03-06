@@ -86,9 +86,9 @@
                     <div class="col-lg-6">
                       {% if categories %}
                       <ul class="list-unstyled mb-0">
-              					{% for category in categories %}
-              						<li><a href ="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
-              					{% endfor %}
+                        {% for category in categories %}
+                            <li><a href ="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
+                        {% endfor %}
                       </ul>
                       {% else %}
                         <strong>There are no categories present.</strong>

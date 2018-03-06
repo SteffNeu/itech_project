@@ -12,15 +12,13 @@ from datetime import datetime
 
 # Create your views here.
 def home(request):
-    context_dict = {}
-
     category_list = Category.objects.all()
     context_dict = {'categories': category_list}
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
     #return render(request, 'antifu/home.html', context_dict)
-    return render(request, 'antifu/home.html',)
+    return render(request, 'antifu/home.html', context_dict)
 
 
 def show_category(request, category_name_slug):

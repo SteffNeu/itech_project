@@ -81,8 +81,15 @@
 							<span class="text hidden-sm"> Categories</span>
 							<span class="caret"></span>
 						</a>
-						<ul  class="dropdown-menu">
-							<li><strong>No Categories</strong></li>
+						<ul class="dropdown-menu" >
+                        {% if categories %}
+                            {% for cat in categories %}
+							    <li class="dropdown-item" style="color: #0b7ac8">{{ cat.name }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>No categories</li>
+                        {% endif %}
+
 						</ul>
 					</li>
 				</div>
