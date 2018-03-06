@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="content.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
 </head>
 <body>
 <div class="post_container">
@@ -12,7 +13,7 @@
 		<div class="row top">
 			<div class="col-sm-6">
 				<div class="post_image thin-border">
-					<img src="hate.jpg" alt="No Image" />
+					<img class="img-responsive post_image" src="{% static "images/hate.jpg" %}" alt="No Image" />
 				</div>
 			</div>
 			<div class="colouring col-sm-6">

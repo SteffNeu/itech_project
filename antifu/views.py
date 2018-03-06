@@ -38,6 +38,12 @@ def personalHelp(request):
 def faq(request):
     return render(request, 'antifu/FAQ.html')
 
+def post(request):
+    return render(request,'antifu/post.html')
+
+def comment(request):
+    return render(request,'antifu/comment.html')
+
 
 @login_required
 def register_profile(request):
