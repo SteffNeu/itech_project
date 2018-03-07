@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django_comments',
     'antifu',
     'registration',
 ]
@@ -154,3 +156,6 @@ STATIC_URL = '/static/'
 # media urls
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
+#set up for comments
+SITE_ID = 1

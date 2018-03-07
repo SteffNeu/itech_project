@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from antifu.models import Category, UserProfile
+from antifu.models import Category, UserProfile, Comment, Post
 from antifu.forms import UserProfileForm
 
 from django.contrib.auth.models import User
@@ -37,9 +37,15 @@ def faq(request):
     return render(request, 'antifu/FAQ.html')
 
 def post(request):
-    return render(request,'antifu/post.html')
+
+
+	comments = Comment.objects.all();
+#	comments = Comment.objects.filter(post=post);
+	context_dict ={'comments':comments}
+	return render(request,'antifu/post.html',context_dict)
 
 def comment(request):
+
     return render(request,'antifu/comment.html')
 
 

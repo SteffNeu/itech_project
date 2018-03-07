@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load comments %}
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -81,6 +82,15 @@
 </div>
 
 </body>
+
+<div>
+    {% for comment in comments %}
+        <div>
+            {{ comment.comment }}
+        </div>
+
+    {% endfor %}
+</div>
 
 
 <div id="stars" class="star_rating container" style="display:none">
