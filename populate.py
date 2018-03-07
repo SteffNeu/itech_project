@@ -10,53 +10,114 @@ from django.contrib.auth.models import User
 
 def populate():
 
-    username = "TomCat"
-    email = "user@email.com"
-    password="mypassw0rd"
-    picture = "H:\Internet-Technology\itech_project\static\images\Scannen0002.jpg"
+    users = [
+        {
+            "username":"TomCat",
+            "email":"user@email.com",
+            "password":"mypassw0rd",
+            "picture":"H:\Internet-Technology\itech_project\static\images\Scannen0002.jpg"
 
-    comment = {"comment": "YOLO",
-                "loveliness": 5,
-                "burnfactor": 4,
-                "logicRating": 2,
-                "accuracyRating": 3 }
+        },
+        {
+            "username": "PussCat",
+            "email": "user2@email.com",
+            "password": "newPassw0rd",
+            "picture": "H:\Internet-Technology\itech_project\static\images\pussCatImg.jpg"
+
+        }
+    ]
+
+    comment = [
+        {
+            "comment": "YOLO",
+            "loveliness": 5,
+            "burnfactor": 4,
+            "logicRating": 2,
+            "accuracyRating": 3
+        },
+        {
+            "comment": "he IS perfect",
+            "loveliness": 78,
+            "burnfactor": 0,
+            "logicRating": 7,
+            "accuracyRating": 20
+        },
+        {
+            "comment": "you are just jealous",
+            "loveliness": 3,
+            "burnfactor": 2,
+            "logicRating": 9,
+            "accuracyRating": 90
+        }
+    ]
 
     lgbtq_post = [
         {"title": "Adam and Steve",
-        "context": "in tweeter",
-        "tags": "#homophobic #lgbtq+",
-        "user": "",
-        "grammarFail": 5,
-        "logicFail": 46,
-        "toxicity": 87,
-        "harmful": 76,
-        "report": 5,
-        "views": 23,
-        "picturePost": "post_pictures/Adam_And_Steve.PNG",
-        "comment": comment},
+         "context": "in tweeter",
+         "tags": "#homophobic #lgbtq+",
+         "user": "",
+         "grammarFail": 5,
+         "logicFail": 46,
+         "toxicity": 87,
+         "harmful": 76,
+         "report": 5,
+         "views": 23,
+         "picturePost": "post_pictures/Adam_And_Steve.PNG"},
     ]
 
-    cats = {"People": {"posts": lgbtq_post},
-            "Racism": {"posts": lgbtq_post},
+    people_post = [
+        {"title": "Ryan Gosling",
+         "context": "celebrities read mean tweets",
+         "tags": "#theotherryan #not-deadpool #perfectcheekbone",
+         "user": "",
+         "grammarFail": 2,
+         "logicFail": 100,
+         "toxicity": 187,
+         "harmful": 3,
+         "report": 1,
+         "views": 260,
+         "picturePost": "post_pictures/ryan-gosling-tweets.jpg",
+         },
+    ]
+
+    cats = {"People": {"posts": people_post},
+            "Racism": {"posts": ""},
             "LGBTQ+": {"posts": lgbtq_post},
-            "Politics": {"posts": lgbtq_post},
-            "Troll": {"posts": lgbtq_post},
-            "PassiveAggressive": {"posts": lgbtq_post},
-            "Missinformation": {"posts": lgbtq_post},
-            "Ableism": {"posts": lgbtq_post},
-            "SelfHate": {"posts": lgbtq_post},
-            "Relationships": {"posts": lgbtq_post},
-            "Religious": {"posts": lgbtq_post}}
+            "Politics": {"posts": ""},
+            "Troll": {"posts": ""},
+            "PassiveAggressive": {"posts": ""},
+            "Missinformation": {"posts": ""},
+            "Ableism": {"posts": ""},
+            "SelfHate": {"posts": ""},
+            "Relationships": {"posts": ""},
+            "Religious": {"posts": ""}}
 
 
-    user = create_su(username,email,password,picture)
+    user = create_su(users[0]["username"],users[0]["email"],users[0]["password"],users[0]["picture"])
+    user2 = create_su(users[1]["username"], users[1]["email"], users[1]["password"], users[1]["picture"])
+    print(users[0]["username"])
+    print(users[0]["email"])
+    print(users[0]["password"])
+    print(users[0]["picture"])
 
+    #user2 = create_su("TomCat","email@email","password23","H:\Internet-Technology\itech_project\static\images\pussCatImg.jpg")
+   # user =create_su("PussCat","email2@Gemail","password232","H:\Internet-Technology\itech_project\static\images\pussCatImg.jpg")
     for cat, cat_data in cats.items():
         c = add_cat(cat)
         for p in cat_data["posts"]:
-            add_post(c, p["title"], p["context"], user, p["tags"],p["grammarFail"],
-                        p["logicFail"],p["toxicity"],p["harmful"],p["report"],
-                        p["views"],p["picturePost"],p["comment"])
+            if cat_data["posts"] == people_post:
+                post = add_post(c, p["title"], p["context"], user, p["tags"],p["grammarFail"],
+                            p["logicFail"],p["toxicity"],p["harmful"],p["report"],
+                            p["views"],p["picturePost"]
+                         )
+
+                add_comm(post,comment[1],user2)
+                add_comm(post,comment[2],user)
+            elif cat_data["posts"] == lgbtq_post:
+                post = add_post(c, p["title"], p["context"], user2, p["tags"], p["grammarFail"],
+                         p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                         p["views"], p["picturePost"])
+                add_comm(post, comment[0], user)
 
 
 def create_su(username, email, password, picture):
@@ -78,7 +139,7 @@ def add_cat(name):
 
 
 def add_post(cat, title, context, user, tags, grammarFail,
-            logicFail, toxicity, harmful, report, views, picturePost, comment):
+            logicFail, toxicity, harmful, report, views, picturePost):
     p = Post.objects.get_or_create(category=cat, title=title)[0]
     p.context=context
     p.tags=tags
@@ -91,7 +152,7 @@ def add_post(cat, title, context, user, tags, grammarFail,
     p.views=views
     p.picturePost=picturePost
 
-    add_comm(p,comment,user)
+
     p.save()
     return p
 
