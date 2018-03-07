@@ -32,6 +32,7 @@ class Category(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     picture = models.ImageField(upload_to='profile_images', blank=True)
+    totallove = models.IntegerField(default = 0)
 
     def __str__(self):
         return self.user.username
@@ -40,7 +41,7 @@ class UserProfile(models.Model):
 
 class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=64)
     context = models.TextField(max_length=512)
     tags = models.CharField(max_length=128)
@@ -57,8 +58,8 @@ class Post(models.Model):
 
 class Comment(models.Model):
     id = models.AutoField(primary_key=True)
-    post = models.ForeignKey(Post)
-    user = models.ForeignKey(UserProfile)
+    post = models.ForeignKey(Post, null=True)
+    user = models.ForeignKey(UserProfile, null=True)
     comment = models.TextField(max_length=1024)
     loveliness = models.IntegerField(default=0)
     burnfactor = models.IntegerField(default=0)
