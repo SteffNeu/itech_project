@@ -15,14 +15,14 @@ def populate():
             "username":"TomCat",
             "email":"user@email.com",
             "password":"mypassw0rd",
-            "picture":os.path.join(os.getcwd(),"\static\images\Scannen0002.jpg")
+            "picture":"Scannen0002.jpg"
 
         },
         {
             "username": "PussCat",
             "email": "user2@email.com",
             "password": "newPassw0rd",
-            "picture": os.path.join(os.getcwd(),"\static\images\pussCatImg.jpg")
+            "picture": "pussCatImg.jpg"
 
         }
     ]

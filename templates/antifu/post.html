@@ -19,7 +19,7 @@
 		<div class="row top">
 			<div class="col-sm-6">
 				<div class="post_image thin-border">
-					<img class="img-responsive post_image" src="{% static "images/hate.jpg" %}" alt="No Image" />
+					<img class="img-responsive post_image" src="{{MEDIA_URL}}post_pictures/Adam_And_Steve.PNG" alt="No Image" />
 				</div>
 			</div>
 			<div class="colouring col-sm-6">
@@ -91,7 +91,6 @@
 <div>
     <ul>
     {% for c in comments %}
-        {{ c.user.picture }}
         <div class="comment_container ">
             <div class="comment">
             <div class="container">
@@ -99,7 +98,7 @@
                     <div class="user_info col-sm-1">
                         <div class="row">
                             <div class="comment_profile_pic col-sm-1">
-                                <img class="small_profile" src="{% static "images/Scannen0002.jpg" %}" alt="No Image"/>
+                                <img class="small_profile" src="{{ MEDIA_URL }}profile_images/{{ c.user.picture }}" alt="No Image"/>
                             </div>
                         </div>
                         <div class="row">
