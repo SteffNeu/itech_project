@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from antifu.models import Category, UserProfile
+from antifu.models import Category, UserProfile, Comment, Post
 from antifu.forms import UserProfileForm
 
 from django.contrib.auth.models import User

@@ -15,14 +15,14 @@ def populate():
             "username":"TomCat",
             "email":"user@email.com",
             "password":"mypassw0rd",
-            "picture":"H:\Internet-Technology\itech_project\static\images\Scannen0002.jpg"
+            "picture":os.path.join(os.getcwd(),"\static\images\Scannen0002.jpg")
 
         },
         {
             "username": "PussCat",
             "email": "user2@email.com",
             "password": "newPassw0rd",
-            "picture": "H:\Internet-Technology\itech_project\static\images\pussCatImg.jpg"
+            "picture": os.path.join(os.getcwd(),"\static\images\pussCatImg.jpg")
 
         }
     ]
@@ -95,13 +95,7 @@ def populate():
 
     user = create_su(users[0]["username"],users[0]["email"],users[0]["password"],users[0]["picture"])
     user2 = create_su(users[1]["username"], users[1]["email"], users[1]["password"], users[1]["picture"])
-    print(users[0]["username"])
-    print(users[0]["email"])
-    print(users[0]["password"])
-    print(users[0]["picture"])
 
-    #user2 = create_su("TomCat","email@email","password23","H:\Internet-Technology\itech_project\static\images\pussCatImg.jpg")
-   # user =create_su("PussCat","email2@Gemail","password232","H:\Internet-Technology\itech_project\static\images\pussCatImg.jpg")
     for cat, cat_data in cats.items():
         c = add_cat(cat)
         for p in cat_data["posts"]:
