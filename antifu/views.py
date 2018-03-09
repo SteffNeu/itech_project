@@ -22,7 +22,9 @@ def home(request):
 
 
 def show_category(request, category_name_slug):
-    return HttpResponse("yeah bish")
+    category = Category.objects.get(slug=category_name_slug)
+    context_dict = {'category':category}
+    return render(request,'antifu/category.html',context_dict)
 
 def aboutUs(request):
     return render(request, 'antifu/aboutUs.html')
