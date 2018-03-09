@@ -29,7 +29,7 @@ def populate():
 
     comment = [
         {
-            "comment": "YOLO",
+            "comment": "It's called Bi-ble and not Straight-ble.",
             "loveliness": 5,
             "burnfactor": 4,
             "logicRating": 2,
@@ -54,7 +54,7 @@ def populate():
     lgbtq_post = [
         {"title": "Adam and Steve",
          "context": "in tweeter",
-         "tags": "#homophobic #lgbtq+",
+         "tags": {"tag1":"homophobic","tag2":"lgbtq+"},
          "user": "",
          "grammarFail": 5,
          "logicFail": 46,
@@ -68,7 +68,7 @@ def populate():
     people_post = [
         {"title": "Ryan Gosling",
          "context": "celebrities read mean tweets",
-         "tags": "#theotherryan #not-deadpool #perfectcheekbone",
+         "tags": {"tag1":"#theotherryan","tag2":" #not-deadpool", "tag3": "#perfectcheekbone"},
          "user": "",
          "grammarFail": 2,
          "logicFail": 100,
@@ -104,9 +104,9 @@ def populate():
                             p["logicFail"],p["toxicity"],p["harmful"],p["report"],
                             p["views"],p["picturePost"]
                          )
-
                 add_comm(post,comment[1],user2)
                 add_comm(post,comment[2],user)
+
             elif cat_data["posts"] == lgbtq_post:
                 post = add_post(c, p["title"], p["context"], user2, p["tags"], p["grammarFail"],
                          p["logicFail"], p["toxicity"], p["harmful"], p["report"],

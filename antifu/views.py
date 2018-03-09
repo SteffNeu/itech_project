@@ -38,9 +38,9 @@ def faq(request):
 
 def post(request):
 
+    post = Post.objects.all()
     comments = Comment.objects.all();
-    #	comments = Comment.objects.filter(post=post);
-    context_dict = {'comments': comments}
+    context_dict = {'comments': comments, 'posts':post}
     return render(request, 'antifu/post.html', context_dict)
 
 def comment(request):

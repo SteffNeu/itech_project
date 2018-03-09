@@ -13,19 +13,21 @@
     <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="post_container">
+<div class="colouring">
+{% for p in posts %}
+<div class="post_container colouring">
 	<div class="post colouring">
 	<div class="container">
 		<div class="row top">
 			<div class="col-sm-6">
 				<div class="post_image thin-border">
-					<img class="img-responsive post_image" src="{{MEDIA_URL}}post_pictures/Adam_And_Steve.PNG" alt="No Image" />
+					<img class="img-responsive post_image" src="{{MEDIA_URL}}{{ p.picturePost }}" alt="No Image" />
 				</div>
 			</div>
 			<div class="colouring col-sm-6">
 				<div class="row">
 					<div class="post_header col-sm-11">
-						<h4>Here goes the title</h4>
+						<h4>{{ p.title }}</h4>
 					</div>
 					<div class="options col-sm-1 ">
 						<div class="dropdown ">
@@ -41,13 +43,14 @@
 				</div>
 				<div class="row">
 					<div class="post_context thin-border col-sm-12">
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-					</div>
+                        {{ p.context }}
+                    </div>
 				</div>	
 				<div class="row">
 					<div class="post_tags col-sm-12">
-						<a href="#">#tag1</a>
-						<a href="#">#tag2</a>
+                        {% for tag in p.tags %}
+					    	<a href="#">{{ tag }}</a>
+						{% endfor %}
 					</div>
 				</div>
 			</div>			
@@ -58,26 +61,26 @@
 			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div class="post_rating r_number col-sm-6">3/5</div>
-					<div class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
+					<div id="grammFail" class="post_rating r_number col-sm-6">3/5</div>
+					<div id="grammFail_avg" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
 				</div>
 			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div class="post_rating r_number col-sm-6">3/5</div>
-					<div class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button" onclick="testFunction()"></div>
+					<div id="logFail" class="post_rating r_number col-sm-6">3/5</div>
+					<div id="logFail_avg" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button" onclick="testFunction()"></div>
 				</div>
 			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div class="post_rating r_number col-sm-6">3/5</div>
-					<div class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
+					<div id="toxic" class="post_rating r_number col-sm-6">3/5</div>
+					<div id="toxic_avg" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
 				</div>
 			</div>			
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div class="post_rating r_number col-sm-6">3/5</div>
-					<div class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
+					<div id="harm" class="post_rating r_number col-sm-6">3/5</div>
+					<div id="harm_avg" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
 				</div>
 			</div>
 			<div class="spaceholder col-sm-6"></div>
@@ -91,6 +94,7 @@
 <div>
     <ul>
     {% for c in comments %}
+        {% if c.post == p %}
         <div class="comment_container ">
             <div class="comment">
             <div class="container">
@@ -161,8 +165,11 @@
             </div>
             </div>
         </div>
+        {% endif %}
     {% endfor %}
     </ul>
+</div>
+{% endfor %}
 </div>
 
 
@@ -177,6 +184,7 @@
 	</div>	
 </div>
 
+<!-- comment -->
 <script>
 
 $('.report').click( function(){
@@ -187,7 +195,7 @@ $('.edit').click( function(source){
 });
 
 $('.c_icon').click( function(source){
-	var id = source.target.id+"_count";
+	var id = source.target.id+"_number";
 	var count = document.getElementById(id).innerHTML;
 	count++;
 	document.getElementById(id).innerHTML = count;
@@ -196,9 +204,15 @@ $('.c_icon').click( function(source){
 
 </script>
 
+<!-- post -->
 <script>
 
+    $('.r_icon').click( function(source){
+	var id = source.target.id+"_avg";
+	var count = document.getElementById(id).innerHTML;
+	alert(count)
 
+});
 
 $('.report').click( function(){
 	alert("selected report")
