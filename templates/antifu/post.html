@@ -61,26 +61,26 @@
 			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div id="grammFail" class="post_rating r_number col-sm-6">3/5</div>
-					<div id="grammFail_avg" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
+					<div id="{{ p.id }}_grammFail" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
+					<div id="{{ p.id }}_grammFail_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div id="logFail" class="post_rating r_number col-sm-6">3/5</div>
-					<div id="logFail_avg" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button" onclick="testFunction()"></div>
+                    <div id="{{ p.id }}_logFail" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button"></div>
+					<div id="{{ p.id }}_logFail_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div id="toxic" class="post_rating r_number col-sm-6">3/5</div>
-					<div id="toxic_avg" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
+					<div id="{{ p.id }}_toxic" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
+					<div id="{{ p.id }}_toxic_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>			
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div id="harm" class="post_rating r_number col-sm-6">3/5</div>
-					<div id="harm_avg" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
+					<div id="{{ p.id }}_harm" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
+					<div id="{{ p.id }}_harm_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
 			<div class="spaceholder col-sm-6"></div>
@@ -130,35 +130,35 @@
                     <div class="spaceholder col-sm-1"></div>
                     <div class="comment_rating col-sm-1">
                         <div class="row">
-                            <div id="love" class="comment_rating c_icon glyphicon glyphicon-heart col-sm-1" role="button"></div>
+                            <div id="{{ c.id }}_loveliness" class="comment_rating c_icon glyphicon glyphicon-heart col-sm-1" role="button" aria-pressed="false"></div>
                         </div>
                         <div class="row">
-                            <div id="love_count" class="comment_rating c_number col-sm-1">{{ c.loveliness }}</div>
+                            <div id="{{ c.id }}_loveliness_count" class="comment_rating c_number col-sm-1">{{ c.loveliness }}</div>
                         </div>
                     </div>
                     <div class="comment_rating col-sm-1">
                         <div class="row">
-                            <div id="burn" class="comment_rating c_icon glyphicon glyphicon-fire col-sm-1" role="button"></div>
+                            <div id="{{ c.id }}_burnfactor" class="comment_rating c_icon glyphicon glyphicon-fire col-sm-1" role="button" aria-pressed="false"></div>
                         </div>
                         <div class="row">
-                            <div id="burn_count" class="comment_rating c_number col-sm-1">{{ c.burnfactor }}</div>
+                            <div id="{{ c.id }}_burnfactor_count" class="comment_rating c_number col-sm-1">{{ c.burnfactor }}</div>
                         </div>
                         </div>
                     <div class="comment_rating col-sm-1">
                         <div class="row">
-                            <div id="logic" class="comment_rating c_icon glyphicon glyphicon-eye-open col-sm-1" role="button"></div>
+                            <div id="{{ c.id }}_logicRating" class="comment_rating c_icon glyphicon glyphicon-eye-open col-sm-1" role="button" aria-pressed="false"></div>
                         </div>
                         <div class="row">
-                            <div id="logic_count" class="comment_rating c_number col-sm-1">{{ c.logicRating }}</div>
+                            <div id="{{ c.id }}_logicRating_count" class="comment_rating c_number col-sm-1">{{ c.logicRating }}</div>
                         </div>
 
                     </div>
                     <div class="comment_rating col-sm-1">
                         <div class="row">
-                            <div id="target" class="comment_rating c_icon glyphicon glyphicon-screenshot col-sm-1" role="button"></div>
+                            <div id="{{ c.id }}_accuracyRating" class="comment_rating c_icon glyphicon glyphicon-screenshot col-sm-1" role="button" aria-pressed="false"></div>
                         </div>
                         <div class="row">
-                            <div id="target_count" class="comment_rating c_number col-sm-1">{{ c.accuracyRating }}</div>
+                            <div id="{{ c.id }}_accuracyRating_count" class="comment_rating c_number col-sm-1">{{ c.accuracyRating }}</div>
                         </div>
                     </div>
                 </div>
@@ -195,22 +195,56 @@ $('.edit').click( function(source){
 });
 
 $('.c_icon').click( function(source){
-	var id = source.target.id+"_number";
-	var count = document.getElementById(id).innerHTML;
-	count++;
-	document.getElementById(id).innerHTML = count;
+
+    <!--get toggle status-->
+    var toggled = source.target.getAttribute("aria-pressed")
+    var id = source.target.id;
+
+
+    <!-- obtain information for database-->
+    var info = id.split("_");
+    var c_id = info[0]
+    var c_elem = info[1]
+
+    var count_id = id+"_count";
+    var count = document.getElementById(count_id).innerHTML;
+    if(toggled === "true"){
+	   count--;
+	   source.target.setAttribute("aria-pressed",false);
+    }
+    else{
+        count++;
+	   source.target.setAttribute("aria-pressed",true);
+    }
+	document.getElementById(count_id).innerHTML = count;
+
+    updateDB(c_id,c_elem);
+
+
 });
 
+function updateDB(id,field) {
+    var sqlite3 = require('sqlite3').verbose();
+    var db = new sqlite3.Database('C:/Users/Tom/python-workspace/itech_project/db.sqlite3');
+    alert(id)
+    alert(field)
+}
+
+
+</script>
+
+<!-- here goes the database update-->
+<script>
+const sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('itech_project/db.sqlite3');
 
 </script>
 
 <!-- post -->
 <script>
-
     $('.r_icon').click( function(source){
 	var id = source.target.id+"_avg";
 	var count = document.getElementById(id).innerHTML;
-	alert(count)
 
 });
 

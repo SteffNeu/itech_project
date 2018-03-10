@@ -45,6 +45,7 @@ class UserProfile(models.Model):
 
 
 class Post(models.Model):
+    id = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=64)
