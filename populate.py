@@ -82,7 +82,7 @@ def populate():
 
     cats = {"People": {"posts": people_post},
             "Racism": {"posts": ""},
-            "LGBTQ+": {"posts": lgbtq_post},
+            "LGBTQ": {"posts": lgbtq_post},
             "Politics": {"posts": ""},
             "Troll": {"posts": ""},
             "PassiveAggressive": {"posts": ""},

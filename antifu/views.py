@@ -24,8 +24,8 @@ def home(request):
     return render(request, 'antifu/home.html', context_dict)
 
 
-def show_category(request, category_name_slug):
-    category = Category.objects.get(slug=category_name_slug)
+def show_category(request, category_name):
+    category = Category.objects.get(name=category_name)
     context_dict = {'category':category}
     return render(request,'antifu/category.html',context_dict)
 
