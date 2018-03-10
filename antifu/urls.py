@@ -9,7 +9,7 @@ urlpatterns = [
 	url(r'^personalHelp/$', views.personalHelp, name='personalHelp'),
 	url(r'^faq/$', views.faq, name='FAQ'),
 	# url(r'^add_category/$', views.add_category, name='add_category'),
-	url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
+	url(r'^category/(?P<category_name>[\w\-]+)/$',
 		views.show_category, name='show_category'),
 	url(r'^profile/(?P<username>[\w\-]+)/$', views.profile, name='profile'),
 	url(r'^comment/$',views.comment,name='comment'),

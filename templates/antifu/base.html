@@ -86,7 +86,7 @@
 						<ul class="dropdown-menu" >
                         {% if categories %}
                             {% for cat in categories %}
-							    <li class="dropdown-item" style="color: #0b7ac8">{{ cat.name }}</li>
+                                <li class="dropdown-item" style="color: #0b7ac8" ><a href="{% url 'show_category' cat.name %}">{{ cat.name }}</a></li>
                             {% endfor %}
                         {% else %}
                             <li>No categories</li>

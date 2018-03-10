@@ -35,7 +35,7 @@ urlpatterns = [
 	# above maps any URLs starting
 	# with antifu/ to be handled bytearray
 	# the antifu application
-	url(r'^admin/', admin.site.urls),	url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
+	url(r'^admin/', admin.site.urls),	url(r'^category/(?P<category_name>[\w\-]+)/$',
 		views.show_category, name='show_category'),    # urls for adding the account settings of django:
     url(r'^accounts/register/$',
         MyRegistrationView.as_view(form_class=UserForm),
