@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'antifu',
     'registration',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -154,5 +155,10 @@ STATIC_URL = '/static/'
 # media urls
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-
+# email variable
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'antifu_app'
+EMAIL_HOST_PASSWORD = '!R8myH8!?'
+EMAIL_USE_TLS = True
