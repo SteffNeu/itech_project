@@ -14,6 +14,7 @@ urlpatterns = [
 	url(r'^profile/(?P<username>[\w\-]+)/$', views.profile, name='profile'),
 	url(r'^comment/$',views.comment,name='comment'),
 	url(r'^post/$',views.post,name='post'),
+	url(r'search/$', views.search, name='search'),
 	url(r'^profile_registration', views.register_profile, name='register_profile'),
 	url(r'^tabs/firsttab/$',views.myContents,name='myContents')
 	# url(r'^category/(?P<category_name_slug>[\w\-]+)/add_page/$', views.add_page, name='add_page'),

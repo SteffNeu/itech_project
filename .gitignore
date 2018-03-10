@@ -1,3 +1,4 @@
 db.sqlite3
 __pycharm__/
 *.pyc
+*.key

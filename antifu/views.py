@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from antifu.models import Category, UserProfile, Comment, Post
-from antifu.forms import UserProfileForm
+from antifu.forms import UserProfileForm, ContactForm
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail, BadHeaderError
+
+from antifu.webhose_search import run_query
 
 from datetime import datetime
 
@@ -30,7 +33,20 @@ def aboutUs(request):
     return render(request, 'antifu/aboutUs.html')
 
 def contactUs(request):
-    return render(request, 'antifu/contactUs.html')
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            name = form.cleaned_data['name']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, name, from_email, ['admin@example.com'])
+            except BadHeaderError:
+                return render(request, 'antifu/contactUs.html')
+    return render(request, 'antifu/contactUs.html', {'form': form})
 
 def personalHelp(request):
     return render(request, 'antifu/personalHelp.html')
@@ -86,3 +102,15 @@ def profile(request, username):
 
 def myContents(request):
     return render(request, 'profile/MyContentsTab.html', {})
+
+def search(request):
+    result_list = []
+    context_dict = {}
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            # Run our Webhose search function to get the results list!
+            result_list = run_query(query)
+        context_dict['query'] = query
+        context_dict['result_list'] = result_list
+    return render(request, 'antifu/search.html', context_dict)

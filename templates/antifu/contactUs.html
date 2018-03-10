@@ -12,8 +12,18 @@
         If you have any questions or suggestions towards our webpage we would be happy to be contacted by you.
       </div>
 			<div class="container">
-				<form>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions">
+              <button type="submit">Send</button>
+            </div>
+        </form>
+
+        <form>
 					<div class="col-md-6 form-line">
+            <!-- templates/email.html -->
 			  			<div class="form-group">
 			  				<label for="exampleInputUsername">Your name</label>
 					    	<input type="text" class="form-control" id="" placeholder=" Enter Name">
