@@ -26,9 +26,9 @@ def home(request):
 
 def show_category(request, category_name):
     category = Category.objects.get(name=category_name)
-    post = Post.objects.all();
-    comments = Comment.objects.all();
-    context_dict = {'category':category,'posts':post,'comments':comments}
+    posts = Post.objects.filter(category=category)
+    comments = Comment.objects.filter(post=posts);
+    context_dict = {'category':category,'posts':posts,'comments':comments}
     return render(request,'antifu/category.html',context_dict)
 
 def aboutUs(request):
