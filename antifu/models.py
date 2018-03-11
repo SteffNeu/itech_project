@@ -62,6 +62,7 @@ class Comment(models.Model):
     id = models.AutoField(primary_key=True)
     post = models.ForeignKey(Post, null=True)
     user = models.ForeignKey(User, null=True)
+    date = models.DateField(default=datetime.date.today)
     comment = models.TextField(max_length=1024)
     loveliness = models.IntegerField(default=0)
     burnfactor = models.IntegerField(default=0)
