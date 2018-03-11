@@ -6,11 +6,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=128, unique = True)
-    slug = models.SlugField(blank=True)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Category,self).save(*args,**kwargs)
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -74,3 +69,17 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
+class FAQ(models.Model):
+    questions = models.TextField(blank=True)
+    answers = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.questions
+
+class PersonalHelp(models.Model):
+    title = models.TextField(blank=True)
+    href = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.title

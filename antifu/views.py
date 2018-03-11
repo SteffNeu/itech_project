@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from antifu.models import Category, UserProfile, Comment, Post
+from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FAQ
 from antifu.forms import UserProfileForm, ContactForm
 
 from django.contrib.auth.models import User
@@ -25,8 +25,10 @@ def home(request):
 
 
 def show_category(request, category_name):
+    category_list = Category.objects.all()
     category = Category.objects.get(name=category_name)
-    context_dict = {'category':category}
+    context_dict = {'category':category,
+                    'categories': category_list}
     return render(request,'antifu/category.html',context_dict)
 
 def aboutUs(request):
@@ -59,10 +61,14 @@ def contactUs(request):
     return render(request, 'antifu/contactUs.html', {'form': form})
 
 def personalHelp(request):
-    return render(request, 'antifu/personalHelp.html')
+    help_list = PersonalHelp.objects.all()
+    context_dict = {"help_list":help_list}
+    return render(request, 'antifu/personalHelp.html',context_dict)
 
 def faq(request):
-    return render(request, 'antifu/FAQ.html')
+    faqs = FAQ.objects.all()
+    context_dict = {"faqs": faqs}
+    return render(request, 'antifu/FAQ.html',context_dict)
 
 def post(request):
 
