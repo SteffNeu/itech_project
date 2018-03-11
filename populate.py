@@ -68,6 +68,7 @@ def populate():
     comment = [
         {
             "comment": "It's called Bi-ble and not Straight-ble.",
+            "date":"2007-05-10",
             "loveliness": 5,
             "burnfactor": 4,
             "logicRating": 2,
@@ -75,6 +76,7 @@ def populate():
         },
         {
             "comment": "he IS perfect",
+            "date":"2015-07-22",
             "loveliness": 78,
             "burnfactor": 0,
             "logicRating": 7,
@@ -82,6 +84,7 @@ def populate():
         },
         {
             "comment": "you are just jealous",
+            "date":"2015-07-25",
             "loveliness": 3,
             "burnfactor": 2,
             "logicRating": 9,
@@ -205,6 +208,7 @@ def add_comm(post,comment,user):
     comm.loveliness=comment['loveliness']
     comm.logicRating = comment['logicRating']
     comm.accuracyRating = comment['accuracyRating']
+    comm.date=comment['date']
     comm.post=post
     comm.user=user
 

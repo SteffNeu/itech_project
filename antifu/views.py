@@ -131,8 +131,8 @@ def search(request):
 #for the nav tabs
 def myContents(request, username):
     user=User.objects.get(username=username)
-    post_list={}
-    comment_list={}
+    post_list=[]
+    post_comment_list=[]
 
     #Posts the user made
     try:
@@ -143,27 +143,31 @@ def myContents(request, username):
 
     #Comments of each post
     try:
-        user_comment_list = Comment.objects.filter(user=user)
-    except Comment.DoesNotExist:
-        print('no comments')
-
-    #Comments the user made
-    try:
         for p in post_list:
             post_comment_list = Comment.objects.filter(post=p)
     except Comment.DoesNotExist:
         print('no comments')
 
-    numComments = len(user_comment_list)
+    numComments = len(post_comment_list)
     context_dict={"posts":post_list,
-                "userComments":user_comment_list,
                 "numComments":numComments,
                 "postComments":post_comment_list}
     return render(request, 'profile/MyContentsTab.html', context_dict)
 
 
-def myRatings(request):
-    return render(request, 'profile/MyRatingsTab.html', {})
+def myComments(request, username):
+    user=User.objects.get(username=username)
+    user_comment_list=[]
+
+    #Comments the user made
+    try:
+        user_comment_list = Comment.objects.filter(user=user)
+    except Comment.DoesNotExist:
+        print('no comments')
+
+
+    context_dict={"comments":user_comment_list}
+    return render(request, 'profile/MyCommentsTab.html', context_dict)
 
 def settings(request):
     return render(request, 'profile/MySettingsTab.html', {})

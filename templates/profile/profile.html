@@ -41,7 +41,7 @@
 
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#myContent">My Content</a></li>
-            <li><a data-toggle="tab" href="#myRatings">My Ratings</a></li>
+            <li><a data-toggle="tab" href="#myRatings">My Comments</a></li>
             <li><a data-toggle="tab" href="#settings">Settings</a></li>
             <li><a data-toggle="tab" href="#uploadContent">Upload Content</a></li>
         </ul>
@@ -54,7 +54,7 @@
             </div>
             <div id="myRatings" class="tab-pane fade">
                 <div>
-                    <iframe height="600px" width=100% src="{% url 'myRatings' %}" name="iframe_a"></iframe>
+                    <iframe height="600px" width=100% src="{% url 'myComments' selecteduser %}" name="iframe_a"></iframe>
                 </div>
             </div>
             <div id="settings" class="tab-pane fade">

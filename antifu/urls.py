@@ -19,7 +19,7 @@ urlpatterns = [
 
 	#the navtabs
 	url(r'^myContents/(?P<username>[\w\-]+)/$',views.myContents,name='myContents'),
-	url(r'^myRatings/$',views.myRatings,name='myRatings'),
+	url(r'^myComments/(?P<username>[\w\-]+)/$',views.myComments,name='myComments'),
 	url(r'^settings/$',views.settings,name='settings'),
 	url(r'^uploadContent/$',views.uploadContent,name='uploadContent'),
 	# url(r'^category/(?P<category_name_slug>[\w\-]+)/add_page/$', views.add_page, name='add_page'),
