@@ -42,7 +42,7 @@ class UserProfile(models.Model):
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(default=datetime.date.today)
     title = models.CharField(max_length=64)
     context = models.TextField(max_length=512)
@@ -61,7 +61,7 @@ class Post(models.Model):
 class Comment(models.Model):
     id = models.AutoField(primary_key=True)
     post = models.ForeignKey(Post, null=True)
-    user = models.ForeignKey(UserProfile, null=True)
+    user = models.ForeignKey(User, null=True)
     comment = models.TextField(max_length=1024)
     loveliness = models.IntegerField(default=0)
     burnfactor = models.IntegerField(default=0)

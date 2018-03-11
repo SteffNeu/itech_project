@@ -163,11 +163,12 @@ def populate():
 def create_su(username, email, password, picture):
     try:
         u = User.objects.create_superuser(username, email, password)
+
         user = UserProfile.objects.get_or_create(user=u)[0]
         user.picture=picture
         user.save()
         u.save()
-        return user
+        return u
     except IntegrityError:
         pass
 
@@ -178,7 +179,7 @@ def add_cat(name):
     return c
 
 #Adding posts
-def add_post(cat, title, context, user,date, tags, grammarFail,
+def add_post(cat, title, context, user, date, tags, grammarFail,
             logicFail, toxicity, harmful, report, views, picturePost):
     p = Post.objects.get_or_create(category=cat, title=title)[0]
     p.context=context
