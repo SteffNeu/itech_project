@@ -5,9 +5,19 @@
   background: linear-gradient(-90deg, #1bffff, #2e3192);
   color: white;
 }
+.fixed-bottom{
+  background:  #0b7ac8;
+  border: none!important;
+}
+#subHeader{
+  background: #0b7ac8; /* for browser that don't support gradient*/
+  background: linear-gradient(-90deg, #1bffff, #2e3192);
+  color: white;
+}
 
 body {
-  padding-top: 5rem;
+  min-height: 75rem;
+  padding-top: 4.0rem;
 }
 
 .container-all {
@@ -15,7 +25,7 @@ body {
   text-align: center;
 }
 
-.navbar-background {
+/* .navbar-background {
   background: transparent;
   border: none!important;
 }
@@ -28,33 +38,8 @@ body {
 
 .navbar-right {
   float: right;
-}
+} */
 
-.navbar-brand img{
-    margin-top: -10px;
-    margin-left: 5px;
-    margin-bottom:5px;
-    margin-right: 5px;
-}
-
-.navbar-collapse {
-  margin-top: 25px;
-  text-align: center;
-}
-
-.navbar-toggle {
-  margin-top: 15px;
-  margin-right: 25px;
-  background: transparent;
-  border : none!important;
-}
-
-
-.nav>li {
-  float: center;
-  display: inline-block;
-  white-space: nowrap;
-}
 
 h1 {
   margin-bottom: 20px;
@@ -63,26 +48,21 @@ h1 {
 }
 
 
-#baseBottom{
-  background:  #0b7ac8;
-  border: none!important;
-  display: inline-block;
-  float : none;
-}
 
+/*
 .navbar-fixed-bottom{
   display: inline-block;
   float : none;
   vertical-align: top;
-}
+} */
 
-.navbar-bottom a{
+/* .navbar-bottom a{
   overflow: hidden;
   div {
     display: inline;
-  }
+  } */
 }
-.navbar-nav-bottom {
+/* .navbar-nav-bottom {
   width: 100%;
 
 }
@@ -97,7 +77,7 @@ h1 {
 .navbar-nav-bottom>li {
   float: none;
   display: inline-block;
-}
+} */
 
 @media (max-width:550px){
   .navbar-bottom a {
@@ -126,7 +106,7 @@ h1 {
 }
 
 .override-hover a:hover{
-  color: red!important;
+  color: grey!important;
 }
 
 #contact{

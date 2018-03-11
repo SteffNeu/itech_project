@@ -4,12 +4,12 @@
 <html lang="en">
 	<head >
         <link rel="stylesheet" type="text/css" href="{%static "css/base.css"%}">
-				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+				<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap-theme.min.css">
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 				<script src="{% static "js/antifu-jquery.js" %}"></script>
 				<script src="{% static "js/antifu-ajax.js" %}"></script>
-  			<script 			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+  			<script 			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
 				</script>
 				{% block link_block %}
 				{% endblock %}
@@ -22,107 +22,94 @@
 		</title>
 	</head>
 	<body>
-		<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top" id="baseHeader">
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
+		<nav class="navbar navbar-expand-md fixed-top navbar-light bg-light" id="baseHeader">
 			<a class="navbar-brand"href="{% url 'home' %}">
-				<img src="{%static "images/logo.png"%}"alt ="Logo" width="100">
+				<img src="{%static "images/logo.png"%}"alt ="Logo" class="d-inline-block align-top" height="80" width="80" alt="">
 			</a>
 
-			<!--<h3>
-			 {% block header_block %}
-				 Making the world a better place one comment at the time
-			 {% endblock %}
-		 </h3> -->
-			<div class="collapse navbar-collapse" id="AntifuMenu">
-				<ul class="navbar-nav mr-auto">
-					 {% if user.is_authenticated %}
-						 <li class="nav-item">
-							 <a class="nav-link text-white" href="{% url 'auth_logout' %}">
-								 <span class="glyphicon glyphicon-log-out"></span>
-								 <span class="text hidden-xs  hidden-sm"> Logout</span>
-							 </a>
-							 <a class="text-white" href="{% url 'profile' user.username %}">
-								 <span class="glyphicon"></span>
-								 <span class="text hidden-xs  hidden-sm"> Welcome, {{ user.username }}</span>
-							 </a>
-						 </li>
-					{% else %}
-						<li class="nav-item">
-							 <a class="nav-link text-white" href="{% url 'auth_login' %}">
-								 <span class="glyphicon glyphicon-log-in"></span>
-								 <span class="text hidden-xs hidden-sm"> Login</span>
-							 </a>
-						 </li>
-						 <li class="nav-item">
-							 <a class="nav-link text-white" href="{% url 'registration_register' %}">
-								 <span class="glyphicon glyphicon-user"></span>
-								 <span class="text hidden-xs  hidden-sm"> Sign Up</span>
-							 </a>
-						 </li>
-					{% endif %}
-						<li class="nav-item">
-							<a class="nav-link search text-white" href="{% url 'search' %}">
-								<span class="glyphicon glyphicon-search text-white"></span>
-							</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" id="catDropDown" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
-									<span class="glyphicon glyphicon-list-alt g"></span>
-									<span class="text hidden-sm"> Categories</span>
-									<span class="caret"></span>
-							</a>
-							<div class="dropdown-menu" aria-labelledby="catDropDown">
-	              {% if categories %}
-	                  {% for cat in categories %}
-	                    <a class="dropdown-item" style="color: #0b7ac8" href="{% url 'show_category' cat.name %}">{{ cat.name }}</a>
-	                  {% endfor %}
-	              {% else %}
-	                  <a class="dropdown-item" href="#">No categories</a>
-	              {% endif %}
-							</div>
-						</li>
-				</ul>
-				<form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeaderContent" aria-controls="navbarHeaderContent" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarHeaderContent">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-6">
+							<h3 class="d-block d-md-none d-lg-block" style="margin-left: 5px">
+							 {% block header_block %}
+							   Making the world a better place one comment at the time
+							 {% endblock %}
+							</h3>
+						</div>
+						<div class="col-6 align-self-end">
+							<form class="form-inline float-right">
+								<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+								<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+							</form>
+						</div>
+					</div>
+					<div class="rows">
+						<div class="col-4-sm">
+					    <ul class="navbar-nav mr-auto">
+								{% if user.is_authenticated %}
+					      <li class="nav-item active override-hover">
+					        <a class="nav-link  text-white override-hover" href="{% url 'auth_logout' %}"> Logout </a>
+								</li>
+								<li class="nav-item active override-hover">
+					        <a class="nav-link  text-white override-hover" href="{% url 'profile' user.username %}">
+										 Welcome, {{ user.username }}
+									</a>
+								</li>
+								{% else %}
+								<li class="nav-item active override-hover">
+					        <a class="nav-link  text-white override-hover" href="{% url 'auth_login' %}"> Login </a>
+								</li>
+								<li class="nav-item active override-hover">
+					        <a class="nav-link text-white override-hover" href="{% url 'registration_register' %}"> Sign Up </a>
+								</li>
+								{% endif %}
+					      <li class="nav-item dropdown">
+									<div class = "dropdown">
+						        <a class="nav-link text-white btn btn-outline-primary dropdown-toggle" href="#" id="CategoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						          Categories
+						        </a>
+						        <div class="dropdown-menu" aria-labelledby="CategoryDropdown">
+											{% if categories %}
+					              {% for cat in categories %}
+					                <a class="dropdown-item" href="{% url 'show_category' cat.name %}">{{ cat.name }}</a>
+					              {% endfor %}
+						          {% else %}
+						              <a class="dropdown-item" href="#">No categories</a>
+						          {% endif %}
+						        </div>
+									</div>
+					      </li>
+					    </ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</nav>
 
-
 		<div class="container-all">
-      {% block body_block %}
+			{% block body_block %}
 
       {% endblock %}
 		</div>
 
-    <div>
-        <nav class="footer navbar-fixed-bottom navbar navbar-background mx-auto"  id="baseBottom">
-            <div class="container-fluid text-center">
-                <ul class="nav navbar-nav navbar-nav-bottom navbar-bottom"style="float:inside">
-                   <li><a class="text-white" href="{% url 'contactUs' %}">
-										 <span class="glyphicon glyphicon-envelope"></span>
-										 <span class="text hidden-xs"> Contact Us</span>
-									 </a></li>
-                   <li><a class="text-white" href="{% url 'aboutUs' %}">
-										 <span class="glyphicon glyphicon-info-sign"></span>
-										 <span class="text hidden-xs"> About Us</span>
-									 </a></li>
-                   <li><a class="text-white" href="{% url 'personalHelp' %}">
-										 <span class="glyphicon glyphicon-heart"></span>
-										 <span class="text hidden-xs"> Personal Help</span>
-									 </a></li>
-                   <li><a class="text-white override-hover" href="{% url 'FAQ' %}">
-										 <span class="glyphicon glyphicon-question-sign"></span>
-										 <span class="text hidden-xs"> FAQ</span>
-									 </a></li>
-                </ul>
-             </div>
-        </nav>
-    </div>
+    <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-primary" id="baseBottom">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+			<div class="collapse navbar-collapse h-100 justify-content-center align-items-center" id="navbarNavAltMarkup">
+		    <div class="navbar-nav">
+		      <a class="nav-item text-white nav-link override-hover" href="{% url 'contactUs' %}"> Contact Us <span class="sr-only">(current)</span></a>
+		      <a class="nav-item text-white nav-link override-hover" href="{% url 'aboutUs' %}"> About Us </a>
+		      <a class="nav-item text-white nav-link override-hover" href="{% url 'personalHelp' %}"> Personal Help </a>
+		      <a class="nav-item text-white nav-link override-hover" href="{% url 'FAQ' %}"> FAQ </a>
+		    </div>
+		  </div>
+    </nav>
 
 
 	</body>
