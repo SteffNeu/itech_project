@@ -18,7 +18,7 @@ urlpatterns = [
 	url(r'^profile_registration', views.register_profile, name='register_profile'),
 
 	#the navtabs
-	url(r'^myContents/$',views.myContents,name='myContents'),
+	url(r'^myContents/(?P<username>[\w\-]+)/$',views.myContents,name='myContents'),
 	url(r'^myRatings/$',views.myRatings,name='myRatings'),
 	url(r'^settings/$',views.settings,name='settings'),
 	url(r'^uploadContent/$',views.uploadContent,name='uploadContent'),

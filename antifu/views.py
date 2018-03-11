@@ -66,12 +66,12 @@ def personalHelp(request):
     return render(request, 'antifu/personalHelp.html',context_dict)
 
 def faq(request):
+
     faqs = FAQ.objects.all()
     context_dict = {"faqs": faqs}
     return render(request, 'antifu/FAQ.html',context_dict)
 
 def post(request):
-
     post = Post.objects.all()
     comments = Comment.objects.all();
     context_dict = {'comments': comments, 'posts':post}
@@ -90,7 +90,7 @@ def register_profile(request):
         user_profile = form.save(commit=False)
         user_profile.user = request.user
         user_profile.save()
-        return redirect('index')
+        return redirect('home')
     else:
         print(form.errors)
     context_dict = {'form':form}
@@ -129,12 +129,36 @@ def search(request):
     return render(request, 'antifu/search.html', context_dict)
 
 #for the nav tabs
-def myContents(request):
-    post_list = Post.objects.all()
-    comment_list = Comment.objects.all()
-    #a = len(comment_list)
+def myContents(request, username):
+    user=User.objects.get(username=username)
+    post_list={}
+    comment_list={}
 
-    context_dict={"posts":post_list}
+    #Posts the user made
+    try:
+        #filter works better than get, we can get multiple objects
+        post_list = Post.objects.filter(user=user)
+    except Post.DoesNotExist:
+        print('no posts')
+
+    #Comments of each post
+    try:
+        user_comment_list = Comment.objects.filter(user=user)
+    except Comment.DoesNotExist:
+        print('no comments')
+
+    #Comments the user made
+    try:
+        for p in post_list:
+            post_comment_list = Comment.objects.filter(post=p)
+    except Comment.DoesNotExist:
+        print('no comments')
+
+    numComments = len(user_comment_list)
+    context_dict={"posts":post_list,
+                "userComments":user_comment_list,
+                "numComments":numComments,
+                "postComments":post_comment_list}
     return render(request, 'profile/MyContentsTab.html', context_dict)
 
 
