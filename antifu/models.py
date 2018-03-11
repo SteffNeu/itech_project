@@ -74,3 +74,19 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
+class PersonalHelp(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=124, default=0)
+    url = models.URLField(default=0)
+
+    def __str__(self):
+        return self.title
+
+class FrequentlyAskedQuestions(models.Model):
+    id = models.AutoField(primary_key=True)
+    question = models.CharField(max_length=124, default=0)
+    answer = models.TextField(max_length=1024, default=0)
+
+    def __str__(self):
+        return self.question
