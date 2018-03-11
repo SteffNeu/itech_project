@@ -2,16 +2,12 @@
 {% load staticfiles %}
 
 {% block link_block %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
-
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.bundle.min.js"></script>
 	<script src="js/bootstrap-dropdownhover.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
 {% endblock %}
 <br/>
 {% block header_block %}
@@ -19,7 +15,7 @@
 {% endblock %}
 
 {% block body_block %}
-    <div class="colouring">
+    <div>
 
 {% for p in posts %}
 <div class="post_container colouring">
@@ -96,7 +92,7 @@
 	</div>
 </div>
 
-</body>
+
 
 <div>
     <ul>
@@ -174,10 +170,23 @@
         </div>
     {% endfor %}
     </ul>
+
+</div>
+<div class="row">
+    <form method = "post">
+        <div class="col-sm-2">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </div>
+        <div class="col-sm-1">
+            <button class="text-black" type="submit">submit</button>
+        </div>
+        <div class="spaceholder col-sm-9"> Ahoj{{ newComment }}</div>
+    </form>
 </div>
 {% endfor %}
 </div>
-
+</body>
 {% endblock %}
 
 <!-- comment -->

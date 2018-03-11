@@ -134,4 +134,80 @@
 
 
 	</body>
+
+<!-- comment -->
+<script>
+
+$('.report').click( function(){
+	alert("selected report")
+});
+$('.edit').click( function(source){
+	alert("selected edit")
+});
+
+$('.c_icon').click( function(source){
+
+    <!--get toggle status-->
+    var toggled = source.target.getAttribute("aria-pressed")
+    var id = source.target.id;
+
+
+    <!-- obtain information for database-->
+    var info = id.split("_");
+    var c_id = info[0]
+    var c_elem = info[1]
+
+    var count_id = id+"_count";
+    var count = document.getElementById(count_id).innerHTML;
+    if(toggled === "true"){
+	   count--;
+	   source.target.setAttribute("aria-pressed",false);
+    }
+    else{
+        count++;
+	   source.target.setAttribute("aria-pressed",true);
+    }
+	document.getElementById(count_id).innerHTML = count;
+
+    updateDB(c_id,c_elem);
+
+
+});
+
+function updateDB(id,field) {
+    var sqlite3 = require('sqlite3').verbose();
+    var db = new sqlite3.Database('C:/Users/Tom/python-workspace/itech_project/db.sqlite3');
+    alert(id)
+    alert(field)
+}
+
+
+</script>
+
+<!-- here goes the database update-->
+<script>
+const sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('itech_project/db.sqlite3');
+
+</script>
+
+<!-- post -->
+<script>
+    $('.r_icon').click( function(source){
+	var id = source.target.id+"_avg";
+	var count = document.getElementById(id).innerHTML;
+
+});
+
+$('.report').click( function(){
+	alert("selected report")
+});
+$('.edit').click( function(){
+	alert("selected edit")
+});
+
+$('.feel_pop').popover();
+</script>
+
+
 </html>

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from antifu.models import Category, UserProfile, Comment, Post
-from antifu.forms import UserProfileForm, ContactForm
+from antifu.forms import UserProfileForm, ContactForm, CommentForm
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -25,10 +25,24 @@ def home(request):
 
 
 def show_category(request, category_name):
+
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
     comments = Comment.objects.filter(post=posts);
-    context_dict = {'category':category,'posts':posts,'comments':comments}
+    if request.method =='GET':
+        form = CommentForm()
+    else:
+        form = ContactForm(request.POST)
+        comment = form.save(commit=False)
+        comment.accuracyRating = 0
+        comment.burnfactor = 0
+        comment.logicRating = 0
+        comment.loveliness = 0
+        comment.comment = form.cleaned_data['comment']
+        comment.save()
+
+
+    context_dict = {'category':category,'posts':posts,'comments':comments, 'form':form}
     return render(request,'antifu/category.html',context_dict)
 
 def aboutUs(request):
