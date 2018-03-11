@@ -1,7 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
-
+import datetime
 
 # Create your models here.
 class Category(models.Model):
@@ -43,6 +43,7 @@ class Post(models.Model):
     id = models.AutoField(primary_key=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
+    date = models.DateField(default=datetime.date.today)
     title = models.CharField(max_length=64)
     context = models.TextField(max_length=512)
     tags = models.CharField(max_length=128)

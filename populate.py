@@ -53,14 +53,14 @@ def populate():
             "username":"TomCat",
             "email":"user@email.com",
             "password":"mypassw0rd",
-            "picture":"Scannen0002.jpg"
+            "picture":"profile_images/Scannen0002.jpg"
 
         },
         {
             "username": "PussCat",
             "email": "user2@email.com",
             "password": "newPassw0rd",
-            "picture": "pussCatImg.jpg"
+            "picture": "profile_images/pussCatImg.jpg"
 
         }
     ]
@@ -94,6 +94,7 @@ def populate():
          "context": "in tweeter",
          "tags": {"tag1":"homophobic","tag2":"lgbtq+"},
          "user": "",
+         "date": "2007-05-10",
          "grammarFail": 5,
          "logicFail": 46,
          "toxicity": 87,
@@ -108,6 +109,7 @@ def populate():
          "context": "celebrities read mean tweets",
          "tags": {"tag1":"#theotherryan","tag2":" #not-deadpool", "tag3": "#perfectcheekbone"},
          "user": "",
+         "date": "2015-07-22",
          "grammarFail": 2,
          "logicFail": 100,
          "toxicity": 187,
@@ -138,7 +140,7 @@ def populate():
         c = add_cat(cat)
         for p in cat_data["posts"]:
             if cat_data["posts"] == people_post:
-                post = add_post(c, p["title"], p["context"], user, p["tags"],p["grammarFail"],
+                post = add_post(c, p["title"], p["context"], user,p["date"], p["tags"],p["grammarFail"],
                             p["logicFail"],p["toxicity"],p["harmful"],p["report"],
                             p["views"],p["picturePost"]
                          )
@@ -146,7 +148,7 @@ def populate():
                 add_comm(post,comment[2],user)
 
             elif cat_data["posts"] == lgbtq_post:
-                post = add_post(c, p["title"], p["context"], user2, p["tags"], p["grammarFail"],
+                post = add_post(c, p["title"], p["context"], user2,p["date"], p["tags"], p["grammarFail"],
                          p["logicFail"], p["toxicity"], p["harmful"], p["report"],
                          p["views"], p["picturePost"])
                 add_comm(post, comment[0], user)
@@ -176,12 +178,13 @@ def add_cat(name):
     return c
 
 #Adding posts
-def add_post(cat, title, context, user, tags, grammarFail,
+def add_post(cat, title, context, user,date, tags, grammarFail,
             logicFail, toxicity, harmful, report, views, picturePost):
     p = Post.objects.get_or_create(category=cat, title=title)[0]
     p.context=context
     p.tags=tags
     p.user=user
+    p.date=date
     p.grammarFail=grammarFail
     p.logicFail=logicFail
     p.toxicity=toxicity

@@ -86,16 +86,15 @@ def register_profile(request):
     form = UserProfileForm()
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES)
-        if form.is_valid():
-            user_profile = form.save(commit=False)
-            user_profile.user = request.user
-            user_profile.save()
-            return redirect('index')
-        else:
-            print(form.errors)
+    if form.is_valid():
+        user_profile = form.save(commit=False)
+        user_profile.user = request.user
+        user_profile.save()
+        return redirect('index')
+    else:
+        print(form.errors)
     context_dict = {'form':form}
     return render(request, 'registration/profile_registration.html', context_dict)
-
 
 @login_required
 def profile(request, username):
@@ -114,10 +113,8 @@ def profile(request, username):
             print(form.errors)
 
     return render(request, 'profile/profile.html',
-        {'userprofile': userprofile, 'selecteduser': user, 'form': form})
+        {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/'})
 
-def myContents(request):
-    return render(request, 'profile/MyContentsTab.html', {})
 
 def search(request):
     result_list = []
@@ -133,7 +130,13 @@ def search(request):
 
 #for the nav tabs
 def myContents(request):
-    return render(request, 'profile/MyContentsTab.html', {})
+    post_list = Post.objects.all()
+    comment_list = Comment.objects.all()
+    #a = len(comment_list)
+
+    context_dict={"posts":post_list}
+    return render(request, 'profile/MyContentsTab.html', context_dict)
+
 
 def myRatings(request):
     return render(request, 'profile/MyRatingsTab.html', {})

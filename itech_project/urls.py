@@ -26,7 +26,7 @@ from antifu.forms import UserForm
 
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
-        return '/antifu/profile_registration'
+        return '/antifu/profile_registration/'
 
 
 urlpatterns = [

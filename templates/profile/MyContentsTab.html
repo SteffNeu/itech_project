@@ -1,7 +1,5 @@
 {% load staticfiles %}
-{% block title_block %}
-    My Contents
-{% endblock %}
+
 
 {% block header_block %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,30 +11,33 @@
 <!--table with content summary-->
 {% block body_block %}
 
-    <div class="container">
-
         <div class="table-responsive">
             <table id="myContentsTable" class="table table-hover table-bordered">
                 <thead>
                 <tr>
-                    <th>#</th>
                     <th>Title</th>
                     <th>Upload Date</th>
                     <th>Reactions</th>
+                    <th>No. of Comments</th>
                     <th>Category</th>
                 </tr>
                 </thead>
                 <tbody>
+                {% for p in posts %}
                 <tr id="post_details">
-                    <td>1</td>
-                    <td>Adam and Steve</td>
-                    <td>10/02/2018</td>
-                    <td>:< :C :/</td>
-                    <td>LGBT+</td>
+                    <td>{{ p.title }}</td>
+                    <td>{{ p.date }}</td>
+                    <td>Grammar Fail: {{ p.grammarFail }}
+                        Logic Fail: {{ p.logicFail }}
+                        Toxicity: {{ p.toxicity }}
+                        Harmful: {{ p.harmful }}</td>
+                    <td> </td>
+                    <td>{{ p.category }}</td>
                 </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
-    </div>
+
 
 {% endblock %}
