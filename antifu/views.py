@@ -62,7 +62,7 @@ def contactUs(request):
 
 def personalHelp(request):
     help_list = PersonalHelp.objects.all()
-    context_dict = {"help_list":help_list}
+    context_dict = {"help":help_list}
     return render(request, 'antifu/personalHelp.html',context_dict)
 
 def faq(request):
@@ -130,3 +130,16 @@ def search(request):
         context_dict['query'] = query
         context_dict['result_list'] = result_list
     return render(request, 'antifu/search.html', context_dict)
+
+#for the nav tabs
+def myContents(request):
+    return render(request, 'profile/MyContentsTab.html', {})
+
+def myRatings(request):
+    return render(request, 'profile/MyRatingsTab.html', {})
+
+def settings(request):
+    return render(request, 'profile/MySettingsTab.html', {})
+
+def uploadContent(request):
+    return render(request, 'profile/UploadContentTab.html', {})

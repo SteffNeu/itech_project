@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load staticfiles %}
+{% block title_block %}
+    Settings
+{% endblock %}
 
-</body>
-</html>
+{% block header_block %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block body_block %}
+    <div class="container">
+
+        <div class="btn-group-vertical">
+
+            <button type="button" class="btn btn-primary btn-lg">Amend Details</button>
+            <button type="button" class="btn btn-primary btn-lg">Manage Categories</button>
+            <button type="button" class="btn btn-primary btn-lg">Deactivate Account</button>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
+

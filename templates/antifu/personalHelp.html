@@ -6,6 +6,11 @@
 {% block body_block %}
     <a href="{% url 'home' %}">6x Take her back!</a>
     <div>
+        {% for h in help %}
+            <li><a href="{{ h.href}}">{{ h.title }}</a></li>
+        {% endfor %}
+    </div>
+    <div>
       <p>
         Hello kind soul.
 
@@ -37,5 +42,6 @@
         <ul>
           <li><a href="https://www.nhs.uk/conditions/suicide/getting-help/">NHS Suicide Getting Help</a></li>
         </ul>
+
     </div>
 {% endblock %}

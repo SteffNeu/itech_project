@@ -1,54 +1,28 @@
 {% extends 'antifu/base.html' %}
 {% load staticfiles %}
+
 {% block link_block %}
   <link rel="stylesheet" type="text/css" href="{%static "css/faq.css"%}">
   <script src="{%static "js/faq.js" %}"></script>
 {% endblock %}
+
 {% block title_block %}
   FAQ
 {% endblock %}
+
 {% block header_block %}
   Frequently asked qustions - FAQ
 {% endblock %}
+
 {% block body_block %}
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">How do I censor my posts properly?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
-</div>
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">How does the rating of the posts go?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
-</div>
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">How do I report an inappropriate post or comment?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
-</div>
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">What is an appropriate comment?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
-</div>
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">What do the rating options on a comment actually mean?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
-</div>
+    {% for faq in faqs %}
+        <div class="faq_container">
+          <div class="faq">
+            <div class="faq_question">{{ faq.questions }}</div>
+            <div class="faq_answer_container">
+              <div class="faq_answer">{{ faq.answers }}</div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
 {% endblock %}

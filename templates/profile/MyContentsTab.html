@@ -1,2 +1,42 @@
+{% load staticfiles %}
+{% block title_block %}
+    My Contents
+{% endblock %}
 
-    POTATO
+{% block header_block %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+
+<!--table with content summary-->
+{% block body_block %}
+
+    <div class="container">
+
+        <div class="table-responsive">
+            <table id="myContentsTable" class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Upload Date</th>
+                    <th>Reactions</th>
+                    <th>Category</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="post_details">
+                    <td>1</td>
+                    <td>Adam and Steve</td>
+                    <td>10/02/2018</td>
+                    <td>:< :C :/</td>
+                    <td>LGBT+</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
