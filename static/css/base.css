@@ -15,9 +15,11 @@
   color: white;
 }
 
-body {
+.bodyClass {
   min-height: 75rem;
   padding-top: 4.0rem;
+  margin-top: 50px;
+  background-color: red;
 }
 
 .container-all {
