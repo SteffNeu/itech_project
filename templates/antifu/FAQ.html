@@ -1,54 +1,41 @@
 {% extends 'antifu/base.html' %}
 {% load staticfiles %}
+
 {% block link_block %}
   <link rel="stylesheet" type="text/css" href="{%static "css/faq.css"%}">
   <script src="{%static "js/faq.js" %}"></script>
 {% endblock %}
+
 {% block title_block %}
   FAQ
 {% endblock %}
+
 {% block header_block %}
-  Frequently asked qustions - FAQ
+  Frequently asked questions - FAQ
 {% endblock %}
+
 {% block body_block %}
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">How do I censor my posts properly?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
+<div class="row">
+  <div class="col-8">
+    {% for faq in faqs %}
+        <div class="toggle-panel faq_container pt-3 mt-1">
+          <div class="card faq">
+            <div class="card-header text-left faq_question" role="tab">
+              <a role="button" class="panel-title text-black">
+                <h4 class="mt-1 ml-2">{{ faq.questions }}</h4>
+              </a>
+            </div>
+            <div class="panel-collapse card-body faq_answer_container">
+              <div class="panel-body p-4 faq_answer">
+                <p class="panel-text mb-5">{{ faq.answers }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
 </div>
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">How does the rating of the posts go?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
-</div>
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">How do I report an inappropriate post or comment?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
-</div>
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">What is an appropriate comment?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
-</div>
-<div class="faq_container">
-  <div class="faq">
-    <div class="faq_question">What do the rating options on a comment actually mean?</div>
-    <div class="faq_answer_container">
-      <div class="faq_answer">Answer goes here</div>
-    </div>
-  </div>
+<div class="col-4-sm col-2-xs">
+  <img class="p-5" src="{% static "images/faq1.jpg" %}" alt="Questioning woman with coffee cup." />
 </div>
 {% endblock %}

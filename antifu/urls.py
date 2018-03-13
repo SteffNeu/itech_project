@@ -16,7 +16,12 @@ urlpatterns = [
 	url(r'^post/$',views.post,name='post'),
 	url(r'search/$', views.search, name='search'),
 	url(r'^profile_registration', views.register_profile, name='register_profile'),
-	url(r'^tabs/firsttab/$',views.myContents,name='myContents')
+
+	#the navtabs
+	url(r'^myContents/(?P<username>[\w\-]+)/$',views.myContents,name='myContents'),
+	url(r'^myComments/(?P<username>[\w\-]+)/$',views.myComments,name='myComments'),
+	url(r'^settings/$',views.settings,name='settings'),
+	url(r'^uploadContent/$',views.uploadContent,name='uploadContent'),
 	# url(r'^category/(?P<category_name_slug>[\w\-]+)/add_page/$', views.add_page, name='add_page'),
 	# url(r'^register/$', views.register, name='register'),
 	# url(r'^login/$', views.user_login, name='login'),

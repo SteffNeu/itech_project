@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+<<<<<<< HEAD
 from antifu.models import Category, UserProfile, Comment, Post
 from antifu.forms import UserProfileForm, ContactForm, CommentForm
+=======
+from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FAQ
+from antifu.forms import UserProfileForm, ContactForm
+>>>>>>> master
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -25,7 +30,6 @@ def home(request):
 
 
 def show_category(request, category_name):
-
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
     comments = Comment.objects.filter(post=posts);
@@ -43,13 +47,17 @@ def show_category(request, category_name):
 
 
     context_dict = {'category':category,'posts':posts,'comments':comments, 'form':form}
+
     return render(request,'antifu/category.html',context_dict)
 
 
 def aboutUs(request):
-    return render(request, 'antifu/aboutUs.html')
+    category_list = Category.objects.all()
+    context_dict = {'categories': category_list}
+    return render(request, 'antifu/aboutUs.html',context_dict)
 
 def contactUs(request):
+    category_list = Category.objects.all()
     if request.method == 'GET':
         form = ContactForm()
     else:
@@ -73,19 +81,27 @@ def contactUs(request):
          # if a GET (or any other method) we'll create a blank form
         else:
             form = ContactForm()
-    return render(request, 'antifu/contactUs.html', {'form': form})
+    return render(request, 'antifu/contactUs.html', {'form': form,'categories': category_list})
 
 def personalHelp(request):
-    return render(request, 'antifu/personalHelp.html')
+    category_list = Category.objects.all()
+    help_list = PersonalHelp.objects.all()
+    context_dict = {"help":help_list,
+                    'categories': category_list}
+    return render(request, 'antifu/personalHelp.html',context_dict)
 
 def faq(request):
-    return render(request, 'antifu/FAQ.html')
+    category_list = Category.objects.all()
+    faqs = FAQ.objects.all()
+    context_dict = {"faqs": faqs,
+                    'categories': category_list}
+    return render(request, 'antifu/FAQ.html',context_dict)
 
 def post(request):
-
+    category_list = Category.objects.all()
     post = Post.objects.all()
     comments = Comment.objects.all();
-    context_dict = {'comments': comments, 'posts':post}
+    context_dict = {'comments': comments, 'posts':post,'categories': category_list}
     return render(request, 'antifu/post.html', context_dict)
 
 def comment(request):
@@ -94,22 +110,23 @@ def comment(request):
 
 @login_required
 def register_profile(request):
+    category_list = Category.objects.all()
     form = UserProfileForm()
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES)
-        if form.is_valid():
-            user_profile = form.save(commit=False)
-            user_profile.user = request.user
-            user_profile.save()
-            return redirect('index')
-        else:
-            print(form.errors)
-    context_dict = {'form':form}
+    if form.is_valid():
+        user_profile = form.save(commit=False)
+        user_profile.user = request.user
+        user_profile.save()
+        return redirect('home')
+    else:
+        print(form.errors)
+    context_dict = {'form':form,'categories': category_list}
     return render(request, 'registration/profile_registration.html', context_dict)
-
 
 @login_required
 def profile(request, username):
+    category_list = Category.objects.all()
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
@@ -125,10 +142,8 @@ def profile(request, username):
             print(form.errors)
 
     return render(request, 'profile/profile.html',
-        {'userprofile': userprofile, 'selecteduser': user, 'form': form})
+        {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/','categories': category_list})
 
-def myContents(request):
-    return render(request, 'profile/MyContentsTab.html', {})
 
 def search(request):
     result_list = []
@@ -141,3 +156,50 @@ def search(request):
         context_dict['query'] = query
         context_dict['result_list'] = result_list
     return render(request, 'antifu/search.html', context_dict)
+
+#for the nav tabs
+def myContents(request, username):
+    user=User.objects.get(username=username)
+    post_list=[]
+    post_comment_list=[]
+
+    #Posts the user made
+    try:
+        #filter works better than get, we can get multiple objects
+        post_list = Post.objects.filter(user=user)
+    except Post.DoesNotExist:
+        print('no posts')
+
+    #Comments of each post
+    try:
+        for p in post_list:
+            post_comment_list = Comment.objects.filter(post=p)
+    except Comment.DoesNotExist:
+        print('no comments')
+
+    numComments = len(post_comment_list)
+    context_dict={"posts":post_list,
+                "numComments":numComments,
+                "postComments":post_comment_list}
+    return render(request, 'profile/MyContentsTab.html', context_dict)
+
+
+def myComments(request, username):
+    user=User.objects.get(username=username)
+    user_comment_list=[]
+
+    #Comments the user made
+    try:
+        user_comment_list = Comment.objects.filter(user=user)
+    except Comment.DoesNotExist:
+        print('no comments')
+
+
+    context_dict={"comments":user_comment_list}
+    return render(request, 'profile/MyCommentsTab.html', context_dict)
+
+def settings(request):
+    return render(request, 'profile/MySettingsTab.html', {})
+
+def uploadContent(request):
+    return render(request, 'profile/UploadContentTab.html', {})
