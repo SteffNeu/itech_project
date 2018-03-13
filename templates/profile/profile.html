@@ -2,19 +2,17 @@
 {% load staticfiles %}
 
 {% block link_block %}
-    <!--meta makes it responsive-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static "css/userProfile.css" %}">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--meta makes it responsive-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static "css/userProfile.css" %}">
 {% endblock %}
 
 {% block title %}{{ selecteduser.username }} Profile{% endblock %}
 
 {% block body_block %}
+<div class="row">
     <!--Profile details left column-->
-    <div id="userDetails"class="col-lg-2" style="background-color: aquamarine; max-width:100%; max-height:100%">
+    <div id="userDetails"class="col-lg-2 " style="background-color: aquamarine; max-width:100%; max-height:100%">
         <h1>{{ selecteduser.username }} Profile</h1>
         <img src="{{ MEDIA_URL }}{{userprofile.picture }}"
              width="300"
@@ -37,40 +35,44 @@
     <!--End of profile details-->
 
     <!--Profile content right column-->
-    <div id="userTabs"class="col-lg-10" style="background-color: red; max-width:100%; max-height:100%">
+    <div id="userTabs"class="col-lg-9" style="background-color: red; max-width:100%; max-height:100%">
 
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#myContent">My Content</a></li>
-            <li><a data-toggle="tab" href="#myRatings">My Comments</a></li>
-            <li><a data-toggle="tab" href="#settings">Settings</a></li>
-            <li><a data-toggle="tab" href="#uploadContent">Upload Content</a></li>
-        </ul>
+        <nav>
+            <div class="nav nav-tabs" id="myTab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-myContentTab" data-toggle="tab" href="#myContentTab" role="tab" aria-controls="nav-home" aria-selected="true">My Content</a>
+                <a class="nav-item nav-link" id="nav-myCommentsTab" data-toggle="tab" href="#myCommentsTab" role="tab" aria-controls="nav-profile" aria-selected="false">My Comments</a>
+                <a class="nav-item nav-link" id="nav-settingsTab" data-toggle="tab" href="#settingsTab" role="tab" aria-controls="nav-contact" aria-selected="false">Settings</a>
+                <a class="nav-item nav-link" id="nav-uploadContentTab" data-toggle="tab" href="#uploadContentTab" role="tab" aria-controls="nav-contact" aria-selected="false">Upload Content</a>
 
-        <div class="tab-content">
-            <div id="myContent" class="tab-pane fade in active">
-                <div>
-                    <iframe height="600px" width=100% src="{% url 'myContents' selecteduser  %}" name="iframe_a"></iframe>
-                </div>
             </div>
-            <div id="myRatings" class="tab-pane fade">
-                <div>
-                    <iframe height="600px" width=100% src="{% url 'myComments' selecteduser %}" name="iframe_a"></iframe>
-                </div>
-            </div>
-            <div id="settings" class="tab-pane fade">
-                <div>
-                    <iframe height="600px" width=100% src="{% url 'settings' %}" name="iframe_a"></iframe>
-                </div>
-            </div>
-            <div id="uploadContent" class="tab-pane fade">
-                <div>
-                    <iframe height="600px" width=100% src="{% url 'uploadContent' %}" name="iframe_a"></iframe>
-                </div>
-            </div>
-        </div>
 
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="myContentTab" role="tabpanel" aria-labelledby="nav-myContentTab">
+                    <div>
+                        <iframe height="600px" width=100% src="{% url 'myContents' selecteduser  %}" name="iframe_a"></iframe>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="myCommentsTab" role="tabpanel" aria-labelledby="nav-myCommentsTab">
+                    <div>
+                        <iframe height="600px" width=100% src="{% url 'myComments' selecteduser %}" name="iframe_a"></iframe>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="settingsTab" role="tabpanel" aria-labelledby="nav-settingsTab">
+                    <div>
+                        <iframe height="600px" width=100% src="{% url 'settings' %}" name="iframe_a"></iframe>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="uploadContentTab" role="tabpanel" aria-labelledby="nav-uploadContentTab">
+                    <div>
+                        <iframe height="600px" width=100% src="{% url 'uploadContent' %}" name="iframe_a"></iframe>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
-    <!--End of profile content-->
+<!--End of profile content-->
+</div>
+
 
 
 {% endblock %}
