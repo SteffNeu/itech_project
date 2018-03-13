@@ -32,9 +32,12 @@ def show_category(request, category_name):
     return render(request,'antifu/category.html',context_dict)
 
 def aboutUs(request):
-    return render(request, 'antifu/aboutUs.html')
+    category_list = Category.objects.all()
+    context_dict = {'categories': category_list}
+    return render(request, 'antifu/aboutUs.html',context_dict)
 
 def contactUs(request):
+    category_list = Category.objects.all()
     if request.method == 'GET':
         form = ContactForm()
     else:
@@ -58,23 +61,27 @@ def contactUs(request):
          # if a GET (or any other method) we'll create a blank form
         else:
             form = ContactForm()
-    return render(request, 'antifu/contactUs.html', {'form': form})
+    return render(request, 'antifu/contactUs.html', {'form': form,'categories': category_list})
 
 def personalHelp(request):
+    category_list = Category.objects.all()
     help_list = PersonalHelp.objects.all()
-    context_dict = {"help":help_list}
+    context_dict = {"help":help_list,
+                    'categories': category_list}
     return render(request, 'antifu/personalHelp.html',context_dict)
 
 def faq(request):
-
+    category_list = Category.objects.all()
     faqs = FAQ.objects.all()
-    context_dict = {"faqs": faqs}
+    context_dict = {"faqs": faqs,
+                    'categories': category_list}
     return render(request, 'antifu/FAQ.html',context_dict)
 
 def post(request):
+    category_list = Category.objects.all()
     post = Post.objects.all()
     comments = Comment.objects.all();
-    context_dict = {'comments': comments, 'posts':post}
+    context_dict = {'comments': comments, 'posts':post,'categories': category_list}
     return render(request, 'antifu/post.html', context_dict)
 
 def comment(request):
@@ -83,6 +90,7 @@ def comment(request):
 
 @login_required
 def register_profile(request):
+    category_list = Category.objects.all()
     form = UserProfileForm()
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES)
@@ -93,11 +101,12 @@ def register_profile(request):
         return redirect('home')
     else:
         print(form.errors)
-    context_dict = {'form':form}
+    context_dict = {'form':form,'categories': category_list}
     return render(request, 'registration/profile_registration.html', context_dict)
 
 @login_required
 def profile(request, username):
+    category_list = Category.objects.all()
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
@@ -113,7 +122,7 @@ def profile(request, username):
             print(form.errors)
 
     return render(request, 'profile/profile.html',
-        {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/'})
+        {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/','categories': category_list})
 
 
 def search(request):
