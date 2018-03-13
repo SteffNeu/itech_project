@@ -38,26 +38,26 @@
         <h2>If you have any questions or suggestions towards our webpage we would be happy to be contacted by you.</h2>
       </div>
 			<div class="container">
-        <div class="row ml-4 mr-4">
-        <div clas="col-6">
-          <form>
-            {% for field in form %}
-              <div class="fieldWrapper">
-                {{ field.errors }}
-                <label for="{{ field.id_for_label }}"><strong>{{ field.label }}</strong></label>
-                <br />
+        <form>
+          {% for field in form %}
+            <div class="fieldWrapper">
+              <div class="row mt-2">
+                <div class="col-2">
+                  {{ field.errors }}
+                  <label class="text-left" for="{{ field.id_for_label }}"><strong>{{ field.label }}</strong></label>
+                </div>
+                <div class="col-10">
                   {% render_field field placeholder=field.label class+="form-control" %}
-
-                {% if field.help_text %}
-                <p class="help form-control">{{ field.help_text|safe }}</p>
-                {% endif %}
+                </div>
               </div>
-            {% endfor %}
-            <input class="btn btn-primary btn-default submit" type="submit" value="Send Message" />
-          </form>
-          {% endif %}
-        </div>
-      </div>
-		</div>
+              {% if field.help_text %}
+              <p class="help form-control">{{ field.help_text|safe }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+          <input class="btn btn-primary btn-default submit" type="submit" value="Send Message" />
+        </form>
+  		</div>
+    {% endif %}
   </div>
 {% endblock %}

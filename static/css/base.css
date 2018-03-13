@@ -15,9 +15,10 @@
   color: white;
 }
 
-body {
+.bodyClass {
   min-height: 75rem;
   padding-top: 4.0rem;
+  margin-top: 50px;
 }
 
 .container-all {
