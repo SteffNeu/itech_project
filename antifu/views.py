@@ -59,10 +59,20 @@ def contactUs(request):
             name = form.cleaned_data['name']
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
+            cc_myself = form.cleaned_data['cc_myself']
+
+            recipients = ['2351944n@student.gla.ac.uk']
+            if cc_myself:
+                recipients.append(sender)
             try:
-                send_mail(subject, message, name, from_email, ['admin@example.com'])
+                send_mail(subject, message, from_email, recipients)
             except BadHeaderError:
                 return render(request, 'antifu/contactUs.html')
+            context_dict = {'thanks': "true"}
+            return render(request,'antifu/contactUs.html',context_dict)
+         # if a GET (or any other method) we'll create a blank form
+        else:
+            form = ContactForm()
     return render(request, 'antifu/contactUs.html', {'form': form})
 
 def personalHelp(request):

@@ -26,12 +26,13 @@ class UserProfileForm(forms.ModelForm):
         fields = ('picture',)
 
 class ContactForm(forms.Form):
-    #name = form.CharField(required=True)
-    from_email = forms.EmailField(required=True)
-    subject = forms.CharField(required=True)
+    name = forms.CharField(required=True, max_length=50)
+    from_email = forms.EmailField(required=True, label='Email')
+    subject = forms.CharField(required=True, max_length=50, label='Subject')
     message = forms.CharField(widget=forms.Textarea, required=True)
+    cc_myself = forms.BooleanField(required=False, label='Send to myself')
 
-class CommentForm(forms.ModelForm):
+    class CommentForm(forms.ModelForm):
     comment = forms.CharField(widget=forms.Textarea, required=True, max_length=1000)
     class Meta:
         model = Comment

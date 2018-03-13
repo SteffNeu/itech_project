@@ -1,0 +1,12 @@
+img{
+    max-width:180px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+input[type=file]{
+    padding:0px;
+}
+
+#pic{
+
+}
