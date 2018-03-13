@@ -38,29 +38,20 @@ def aboutUs(request):
 
 def contactUs(request):
     category_list = Category.objects.all()
-    if request.method == 'GET':
-        form = ContactForm()
-    else:
+    context_dict = {'categories': category_list}
+    if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']
-            name = form.cleaned_data['name']
-            from_email = form.cleaned_data['from_email']
-            message = form.cleaned_data['message']
-            cc_myself = form.cleaned_data['cc_myself']
-
-            recipients = ['2351944n@student.gla.ac.uk']
-            if cc_myself:
-                recipients.append(sender)
-            try:
-                send_mail(subject, message, from_email, recipients)
-            except BadHeaderError:
-                return render(request, 'antifu/contactUs.html')
+            print (form)
+            print ("happened")
+            form.save(commit=True)
             context_dict = {'thanks': "true"}
             return render(request,'antifu/contactUs.html',context_dict)
          # if a GET (or any other method) we'll create a blank form
         else:
             form = ContactForm()
+    else:
+        form = ContactForm()
     return render(request, 'antifu/contactUs.html', {'form': form,'categories': category_list})
 
 def personalHelp(request):

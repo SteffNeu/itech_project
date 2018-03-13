@@ -26,6 +26,10 @@
   text-align: center;
 }
 
+.jumbotron-adaption {
+  padding: 0px;
+}
+
 /* .navbar-background {
   background: transparent;
   border: none!important;

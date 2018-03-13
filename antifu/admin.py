@@ -1,5 +1,5 @@
 from django.contrib import admin
-from antifu.models import Category, Post, Comment, UserProfile, FAQ, PersonalHelp
+from antifu.models import Category, Post, Comment, UserProfile, FAQ, PersonalHelp, ContactUsEmail
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'category',)
@@ -11,3 +11,4 @@ admin.site.register(Comment)
 admin.site.register(UserProfile)
 admin.site.register(FAQ)
 admin.site.register(PersonalHelp)
+admin.site.register(ContactUsEmail)

@@ -85,3 +85,15 @@ class PersonalHelp(models.Model):
 
     def __str__(self):
         return self.title
+
+class ContactUsEmail(models.Model):
+    name = models.CharField(default=0, max_length=50)
+    from_email = models.EmailField(default=0)
+    subject = models.CharField(default=0, max_length=50)
+    message = models.CharField(default=0, max_length=1024)
+
+    def save(self, *args, **kwargs):
+        super(ContactUsEmail, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.id

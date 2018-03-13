@@ -1,5 +1,5 @@
 from django import forms
-from antifu.models import UserProfile
+from antifu.models import UserProfile, ContactUsEmail
 from django.contrib.auth.models import User
 from registration.forms import RegistrationForm
 
@@ -25,9 +25,12 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('picture',)
 
-class ContactForm(forms.Form):
+class ContactForm(forms.ModelForm):
     name = forms.CharField(required=True, max_length=50)
     from_email = forms.EmailField(required=True, label='Email')
     subject = forms.CharField(required=True, max_length=50, label='Subject')
-    message = forms.CharField(widget=forms.Textarea, required=True)
-    cc_myself = forms.BooleanField(required=False, label='Send to myself')
+    message = forms.CharField(widget=forms.Textarea, required=True, max_length=1024)
+
+    class Meta:
+        model = ContactUsEmail
+        fields = ('name', 'from_email', 'subject', 'message',)
