@@ -45,6 +45,7 @@ def show_category(request, category_name):
     context_dict = {'category':category,'posts':posts,'comments':comments, 'form':form}
     return render(request,'antifu/category.html',context_dict)
 
+
 def aboutUs(request):
     return render(request, 'antifu/aboutUs.html')
 
