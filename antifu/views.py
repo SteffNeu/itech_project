@@ -1,12 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-<<<<<<< HEAD
-from antifu.models import Category, UserProfile, Comment, Post
-from antifu.forms import UserProfileForm, ContactForm, CommentForm
-=======
 from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FAQ
-from antifu.forms import UserProfileForm, ContactForm
->>>>>>> master
+from antifu.forms import UserProfileForm, ContactForm, CommentForm
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
