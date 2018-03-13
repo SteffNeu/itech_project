@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
@@ -11,7 +10,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-</head>
+
 <body>
 <div class="colouring">
 {% for p in posts %}
@@ -172,7 +171,6 @@
 {% endfor %}
 </div>
 
-
 <div id="stars" class="star_rating container" style="display:none">
 	<div class="row">
 		<div class="star_rating glyphicon glyphicon-star-empty col-sm-1"></div>
@@ -199,7 +197,6 @@ $('.c_icon').click( function(source){
     <!--get toggle status-->
     var toggled = source.target.getAttribute("aria-pressed")
     var id = source.target.id;
-
 
     <!-- obtain information for database-->
     var info = id.split("_");

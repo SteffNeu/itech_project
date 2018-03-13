@@ -1,5 +1,5 @@
 from django import forms
-from antifu.models import UserProfile
+from antifu.models import UserProfile, Comment
 from django.contrib.auth.models import User
 from registration.forms import RegistrationForm
 
@@ -31,3 +31,9 @@ class ContactForm(forms.Form):
     subject = forms.CharField(required=True, max_length=50, label='Subject')
     message = forms.CharField(widget=forms.Textarea, required=True)
     cc_myself = forms.BooleanField(required=False, label='Send to myself')
+
+class CommentForm(forms.ModelForm):
+    comment = forms.CharField(widget=forms.Textarea, required=True, max_length=1000)
+    class Meta:
+        model = Comment
+        fields = ('comment',)
