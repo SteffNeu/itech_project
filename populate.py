@@ -171,7 +171,7 @@ def create_su(username, email, password, picture):
         user.picture=picture
         user.save()
         u.save()
-        return u
+        return user
     except IntegrityError:
         pass
 
