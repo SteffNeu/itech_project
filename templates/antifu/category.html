@@ -2,11 +2,6 @@
 {% load staticfiles %}
 
 {% block link_block %}
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.bundle.min.js"></script>
-	<script src="js/bootstrap-dropdownhover.min.js"></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
 {% endblock %}
 <br/>
@@ -171,21 +166,31 @@
 
 </div>
 <div class="row">
-    <form method = "post">
+    <form method = "post" class="commentForm" data-postID="{{ p.id }}">
         <div class="col-sm-2">
             {% csrf_token %}
             {{ form.as_p }}
         </div>
         <div class="col-sm-1">
-            <button class="text-black" type="submit">submit</button>
+            <button class="text-black commentButton" type="submit">submit</button>
         </div>
-        <div class="spaceholder col-sm-9"> Ahoj{{ newComment }}</div>
+        <div class="spaceholder col-sm-9"></div>
     </form>
 </div>
 {% endfor %}
 </div>
 </body>
 {% endblock %}
+
+
+<!-- submit form -->
+<script type="text/javascript">
+$(".commentButton").submit(function(event) {
+    alert("meep");
+});
+
+</script>
+
 
 <!-- comment -->
 <script>
@@ -221,20 +226,11 @@ $('.c_icon').click( function(source){
     }
 	document.getElementById(count_id).innerHTML = count;
 
-    updateDB(c_id,c_elem);
-
 
 });
 
-
 </script>
 
-<!-- here goes the database update-->
-<script>
-const sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('itech_project/db.sqlite3');
-
-</script>
 
 <!-- post -->
 <script>
