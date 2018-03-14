@@ -25,11 +25,12 @@ def home(request):
 
 
 def show_category(request, category_name):
+    category_list = Category.objects.all()
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
     comments = Comment.objects.filter(post=posts);
     form = CommentForm();
-    context_dict = {'category':category,'posts':posts,'comments':comments, 'form':form}
+    context_dict = {'category':category,'posts':posts,'comments':comments, 'form':form,'categories': category_list}
 
     return render(request,'antifu/category.html',context_dict)
 
@@ -150,13 +151,14 @@ def search(request):
 #for the nav tabs
 def myContents(request, username):
     user=User.objects.get(username=username)
+    userprofile=UserProfile.objects.get(user=user)
     post_list=[]
     post_comment_list=[]
 
     #Posts the user made
     try:
         #filter works better than get, we can get multiple objects
-        post_list = Post.objects.filter(user=user)
+        post_list = Post.objects.filter(user=userprofile)
     except Post.DoesNotExist:
         print('no posts')
 
@@ -176,11 +178,12 @@ def myContents(request, username):
 
 def myComments(request, username):
     user=User.objects.get(username=username)
+    userprofile=UserProfile.objects.get(user=user)
     user_comment_list=[]
 
     #Comments the user made
     try:
-        user_comment_list = Comment.objects.filter(user=user)
+        user_comment_list = Comment.objects.filter(user=userprofile)
     except Comment.DoesNotExist:
         print('no comments')
 
