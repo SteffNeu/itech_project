@@ -28,19 +28,7 @@ def show_category(request, category_name):
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
     comments = Comment.objects.filter(post=posts);
-    if request.method =='GET':
-        form = CommentForm()
-    else:
-        form = ContactForm(request.POST)
-        comment = form.save(commit=False)
-        comment.accuracyRating = 0
-        comment.burnfactor = 0
-        comment.logicRating = 0
-        comment.loveliness = 0
-        comment.comment = form.cleaned_data['comment']
-        comment.save()
-
-
+    form = CommentForm();
     context_dict = {'category':category,'posts':posts,'comments':comments, 'form':form}
 
     return render(request,'antifu/category.html',context_dict)
@@ -99,8 +87,15 @@ def post(request):
     context_dict = {'comments': comments, 'posts':post,'categories': category_list}
     return render(request, 'antifu/post.html', context_dict)
 
-def comment(request):
-    return render(request,'antifu/comment.html')
+def submit_comment(request, post_id):
+    if reqest.method == 'POST':
+        post = Post.objects.get(id=post_id)
+        #new_comment = Comment(comment=request.POST['comment'])
+        new_comment = Comment()
+        new_comment.user = "TomCat"
+        new_comment.post = post
+        new_comment.save()
+        return new_comment
 
 
 @login_required

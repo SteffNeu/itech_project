@@ -12,7 +12,7 @@ urlpatterns = [
 	url(r'^category/(?P<category_name>[\w\-]+)/$',
 		views.show_category, name='show_category'),
 	url(r'^profile/(?P<username>[\w\-]+)/$', views.profile, name='profile'),
-	url(r'^comment/$',views.comment,name='comment'),
+	url(r'^comment/$',views.submit_comment,name='submit_comment'),
 	url(r'^post/$',views.post,name='post'),
 	url(r'search/$', views.search, name='search'),
 	url(r'^profile_registration', views.register_profile, name='register_profile'),

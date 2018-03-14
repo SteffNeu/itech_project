@@ -51,9 +51,7 @@
 				</div>
 				<div class="row">
 					<div class="post_tags col-sm-12">
-                        {% for tag in p.tags %}
-					    	<a href="#">{{ tag }}</a>
-						{% endfor %}
+                        {{ p.tags }}
 					</div>
 				</div>
 			</div>
@@ -227,13 +225,6 @@ $('.c_icon').click( function(source){
 
 
 });
-
-function updateDB(id,field) {
-    var sqlite3 = require('sqlite3').verbose();
-    var db = new sqlite3.Database('C:/Users/Tom/python-workspace/itech_project/db.sqlite3');
-    alert(id)
-    alert(field)
-}
 
 
 </script>
