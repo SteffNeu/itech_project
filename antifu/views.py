@@ -81,11 +81,11 @@ def faq(request):
                     'categories': category_list}
     return render(request, 'antifu/FAQ.html',context_dict)
 
-def post(request):
+def post(request, postID):
     category_list = Category.objects.all()
-    post = Post.objects.all()
-    comments = Comment.objects.all();
-    context_dict = {'comments': comments, 'posts':post,'categories': category_list}
+    post = Post.objects.get(id=postID)
+    comments = Comment.objects.filter(post=post);
+    context_dict = {'comments': comments, 'post':post,'categories': category_list}
     return render(request, 'antifu/post.html', context_dict)
 
 def submit_comment(request, post_id):

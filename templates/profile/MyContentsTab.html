@@ -25,7 +25,7 @@
                 <tbody>
                 {% for p in posts %}
                 <tr id="post_details">
-                    <td>{{ p.title }}</td>
+                    <td><a target="_parent" href="{% url 'post' p.id %}">{{ p.title }}</a></td>
                     <td>{{ p.date }}</td>
                     <td>Grammar Fail: {{ p.grammarFail }}
                         Logic Fail: {{ p.logicFail }}

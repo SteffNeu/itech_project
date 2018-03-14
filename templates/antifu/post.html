@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+{% extends 'antifu/base.html' %}
 {% load staticfiles %}
+{% block link_block %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -10,23 +12,24 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+{% endblock %}
 
-<body>
+
+{% block body_block %}
 <div class="colouring">
-{% for p in posts %}
 <div class="post_container colouring">
 	<div class="post colouring">
 	<div class="container">
 		<div class="row top">
 			<div class="col-sm-6">
 				<div class="post_image thin-border">
-					<img class="img-responsive post_image" src="{{MEDIA_URL}}{{ p.picturePost }}" alt="No Image" />
+					<img class="img-responsive post_image" src="{{MEDIA_URL}}{{ post.picturePost }}" alt="No Image" />
 				</div>
 			</div>
 			<div class="colouring col-sm-6">
 				<div class="row">
 					<div class="post_header col-sm-11">
-						<h4>{{ p.title }}</h4>
+						<h4>{{ post.title }}</h4>
 					</div>
 					<div class="options col-sm-1 ">
 						<div class="dropdown ">
@@ -42,17 +45,17 @@
 				</div>
 				<div class="row">
 					<div class="post_context thin-border col-sm-12">
-                        {{ p.context }}
-                    </div>
-				</div>	
+                {{ post.context }}
+          </div>
+				</div>
 				<div class="row">
 					<div class="post_tags col-sm-12">
-                        {% for tag in p.tags %}
+            {% for tag in post.tags %}
 					    	<a href="#">{{ tag }}</a>
 						{% endfor %}
 					</div>
 				</div>
-			</div>			
+			</div>
 		</div>
 		<div class="row">
 			<div class="post_feeling col-sm-2 container">
@@ -60,40 +63,39 @@
 			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div id="{{ p.id }}_grammFail" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
-					<div id="{{ p.id }}_grammFail_avg" class="post_rating r_number col-sm-6">3/5</div>
+					<div id="{{ post.id }}_grammFail" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
+					<div id="{{ post.id }}_grammFail_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-                    <div id="{{ p.id }}_logFail" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button"></div>
-					<div id="{{ p.id }}_logFail_avg" class="post_rating r_number col-sm-6">3/5</div>
+                    <div id="{{ post.id }}_logFail" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button"></div>
+					<div id="{{ post.id }}_logFail_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div id="{{ p.id }}_toxic" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
-					<div id="{{ p.id }}_toxic_avg" class="post_rating r_number col-sm-6">3/5</div>
+					<div id="{{ post.id }}_toxic" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
+					<div id="{{ post.id }}_toxic_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
-			</div>			
+			</div>
 			<div class="post_rating col-sm-1">
 				<div class="row">
-					<div id="{{ p.id }}_harm" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
-					<div id="{{ p.id }}_harm_avg" class="post_rating r_number col-sm-6">3/5</div>
+					<div id="{{ post.id }}_harm" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
+					<div id="{{ post.id }}_harm_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
 			<div class="spaceholder col-sm-6"></div>
 		</div>
-	</div>	
+	</div>
 	</div>
 </div>
-
-</body>
+{% endblock %}
 
 <div>
     <ul>
     {% for c in comments %}
-        {% if c.post == p %}
+        {% if c.post == post %}
         <div class="comment_container ">
             <div class="comment">
             <div class="container">
@@ -101,7 +103,7 @@
                     <div class="user_info col-sm-1">
                         <div class="row">
                             <div class="comment_profile_pic col-sm-1">
-                                <img class="small_profile" src="{{ MEDIA_URL }}profile_images/{{ c.user.picture }}" alt="No Image"/>
+                                <img class="small_profile" src="{{ MEDIA_URL }}{{ c.user.picture }}" alt="No Image"/>
                             </div>
                         </div>
                         <div class="row">
@@ -168,7 +170,6 @@
     {% endfor %}
     </ul>
 </div>
-{% endfor %}
 </div>
 
 <div id="stars" class="star_rating container" style="display:none">
@@ -179,7 +180,7 @@
 		<div class="star_rating glyphicon glyphicon-star-empty col-sm-1"></div>
 		<div class="star_rating glyphicon glyphicon-star-empty col-sm-1"></div>
 		<div class="spaceholder col-sm-8"></div>
-	</div>	
+	</div>
 </div>
 
 <!-- comment -->
