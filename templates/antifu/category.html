@@ -172,7 +172,7 @@
             {{ form.as_p }}
         </div>
         <div class="col-sm-1">
-            <button class="text-black commentButton" type="submit">submit</button>
+            <input id="submitfield" class="text-black commentButton" type="submit">submit</input>
         </div>
         <div class="spaceholder col-sm-9"></div>
     </form>
@@ -185,9 +185,15 @@
 
 <!-- submit form -->
 <script type="text/javascript">
-$(".commentButton").submit(function(event) {
-    alert("meep");
+$(".commentForm").submit(function(event) {
+    event.preventDefault;
+    alert("hello")
 });
+
+    $("#submitfield").submit(function (event) {
+       event.preventDefault;
+       alert("hello world")
+    });
 
 </script>
 
