@@ -27,8 +27,8 @@ def show_category(request, category_name):
     category_list = Category.objects.all()
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
-    comments = Comment.objects.filter(post=posts);
-    form = CommentForm();
+    comments = Comment.objects.filter(post=posts)
+    form = CommentForm()
     context_dict = {'category':category,'posts':posts,'comments':comments, 'form':form,'categories': category_list}
 
     return render(request,'antifu/category.html',context_dict)
@@ -57,12 +57,38 @@ def contactUs(request):
         form = ContactForm()
     return render(request, 'antifu/contactUs.html', {'form': form,'categories': category_list})
 
+
 def personalHelp(request):
     category_list = Category.objects.all()
-    help_list = PersonalHelp.objects.all()
+    help_obj = PersonalHelp.objects.all()
+
+    cb_list = []
+    prev_list = []
+    interv_list = []
+    help_list = []
+    suiPrev_list = []
+
+    for e in help_obj:
+        if e.cbTitle is not '':
+            cb_list.append({e.cbTitle:e.cbHref})
+        if e.preventionTitle is not '':
+            prev_list.append({e.preventionTitle:e.preventionHref})
+        if e.interventionTitle is not '':
+            interv_list.append({e.interventionTitle,e.interventionHref})
+        if e.helpTitle is not '':
+            help_list.append({e.helpTitle,e.helpHref})
+        if e.suiPrevTitle is not '':
+            suiPrev_list.append({e.suiPrevTitle,e.suiPrevHref})
+
+
     context_dict = {"help":help_list,
+                    "cb":cb_list,
+                    "prev":prev_list,
+                    "interv":interv_list,
+                    "sui":suiPrev_list,
                     'categories': category_list}
     return render(request, 'antifu/personalHelp.html',context_dict)
+
 
 def faq(request):
     category_list = Category.objects.all()
@@ -74,9 +100,10 @@ def faq(request):
 def post(request, postID):
     category_list = Category.objects.all()
     post = Post.objects.get(id=postID)
-    comments = Comment.objects.filter(post=post);
+    comments = Comment.objects.filter(post=post)
     context_dict = {'comments': comments, 'post':post,'categories': category_list}
     return render(request, 'antifu/post.html', context_dict)
+
 
 def submit_comment(request, post_id):
     if reqest.method == 'POST':

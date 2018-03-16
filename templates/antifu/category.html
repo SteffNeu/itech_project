@@ -3,6 +3,8 @@
 
 {% block link_block %}
     <link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
 {% endblock %}
 <br/>
 {% block header_block %}
@@ -126,34 +128,28 @@
                     <div class="spaceholder col-sm-1"></div>
                     <div class="comment_rating col-sm-1">
                         <div class="row">
-                            <div id="{{ c.id }}_loveliness" class="comment_rating c_icon glyphicon glyphicon-heart col-sm-1" role="button" aria-pressed="false"></div>
-                        </div>
-                        <div class="row">
+                            <div id="{{ c.id }}_loveliness" class="comment_rating c_icon fa fa-heart col-sm-1" role="button" aria-pressed="false"></div>
                             <div id="{{ c.id }}_loveliness_count" class="comment_rating c_number col-sm-1">{{ c.loveliness }}</div>
                         </div>
                     </div>
                     <div class="comment_rating col-sm-1">
                         <div class="row">
-                            <div id="{{ c.id }}_burnfactor" class="comment_rating c_icon glyphicon glyphicon-fire col-sm-1" role="button" aria-pressed="false"></div>
-                        </div>
-                        <div class="row">
+                            <div id="{{ c.id }}_burnfactor" class="comment_rating c_icon fas fa-fire col-sm-1" role="button" aria-pressed="false"></div>
                             <div id="{{ c.id }}_burnfactor_count" class="comment_rating c_number col-sm-1">{{ c.burnfactor }}</div>
                         </div>
                         </div>
                     <div class="comment_rating col-sm-1">
                         <div class="row">
-                            <div id="{{ c.id }}_logicRating" class="comment_rating c_icon glyphicon glyphicon-eye-open col-sm-1" role="button" aria-pressed="false"></div>
-                        </div>
-                        <div class="row">
+                            <div id="{{ c.id }}_logicRating" class="comment_rating c_icon fas fa-lightbulb col-sm-1" role="button" aria-pressed="false"></div>
+
                             <div id="{{ c.id }}_logicRating_count" class="comment_rating c_number col-sm-1">{{ c.logicRating }}</div>
                         </div>
 
                     </div>
                     <div class="comment_rating col-sm-1">
                         <div class="row">
-                            <div id="{{ c.id }}_accuracyRating" class="comment_rating c_icon glyphicon glyphicon-screenshot col-sm-1" role="button" aria-pressed="false"></div>
-                        </div>
-                        <div class="row">
+                            <div id="{{ c.id }}_accuracyRating" class="comment_rating c_icon fas fa-bullseye col-sm-1" role="button" aria-pressed="false"></div>
+
                             <div id="{{ c.id }}_accuracyRating_count" class="comment_rating c_number col-sm-1">{{ c.accuracyRating }}</div>
                         </div>
                     </div>
@@ -180,7 +176,7 @@
 {% endfor %}
 </div>
 </body>
-{% endblock %}
+
 
 
 <!-- submit form -->
@@ -249,3 +245,4 @@ $('.edit').click( function(){
 
 $('.feel_pop').popover();
 </script>
+{% endblock %}

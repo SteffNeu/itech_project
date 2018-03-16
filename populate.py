@@ -26,28 +26,39 @@ def populate():
                                               "those people posted the things they posted and if we might misunderstand it. For that reason we aim to respect the privacy and identity of the original poster and rather encourage to "
                                               "kindly change people’s mind"}
 
-    helps = {"Category: Cyber Bullying ":"",
+
+
+
+
+
+    helpLinks = [
+        # helpLinks[0] - Cyber bullying
+        {
              "What is Cyberbully exactly?":"http://www.stopcyberbullying.org/what_is_cyberbullying_exactly.html",
              "What is cyber bullying?":"https://www.bullying.co.uk/cyberbullying/what-is-cyberbullying/",
-             "What is cyber bullying":"https://www.kidscape.org.uk/cyberbullying/",
-             "Category: Prevention":"",
-             "Effective Cyberbullying Prevention Strategies ":"http://www.cyberbullyhotline.com/blog/effective-cyberbullying-prevention-strategies/",
-             "Preventing cyberbullying":"http://www.stopcyberbullying.org/prevention/index.htm",
-             "Category: Intervention":"",
-             "Take a stand against cyberbullying":"http://www.stopcyberbullying.org/take_action/take_a_stand_against_cyberbullying.html ",
+             "What is cyber bullying":"https://www.kidscape.org.uk/cyberbullying/"},
+        # helpLinks[1] - Prevention
+        {
+            "Effective Cyberbullying Prevention Strategies ":"http://www.cyberbullyhotline.com/blog/effective-cyberbullying-prevention-strategies/",
+             "Preventing cyberbullying":"http://www.stopcyberbullying.org/prevention/index.html"},
+        # helpLinks[2] - Intervention
+        {     "Take a stand against cyberbullying":"http://www.stopcyberbullying.org/take_action/take_a_stand_against_cyberbullying.html ",
              "Intervene in Cyberbullying":"http://preventingbullying.promoteprevent.org/cyberbullying/intervene-cyberbullying",
              "School-Based Cyberbullying Intervention":"https://gb.education.com/reference/article/school-based-cyberbullying-interventions/",
              "Cyberbullying: Resources for Intervention and Prevention ":"https://files.eric.ed.gov/fulltext/EJ1053892.pdf",
-             "Interventions on Bullying and Cyberbullying in Schools: A Systematic Review": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4378064/",
-             "Category: Getting Help": "",
+             "Interventions on Bullying and Cyberbullying in Schools: A Systematic Review": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4378064/"},
+        # helpLinks[3] - Getting help
+        {
              "HELP US, HELP YOU, STOP BULLYING": "http://www.nationalbullyinghelpline.co.uk/",
-             "What to do if you’re being bullied on a social network ": "https://www.bullying.co.uk/cyberbullying/what-to-do-if-you-re-being-bullied-on-a-social-network/ ",
+             "What to do if you are being bullied on a social network ": "https://www.bullying.co.uk/cyberbullying/what-to-do-if-you-re-being-bullied-on-a-social-network/ ",
              "Bullying UK ": "http://ht.ly/ryD730gACeb",
-             "Know your rights: Report, complain, campaign ":"http://www.stoponlineabuse.org.uk/",
-             "Category: Suicide Prevention ":"",
+             "Know your rights: Report, complain, campaign ":"http://www.stoponlineabuse.org.uk/"},
+        # helpLinks[4] - Suicide prevention
+        {
              "Papyrus: prevention of young suicide ": "https://www.papyrus-uk.org/",
              "National Suicide Prevention Alliance": "https://www.samaritans.org/about-us/our-organisation/national-suicide-prevention-alliance-nspa ",
-             "The Alliance of Suicide Prevention Charitie": "http://tasc-uk.org/"}
+             "The Alliance of Suicide Prevention Charity": "http://tasc-uk.org/"}]
+
     users = [
         {
             "username":"TomCat",
@@ -159,8 +170,11 @@ def populate():
     for q,value in faqs.items():
         add_faq(q,value)
 
-    for h,value in helps.items():
-        add_help(h,value)
+    i = 0
+    for h in helpLinks:
+        i = i + 1
+        for k,value in h.items():
+            add_help(k,value,i)
 
 #Creating superusers
 def create_su(username, email, password, picture):
@@ -219,8 +233,17 @@ def add_faq(q,a):
     FAQ.objects.get_or_create(questions=q,answers=a)
 
 #PersonalHelp
-def add_help(h,value):
-    PersonalHelp.objects.get_or_create(title=h,href=value)
+def add_help(h,value,i):
+    if i==1:
+        PersonalHelp.objects.get_or_create(cbTitle=h,cbHref=value)
+    elif i==2:
+        PersonalHelp.objects.get_or_create(preventionTitle=h, preventionHref=value)
+    elif i==3:
+        PersonalHelp.objects.get_or_create(interventionTitle=h, interventionHref=value)
+    elif i==4:
+        PersonalHelp.objects.get_or_create(helpTitle=h, helpHref=value)
+    else:
+        PersonalHelp.objects.get_or_create(suiPrevTitle=h, suiPrevHref=value)
 
 # Start execution here!
 if __name__ == '__main__':
