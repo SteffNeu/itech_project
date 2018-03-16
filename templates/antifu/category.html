@@ -165,35 +165,48 @@
     </ul>
 
 </div>
-<div class="row">
-    <form method = "post" class="commentForm" data-postID="{{ p.id }}">
-        <div class="col-sm-2">
-            {% csrf_token %}
-            {{ form.as_p }}
-        </div>
-        <div class="col-sm-1">
-            <input id="submitfield" class="text-black commentButton" type="submit">submit</input>
-        </div>
-        <div class="spaceholder col-sm-9"></div>
-    </form>
-</div>
+{% if user.is_authenticated %}
+    <div class="row">
+        <form method = "post" id="post_{{ p.id }}" class="commentForm" data-postID="{{ p.id }}" data-user="{{ user }}">
+            <div class="col-sm-2">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </div>
+            <div class="col-sm-1">
+                <button id="submitfield" class="text-black commentButton" type="submit">submit</button>
+            </div>
+            <div class="spaceholder col-sm-9"></div>
+        </form>
+    </div>
+{% endif %}
 {% endfor %}
 </div>
 </body>
-{% endblock %}
-
 
 <!-- submit form -->
 <script type="text/javascript">
 $(".commentForm").submit(function(event) {
+    var source = event.target
+    console.log(source)
     event.preventDefault;
-    alert("hello")
+    var post = source.getAttribute('data-postID')
+    var user = source.getAttribute('data-user')
+    var text_form = $($($(source).children()[0]).children()[1]).children()[1]
+    var comment = $(text_form).val()
+    console.log()
+    alert("post ID: "+ post+ " user: " + user + " comment: " + comment)
+    alert('{% url 'submit_comment' %}')
+    $.ajax({
+  				type: "POST",
+  				url: '{% url 'submit_comment' post user comment %}',
+  				data: data,
+  				success: function(data) {
+					alert("Hello world!")
+				},
+			});
 });
 
-    $("#submitfield").submit(function (event) {
-       event.preventDefault;
-       alert("hello world")
-    });
+
 
 </script>
 
@@ -255,3 +268,7 @@ $('.edit').click( function(){
 
 $('.feel_pop').popover();
 </script>
+
+{% endblock %}
+
+

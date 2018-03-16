@@ -88,13 +88,13 @@ def post(request, postID):
     context_dict = {'comments': comments, 'post':post,'categories': category_list}
     return render(request, 'antifu/post.html', context_dict)
 
-def submit_comment(request, post_id):
+def submit_comment(request, post_id, user, comment):
     if reqest.method == 'POST':
         post = Post.objects.get(id=post_id)
-        #new_comment = Comment(comment=request.POST['comment'])
         new_comment = Comment()
-        new_comment.user = "TomCat"
+        new_comment.user = user
         new_comment.post = post
+        new_comment.comment = comment
         new_comment.save()
         return new_comment
 
