@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FAQ
 from antifu.forms import UserProfileForm, ContactForm, CommentForm
 
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -88,8 +89,12 @@ def post(request, postID):
     context_dict = {'comments': comments, 'post':post,'categories': category_list}
     return render(request, 'antifu/post.html', context_dict)
 
-
-def submit_comment(request, post_id, user, comment):
+@csrf_protect
+def submit_comment(request, post_id):
+    #user comment
+    user = "TomCat"
+    comment = "comment"
+    print("I'm called")
     if reqest.method == 'POST':
         post = Post.objects.get(id=post_id)
         new_comment = Comment()
@@ -97,7 +102,7 @@ def submit_comment(request, post_id, user, comment):
         new_comment.post = post
         new_comment.comment = comment
         new_comment.save()
-        return new_comment
+        return HttpResponseRedirect('antifu/FAQ.html')
 
 
 @login_required

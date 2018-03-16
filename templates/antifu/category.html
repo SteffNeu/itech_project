@@ -185,21 +185,24 @@
 
 <!-- submit form -->
 <script type="text/javascript">
+$(document).ready(function() {
+
 $(".commentForm").submit(function(event) {
     var source = event.target
     console.log(source)
     event.preventDefault;
-    var post = source.getAttribute('data-postID')
+    var post_id = source.getAttribute('data-postID')
     var user = source.getAttribute('data-user')
     var text_form = $($($(source).children()[0]).children()[1]).children()[1]
     var comment = $(text_form).val()
+    post_id = 2
     console.log()
-    alert("post ID: "+ post+ " user: " + user + " comment: " + comment)
-    alert('{% url 'submit_comment' %}')
+    alert("post ID: "+ post_id+ " user: " + user + " comment: " + comment)
+    var data = {'postID':post_id, 'user':user, 'comment':comment}
     $.ajax({
   				type: "POST",
-  				url: '{% url 'submit_comment' post user comment %}',
-  				data: data,
+  				url: "{% url 'submit_comment' p.id %}",
+  				data: JSON.stringify(data),
   				success: function(data) {
 					alert("Hello world!")
 				},
@@ -208,6 +211,7 @@ $(".commentForm").submit(function(event) {
 
 
 
+});
 </script>
 
 
