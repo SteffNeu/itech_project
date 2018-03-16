@@ -90,8 +90,9 @@ def post(request, postID):
     return render(request, 'antifu/post.html', context_dict)
 
 @csrf_protect
-def submit_comment(request, post_id):
-    #user comment
+def submit_comment(request):
+    #user comment post_id
+    post_id = 1
     user = "TomCat"
     comment = "comment"
     print("I'm called")
@@ -102,7 +103,7 @@ def submit_comment(request, post_id):
         new_comment.post = post
         new_comment.comment = comment
         new_comment.save()
-        return HttpResponseRedirect('antifu/FAQ.html')
+        return new_comment
 
 
 @login_required
