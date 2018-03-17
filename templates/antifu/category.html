@@ -166,7 +166,7 @@
         <form method = "post" id="post_{{ p.id }}" class="commentForm" data-postID="{{ p.id }}" data-user="{{ user }}">
             {% csrf_token %}
             <div class="col-sm-2">
-                {{ form.as_p }}
+                {{ form }}
             </div>
             <div class="col-sm-1">
                 <button id="submitfield" class="text-black commentButton" type="submit">submit</button>
@@ -190,7 +190,6 @@ $(".commentForm").submit(function(event) {
     var post_id = source.getAttribute('data-postID')
     var user = source.getAttribute('data-user')
     var text_form = $($($(source).children()[0]).children()[1]).children()[1]
-    console.log(text_form)
     var comment = $(text_form).val()
 
 
@@ -203,8 +202,8 @@ $(".commentForm").submit(function(event) {
   				type: "POST",
   				url: "{% url 'submit_comment' %}",
   				data: data,
-  				success: function(data) {
-					alert("Hello world!")
+  				success: function(responseData) {
+					alert(responseData)
 				},
 				error: function(){
   				    alert("something went wrong")

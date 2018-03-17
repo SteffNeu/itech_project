@@ -110,15 +110,25 @@ def post(request, postID):
 @csrf_protect
 @csrf_exempt
 def submit_comment(request):
-    #user comment post_id
-    post_id = 1
-    user = User.objects.get(username="TomCat")
-    userProfile = UserProfile.objects.get(user=user)
+
     print("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!")
     if request.method == 'POST':
-        print("I get the post")
+        print("FUCK IT ALL")
+        #get the data
+        data = request.POST
+        print("FUCK THAT")
+        #extract information
+        post_id = data['post_id']
+        username = data['user']
+        #get user profile
+        print(username)
+        user = User.objects.get(username=username)
+        print(user)
+        userProfile = UserProfile.objects.get_or_create(user=user)
+        print("#selbstmord")
         form = CommentForm(request.POST)
-        print(form)
+
+        print(request.POST['post_id'])
         if form.is_valid():
             print("The form is valid")
             comment = form.cleaned_data['comment']
@@ -127,8 +137,11 @@ def submit_comment(request):
             new_comment = Comment.objects.create(post=post,user=userProfile, comment=comment)
             new_comment.save()
 
-            return new_comment
+            return HttpResponse(new_comment)
 
+
+    response = HttpResponse("hello world")
+    return response
 
 @login_required
 def register_profile(request):

@@ -37,7 +37,7 @@ SECRET_KEY = 'rkv5i5h3ss_b6kucvv#pk+038kb7zro8^bmoo2*74m*lm994u+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['antifu.pythonanywhere.com']
+ALLOWED_HOSTS = []#['antifu.pythonanywhere.com']
 
 
 # Application definition
