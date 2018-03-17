@@ -144,20 +144,12 @@ $('.c_icon').click( function(source){
     }
 	document.getElementById(count_id).innerHTML = count;
 
-    updateDB(c_id,c_elem);
-
 
 });
 
 
 </script>
 
-<!-- here goes the database update-->
-<script>
-const sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('itech_project/db.sqlite3');
-
-</script>
 
 <!-- post -->
 <script>
