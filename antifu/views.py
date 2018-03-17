@@ -125,9 +125,12 @@ def submit_comment(request):
         user = User.objects.get(username=username)
         userProfile = UserProfile.objects.get(user=user)
 
-        print(userProfile)
         #get the form
         form = CommentForm(request.POST)
+
+
+        print(form.is_valid())
+        print("missed something")
 
         if form.is_valid():
             print("The form is valid")

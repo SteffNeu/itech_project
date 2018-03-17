@@ -16,7 +16,7 @@
 
 {% for p in posts %}
 <div class="post_container colouring">
-	<div class="post colouring">
+	<div class="post-{{ p.id }} colouring">
 	<div class="container">
 		<div class="row top">
 			<div class="col-sm-6">
@@ -184,6 +184,7 @@
 $(document).ready(function() {
 
 $(".commentForm").submit(function(event) {
+    event.preventDefault()
     var source = event.target
     console.log(source)
     event.preventDefault;
@@ -203,7 +204,7 @@ $(".commentForm").submit(function(event) {
   				url: "{% url 'submit_comment' %}",
   				data: data,
   				success: function(responseData) {
-					alert(responseData.serialize())
+					alert(responseData)
 				},
 				error: function(){
   				    alert("something went wrong")
