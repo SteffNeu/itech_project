@@ -113,22 +113,22 @@ def submit_comment(request):
 
     print("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!")
     if request.method == 'POST':
-        print("FUCK IT ALL")
+
         #get the data
         data = request.POST
-        print("FUCK THAT")
+
         #extract information
         post_id = data['post_id']
         username = data['user']
+
         #get user profile
-        print(username)
         user = User.objects.get(username=username)
-        print(user)
-        userProfile = UserProfile.objects.get_or_create(user=user)
-        print("#selbstmord")
+        userProfile = UserProfile.objects.get(user=user)
+
+        print(userProfile)
+        #get the form
         form = CommentForm(request.POST)
 
-        print(request.POST['post_id'])
         if form.is_valid():
             print("The form is valid")
             comment = form.cleaned_data['comment']
@@ -139,8 +139,10 @@ def submit_comment(request):
 
             return HttpResponse(new_comment)
 
-
-    response = HttpResponse("hello world")
+        post = Post.objects.get(id=post_id)
+        new_comment = Comment.objects.create(post=post, user=userProfile, comment="hardcoded comment")
+        new_comment.save()
+    response = HttpResponse(new_comment)
     return response
 
 @login_required

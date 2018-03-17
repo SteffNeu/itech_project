@@ -203,7 +203,7 @@ $(".commentForm").submit(function(event) {
   				url: "{% url 'submit_comment' %}",
   				data: data,
   				success: function(responseData) {
-					alert(responseData)
+					alert(responseData.serialize())
 				},
 				error: function(){
   				    alert("something went wrong")
