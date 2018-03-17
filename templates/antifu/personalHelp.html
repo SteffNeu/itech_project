@@ -3,10 +3,14 @@
 {% block title_block %}
     Personal Help
 {% endblock %}
+
 {% block header_block %}
     Personal Help Section
 {% endblock %}
+
 {% block body_block %}
+
+    <!--Description card -->
     <div class="card p-4">
         <img class="card-img-top" src="{% static "images/pH1.jpg" %}" alt="Helping hand." style="opacity: 0.8"/>
         <div class="card-img-overlay">
@@ -31,6 +35,7 @@
         </div>
     </div>
 
+    <!--Cyber Bullying card -->
     <div class="card m-5 mx-auto" style="width: 40rem;">
         <img class="card-img-top" src="{% static "images/pH2.jpg" %}" alt="Helping hand." style="opacity: 0.3"/>
         <div class="card-img-overlay">
@@ -47,6 +52,7 @@
         </div>
     </div>
 
+    <!--Prevention card -->
     <div class="card m-5 mx-auto" style="width: 40rem;">
         <img class="card-img-top" src="{% static "images/pH3.jpg" %}" alt="Helping hand." style="opacity: 0.3"/>
         <div class="card-img-overlay">
@@ -63,6 +69,7 @@
         </div>
     </div>
 
+    <!--Intervention card -->
     <div class="card m-5 mx-auto" style="width: 40rem;">
         <img class="card-img-top" src="{% static "images/pH4.jpg" %}" alt="Helping hand." style="opacity: 0.3"/>
         <div class="card-img-overlay">
@@ -83,13 +90,13 @@
         </div>
     </div>
 
+    <!--Getting Help card -->
     <div class="card m-5 mx-auto" style="width: 40rem;">
         <img class="card-img-top" src="{% static "images/pH5.jpg" %}" alt="Helping hand." style="opacity: 0.3"/>
         <div class="card-img-overlay">
             <h2 id="getting_help" class="card-title">Getting Help</h2>
             <hr class="vertical"/>
             <p class="card-text">There are a lot of places you can go to for help. Family, friends, charities and professionals. In this world and probably near you there is more help you can probaly even imagine. More people that care and are good than you might be aware of.</p>
-
             <ul class="list-group list-group-flush">
                 {% for h in help %}
                     {% for key,value in h.items %}
@@ -100,6 +107,7 @@
         </div>
     </div>
 
+    <!--Suicude Prevention card -->
     <div class="card m-5 mx-auto" style="width: 40rem;">
         <img class="card-img-top" src="{% static "images/pH6.jpg" %}" alt="Helping hand." style="opacity: 0.3"/>
         <div class="card-img-overlay">

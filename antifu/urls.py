@@ -22,6 +22,7 @@ urlpatterns = [
 	url(r'^myComments/(?P<username>[\w\-]+)/$',views.myComments,name='myComments'),
 	url(r'^settings/$',views.settings,name='settings'),
 	url(r'^uploadContent/$',views.uploadContent,name='uploadContent'),
+	# url(r'^uploadContent/(?P<categoryName>[\w\-]+)/$',views.uploadContent,name='uploadContent'),
 	# url(r'^category/(?P<category_name_slug>[\w\-]+)/add_page/$', views.add_page, name='add_page'),
 	# url(r'^register/$', views.register, name='register'),
 	# url(r'^login/$', views.user_login, name='login'),

@@ -14,21 +14,6 @@ class Category(models.Model):
         return self.name
 
 
-# Create your models here.
-# class Category(models.Model):
-#     name = models.CharField(max_length=128, unique=True)
-#
-#     def save(self, *args, **kwargs):
-#         super(Category, self).save(*args, **kwargs)
-#
-#     class Meta:
-#         verbose_name_plural = 'Categories'
-#
-#     def __str__(self):
-#         return self.name
-
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     picture = models.ImageField(upload_to='profile_images', blank=True)

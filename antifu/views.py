@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FAQ
-from antifu.forms import UserProfileForm, ContactForm, CommentForm
+from antifu.forms import UserProfileForm, ContactForm, CommentForm, uploadPostForm
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -212,4 +212,18 @@ def settings(request):
     return render(request, 'profile/MySettingsTab.html', {})
 
 def uploadContent(request):
-    return render(request, 'profile/UploadContentTab.html', {})
+
+    form=uploadPostForm()
+    if request.method== 'POST':
+        form = UserProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            print(request.POST.get('category',''))
+            userProfile = UserProfile.objects.get(user=request.user)
+            category = Category.objects.get(name=request.POST.get('category',''))
+            post = Post.objects.create(category=category,user=userProfile,title=request.POST.get('title',''),context=request.POST.get('context',''),picturePost=request.FILES.get('pic',''))
+            form = UserProfileForm(instance=post)
+            post = form.save(commit=False)
+            post.save()
+
+
+    return render(request, 'profile/UploadContentTab.html', {'form':form})
