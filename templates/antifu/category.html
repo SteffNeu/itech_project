@@ -168,8 +168,8 @@
 {% if user.is_authenticated %}
     <div class="row">
         <form method = "post" id="post_{{ p.id }}" class="commentForm" data-postID="{{ p.id }}" data-user="{{ user }}">
+            {% csrf_token %}
             <div class="col-sm-2">
-                {% csrf_token %}
                 {{ form.as_p }}
             </div>
             <div class="col-sm-1">
@@ -194,19 +194,25 @@ $(".commentForm").submit(function(event) {
     var post_id = source.getAttribute('data-postID')
     var user = source.getAttribute('data-user')
     var text_form = $($($(source).children()[0]).children()[1]).children()[1]
+    console.log(text_form)
     var comment = $(text_form).val()
 
-    alert("post ID: "+ post_id+ " user: " + user + " comment: " + comment)
 
-    var data = {"post_id": post_id, "user":user, "comment":comment}
+    var data = {
+        user:user,
+        post_id:post_id,
+    }
 
     $.ajax({
   				type: "POST",
   				url: "{% url 'submit_comment' %}",
-  				data: {my_data: JSON.stringify(data)},
+  				data: data,
   				success: function(data) {
 					alert("Hello world!")
 				},
+				error: function(){
+  				    alert("something went wrong")
+                }
 			});
 });
 

@@ -4,6 +4,7 @@ from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FA
 from antifu.forms import UserProfileForm, ContactForm, CommentForm
 
 from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -90,20 +91,26 @@ def post(request, postID):
     return render(request, 'antifu/post.html', context_dict)
 
 @csrf_protect
+@csrf_exempt
 def submit_comment(request):
     #user comment post_id
     post_id = 1
-    user = "TomCat"
-    comment = "comment"
-    print("I'm called")
-    if reqest.method == 'POST':
-        post = Post.objects.get(id=post_id)
-        new_comment = Comment()
-        new_comment.user = user
-        new_comment.post = post
-        new_comment.comment = comment
-        new_comment.save()
-        return new_comment
+    user = User.objects.get(username="TomCat")
+    userProfile = UserProfile.objects.get(user=user)
+    print("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!")
+    if request.method == 'POST':
+        print("I get the post")
+        form = CommentForm(request.POST)
+        print(form)
+        if form.is_valid():
+            print("The form is valid")
+            comment = form.cleaned_data['comment']
+            print("my comment :" + comment)
+            post = Post.objects.get(id=post_id)
+            new_comment = Comment.objects.create(post=post,user=userProfile, comment=comment)
+            new_comment.save()
+
+            return new_comment
 
 
 @login_required
