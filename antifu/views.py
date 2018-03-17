@@ -129,7 +129,7 @@ def submit_comment(request):
         form = CommentForm(request.POST)
 
 
-        print(form.is_valid())
+        print(form)
         print("missed something")
 
         if form.is_valid():

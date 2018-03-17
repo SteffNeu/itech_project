@@ -164,8 +164,9 @@
 {% if user.is_authenticated %}
     <div class="row">
         <form method = "post" id="post_{{ p.id }}" class="commentForm" data-postID="{{ p.id }}" data-user="{{ user }}">
-            {% csrf_token %}
+
             <div class="col-sm-2">
+                {% csrf_token %}
                 {{ form }}
             </div>
             <div class="col-sm-1">
@@ -184,15 +185,13 @@
 $(document).ready(function() {
 
 $(".commentForm").submit(function(event) {
-    event.preventDefault()
+
     var source = event.target
-    console.log(source)
-    event.preventDefault;
+
     var post_id = source.getAttribute('data-postID')
     var user = source.getAttribute('data-user')
     var text_form = $($($(source).children()[0]).children()[1]).children()[1]
-    var comment = $(text_form).val()
-
+    var comment = $(source).val()
 
     var data = {
         user:user,
@@ -234,11 +233,7 @@ $('.c_icon').click( function(source){
     var toggled = source.target.getAttribute("aria-pressed")
     var id = source.target.id;
 
-
-    <!-- obtain information for database-->
-    var info = id.split("_");
-    var c_id = info[0]
-    var c_elem = info[1]
+    alert(id)
 
     var count_id = id+"_count";
     var count = document.getElementById(count_id).innerHTML;
