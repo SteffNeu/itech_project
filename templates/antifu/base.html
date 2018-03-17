@@ -132,12 +132,6 @@ $('.c_icon').click( function(source){
     var toggled = source.target.getAttribute("aria-pressed")
     var id = source.target.id;
 
-
-    <!-- obtain information for database-->
-    var info = id.split("_");
-    var c_id = info[0]
-    var c_elem = info[1]
-
     var count_id = id+"_count";
     var count = document.getElementById(count_id).innerHTML;
     if(toggled === "true"){
@@ -154,13 +148,6 @@ $('.c_icon').click( function(source){
 
 
 });
-
-function updateDB(id,field) {
-    var sqlite3 = require('sqlite3').verbose();
-    var db = new sqlite3.Database('C:/Users/Tom/python-workspace/itech_project/db.sqlite3');
-    alert(id)
-    alert(field)
-}
 
 
 </script>
