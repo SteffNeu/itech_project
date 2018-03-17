@@ -1,5 +1,5 @@
 from django import forms
-from antifu.models import UserProfile, Comment, ContactUsEmail
+from antifu.models import UserProfile, Comment, ContactUsEmail, Category, Post
 from django.contrib.auth.models import User
 from registration.forms import RegistrationForm
 
@@ -40,3 +40,14 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment',)
+
+class uploadPostForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
+    title = forms.CharField(max_length=64)
+    context = forms.CharField(max_length=512)
+    tags = forms.CharField(max_length=128)
+    picturePost = forms.ImageField(required=True)
+    
+    class Meta:
+        model = Post
+        fields = ('category','title','context','tags','picturePost',)
