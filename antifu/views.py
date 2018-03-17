@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.core.urlresolvers import reverse
-from django.core.mail import send_mail, BadHeaderError
 
 from antifu.webhose_search import run_query
 
@@ -30,8 +29,8 @@ def show_category(request, category_name):
     category_list = Category.objects.all()
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
-    comments = Comment.objects.filter(post=posts);
-    form = CommentForm();
+    comments = Comment.objects.filter(post=posts)
+    form = CommentForm()
     context_dict = {'category':category,'posts':posts,'comments':comments, 'form':form,'categories': category_list}
 
     return render(request,'antifu/category.html',context_dict)
@@ -44,37 +43,54 @@ def aboutUs(request):
 
 def contactUs(request):
     category_list = Category.objects.all()
-    if request.method == 'GET':
-        form = ContactForm()
-    else:
+    context_dict = {'categories': category_list}
+    if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']
-            name = form.cleaned_data['name']
-            from_email = form.cleaned_data['from_email']
-            message = form.cleaned_data['message']
-            cc_myself = form.cleaned_data['cc_myself']
-
-            recipients = ['2351944n@student.gla.ac.uk']
-            if cc_myself:
-                recipients.append(sender)
-            try:
-                send_mail(subject, message, from_email, recipients)
-            except BadHeaderError:
-                return render(request, 'antifu/contactUs.html')
+            print (form)
+            print ("happened")
+            form.save(commit=True)
             context_dict = {'thanks': "true"}
             return render(request,'antifu/contactUs.html',context_dict)
          # if a GET (or any other method) we'll create a blank form
         else:
             form = ContactForm()
+    else:
+        form = ContactForm()
     return render(request, 'antifu/contactUs.html', {'form': form,'categories': category_list})
+
 
 def personalHelp(request):
     category_list = Category.objects.all()
-    help_list = PersonalHelp.objects.all()
+    help_obj = PersonalHelp.objects.all()
+
+    cb_list = []
+    prev_list = []
+    interv_list = []
+    help_list = []
+    suiPrev_list = []
+
+    for e in help_obj:
+        if e.cbTitle is not '':
+            cb_list.append({e.cbTitle:e.cbHref})
+        if e.preventionTitle is not '':
+            prev_list.append({e.preventionTitle:e.preventionHref})
+        if e.interventionTitle is not '':
+            interv_list.append({e.interventionTitle,e.interventionHref})
+        if e.helpTitle is not '':
+            help_list.append({e.helpTitle,e.helpHref})
+        if e.suiPrevTitle is not '':
+            suiPrev_list.append({e.suiPrevTitle,e.suiPrevHref})
+
+
     context_dict = {"help":help_list,
+                    "cb":cb_list,
+                    "prev":prev_list,
+                    "interv":interv_list,
+                    "sui":suiPrev_list,
                     'categories': category_list}
     return render(request, 'antifu/personalHelp.html',context_dict)
+
 
 def faq(request):
     category_list = Category.objects.all()
@@ -86,9 +102,10 @@ def faq(request):
 def post(request, postID):
     category_list = Category.objects.all()
     post = Post.objects.get(id=postID)
-    comments = Comment.objects.filter(post=post);
+    comments = Comment.objects.filter(post=post)
     context_dict = {'comments': comments, 'post':post,'categories': category_list}
     return render(request, 'antifu/post.html', context_dict)
+
 
 @csrf_protect
 @csrf_exempt

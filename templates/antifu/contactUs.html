@@ -12,33 +12,34 @@
 
       {% if thanks %}
       <div class="container">
-        <div class="row"</div>
-          <h1> Thank you! </h1>
-        </div>
-        <div class="row"</div>
-          <div class = "col-6">
-            <p> Thank you for writting to us. We will be in contact with you shortly. </p>
+        <div class="card"</div>
+          <div class = "card-header">
+            <h1> Thank you! </h1>
           </div>
-          <div class = "col-6">
-            <p> Maybe your enquiry can already be answered if you visit one of the following pages: </p><br />
-            <li><a class="text-white" href="{% url 'aboutUs' %}">
+          <div class = "card-body">
+            <h4 class="card-title"> Thank you for writting to us. We will be in contact with you shortly. </h4>
+            <p class="card-subtitle"> Maybe your enquiry can already be answered if you visit one of the following pages: </p><br />
+            <a class="card-link text-left btn btn-outline-info override-hover" href="{% url 'aboutUs' %}">
               <span class="text hidden-xs"> About Us</span>
-            </a></li>
-            <li><a class="text-white" href="{% url 'personalHelp' %}">
+            </a>
+            <a class="card-link text-left btn btn-outline-info override-hover" href="{% url 'personalHelp' %}">
               <span class="text hidden-xs"> Personal Help</span>
-            </a></li>
-            <li><a class="text-white override-hover" href="{% url 'FAQ' %}">
+            </a>
+            <a class="card-link text-left btn btn-outline-info override-hover" href="{% url 'FAQ' %}">
               <span class="text hidden-xs"> FAQ</span>
-            </a></li>
+            </a>
           </div>
         </div>
       </div>
       {% else %}
-      <div class="container m-2 mb-5">
-        <h2>If you have any questions or suggestions towards our webpage we would be happy to be contacted by you.</h2>
+      <div class="jumbotron jumbotron-fluid jumbotron-adaption">
+          <h1>Welcome to Anti-FU!</h1>
+          <p class="lead">If you have any questions or suggestions towards our webpage we would be happy to be contacted by you.</p>
       </div>
 			<div class="container">
-        <form>
+        <form method="post">
+          {% csrf_token %}
+
           {% for field in form %}
             <div class="fieldWrapper">
               <div class="row mt-2">
@@ -55,7 +56,7 @@
               {% endif %}
             </div>
           {% endfor %}
-          <input class="btn btn-primary btn-default submit" type="submit" value="Send Message" />
+          <input class="btn btn-primary btn-default submit mt-3" type="submit" value="Send Message" />
         </form>
   		</div>
     {% endif %}
