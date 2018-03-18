@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FAQ
-from antifu.forms import UserProfileForm, ContactForm, CommentForm, uploadPostForm
+from antifu.forms import UserProfileForm, ContactForm, CommentForm
 
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
@@ -38,6 +38,11 @@ def show_category(request, category_name):
 
     return render(request,'antifu/category.html',context_dict)
 
+def show_post(request, post_id):
+    selected_post = Post.objects.filter(id=post_id)
+    comments = Comment.objects.all()
+    context_dict = {'posts': selected_post, 'comments': comments}
+    return render(request,'antifu/show_post.html',context_dict)
 
 def aboutUs(request):
     category_list = Category.objects.all()
@@ -101,6 +106,8 @@ def faq(request):
     context_dict = {"faqs": faqs,
                     'categories': category_list}
     return render(request, 'antifu/FAQ.html',context_dict)
+
+
 
 def post(request, postID):
     category_list = Category.objects.all()

@@ -14,7 +14,7 @@ urlpatterns = [
 	url(r'^profile/(?P<username>[\w\-]+)/$', views.profile, name='profile'),
 	url(r'^submit_comment/$',views.submit_comment,name='submit_comment'),
 	url(r'^update_comment_feat/$', views.update_comment_feat, name='update_comment_feat'),
-	url(r'^post/(?P<postID>[\w\-]+)/$',views.post,name='post'),
+	url(r'^post/(?P<post_id>[\w\-]+)/$',views.show_post,name='show_post'),
 	url(r'search/$', views.search, name='search'),
 	url(r'^profile_registration', views.register_profile, name='register_profile'),
 

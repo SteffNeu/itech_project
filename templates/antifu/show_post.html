@@ -9,49 +9,9 @@
 {% endblock %}
 <br/>
 {% block header_block %}
-    {{ category.name }}
+    {{ posts.title }}
 {% endblock %}
 
 {% block body_block %}
     {% get_post_comment_submit posts comments user %}
 {% endblock %}
-
-<!-- comment -->
-<script>
-
-$('.report').click( function(){
-	alert("selected report")
-});
-
-
-$('.c_icon').click( function(source){
-
-    <!--get toggle status-->
-    var toggled = source.target.getAttribute("aria-pressed")
-    var id = source.target.id;
-
-    alert(id)
-
-    var count_id = id+"_count";
-    var count = document.getElementById(count_id).innerHTML;
-    if(toggled === "true"){
-	   count--;
-	   source.target.setAttribute("aria-pressed",false);
-    }
-    else{
-        count++;
-	   source.target.setAttribute("aria-pressed",true);
-    }
-
-
-	document.getElementById(count_id).innerHTML = count;
-
-
-});
-
-</script>
-
-
-
-
-

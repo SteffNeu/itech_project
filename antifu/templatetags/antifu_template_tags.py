@@ -19,8 +19,8 @@ def get_post(postID = None):
     return{'post':Post.objects.get(id = postID)}
 
 @register.inclusion_tag('antifu/post_comment_submit.html')
-def get_post_comment_submit(posts, comments, user, form):
-    return{'posts':posts,'comments':comments, 'user':user, 'form':form}
+def get_post_comment_submit(posts, comments, user):
+    return{'posts':posts,'comments':comments, 'user':user}
 
 # here we need one certain comment rating we should get via the id of the comment we request the rating from
 @register.inclusion_tag('antifu/comment_rating.html')

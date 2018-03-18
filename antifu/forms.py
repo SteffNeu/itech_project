@@ -44,15 +44,3 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('comment',)
 
-
-class uploadPostForm(forms.ModelForm):
-    category = forms.ModelChoiceField(queryset=Category.objects.all())
-    title = forms.CharField(max_length=64)
-    context = forms.CharField(max_length=512)
-    tags = forms.CharField(max_length=128)
-    picturePost = forms.ImageField(required=True)
-    
-    class Meta:
-        model = Post
-        fields = ('category','title','context','tags','picturePost',)
-
