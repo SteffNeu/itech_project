@@ -132,6 +132,12 @@ $('.c_icon').click( function(source){
     var toggled = source.target.getAttribute("aria-pressed")
     var id = source.target.id;
 
+    var split = id.split("_")
+    var comment_id = split[0]
+    var feat = split[1]
+
+    alert(comment_id + " c & f " + feat)
+
     var count_id = id+"_count";
     var count = document.getElementById(count_id).innerHTML;
     if(toggled === "true"){

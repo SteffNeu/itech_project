@@ -248,3 +248,17 @@ def settings(request):
 
 def uploadContent(request):
     return render(request, 'profile/UploadContentTab.html', {})
+
+def update_comment_feat(comment_id,feat,value):
+    comment = Comment.objects.get(id=comment_id)
+
+    if feat == "loveliness":
+        comment.loveliness = value
+    elif feat == "burnfactor":
+        comment.burnfactor = value
+    elif feat == "logicRating":
+        comment.logicRating = value
+    else:
+        comment.accuracyRating = value
+
+    comment.save()
