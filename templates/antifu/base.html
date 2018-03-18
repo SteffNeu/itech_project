@@ -42,10 +42,16 @@
                     </h3>
                 </div>
                 <div class="col-6 align-self-end">
-                    <form class="form-inline float-right">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                  <form class="form-inline" id="user_form"
+                    method="post" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                    <input class="form-control" type="text" size="50"
+                    name="query" value="{{ query }}" id="query" />
+                    </div>
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" name="submit"
+                    value="Search">Search</button>
+                  </form>
                 </div>
             </div>
             <div class="rows" >
