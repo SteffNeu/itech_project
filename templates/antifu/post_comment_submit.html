@@ -6,7 +6,9 @@
     <div>
         <ul>
         {% for c in comments %}
-            {% get_comment c.id %}
+            {% if c.post == p %}
+                {% get_comment c.id %}
+            {% endif %}
         {% endfor %}
         </ul>
     </div>

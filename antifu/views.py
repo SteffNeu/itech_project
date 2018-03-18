@@ -18,7 +18,7 @@ from datetime import datetime
 def home(request):
     category_list = Category.objects.all()
     posts = Post.objects.order_by('-date')[:5]
-    comments = Comment.objects.filter(post=posts)
+    comments = Comment.objects.all()
     form = CommentForm()
     context_dict = {'categories': category_list, 'posts':posts, 'comments':comments,'form':form}
     # Return a rendered response to send to the client.
