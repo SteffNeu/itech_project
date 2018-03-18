@@ -1,5 +1,6 @@
 {% extends 'antifu/base.html' %}
 {% load staticfiles %}
+{% load antifu_template_tags %}
 
 {% block link_block %}
     <link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
@@ -12,211 +13,8 @@
 {% endblock %}
 
 {% block body_block %}
-    <div>
-
-{% for p in posts %}
-<div class="post_container colouring">
-	<div class="post-{{ p.id }} colouring">
-	<div class="container">
-		<div class="row top">
-			<div class="col-sm-6">
-				<div class="post_image thin-border">
-					<img class="img-responsive post_image" src="{{MEDIA_URL}}{{ p.picturePost }}" alt="No Image" />
-				</div>
-			</div>
-			<div class="colouring col-sm-6">
-				<div class="row">
-					<div class="post_header col-sm-11">
-						<h4>{{ p.title }}</h4>
-					</div>
-					<div class="options col-sm-1 ">
-						<div class="dropdown ">
-						  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
-						  <span class="glyphicon glyphicon-option-horizontal"></span>
-						  </button>
-						  <ul class="dropdown-menu">
-							<li class="report"><span class="glyphicon glyphicon-alert" role="button"> Report</span></li>
-							<li class="edit"><span class="glyphicon glyphicon-pencil" role="button"> Edit</span></li>
-						  </ul>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="post_context thin-border col-sm-12">
-                        {{ p.context }}
-                    </div>
-				</div>
-				<div class="row">
-					<div class="post_tags col-sm-12">
-                        {{ p.tags }}
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="post_feeling col-sm-2 container">
-				<div id="feel_pop" data-toggle="popover" data-placement="top" data-content="yo" role="button">Feeling </div>
-			</div>
-			<div class="post_rating col-sm-1">
-				<div class="row">
-					<div id="{{ p.id }}_grammFail" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
-					<div id="{{ p.id }}_grammFail_avg" class="post_rating r_number col-sm-6">3/5</div>
-				</div>
-			</div>
-			<div class="post_rating col-sm-1">
-				<div class="row">
-                    <div id="{{ p.id }}_logFail" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button"></div>
-					<div id="{{ p.id }}_logFail_avg" class="post_rating r_number col-sm-6">3/5</div>
-				</div>
-			</div>
-			<div class="post_rating col-sm-1">
-				<div class="row">
-					<div id="{{ p.id }}_toxic" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
-					<div id="{{ p.id }}_toxic_avg" class="post_rating r_number col-sm-6">3/5</div>
-				</div>
-			</div>
-			<div class="post_rating col-sm-1">
-				<div class="row">
-					<div id="{{ p.id }}_harm" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
-					<div id="{{ p.id }}_harm_avg" class="post_rating r_number col-sm-6">3/5</div>
-				</div>
-			</div>
-			<div class="spaceholder col-sm-6"></div>
-		</div>
-	</div>
-	</div>
-</div>
-
-
-
-<div>
-    <ul>
-    {% for c in comments %}
-
-        <div class="comment_container ">
-            <div class="comment">
-            <div class="container">
-                <div class="row">
-                    <div class="user_info col-sm-1">
-                        <div class="row">
-                            <div class="comment_profile_pic col-sm-1">
-                                <img class="small_profile" src="{{ MEDIA_URL }}{{ c.user.picture }}" alt="No Image"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="comment_user col-sm-1">
-                                {{ c.user }}
-                            </div>
-                        </div>
-                    </div>
-                    <div id="postnr" class="comment_content thin-border col-sm-9">
-                      {{ c.comment }}
-                    </div>
-                    <div class="options col-sm-1">
-                        <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
-                          <span class="glyphicon glyphicon-option-horizontal"></span>
-                          </button>
-                          <ul class="dropdown-menu">
-                            <li class="report"><span class="glyphicon glyphicon-alert" role="button"> Report</span></li>
-                            <li class="edit"><span class="glyphicon glyphicon-pencil" role="button"> Edit</span></li>
-                          </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row top">
-                    <div class="spaceholder col-sm-1"></div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ c.id }}_loveliness" class="comment_rating c_icon fa fa-heart col-sm-1" role="button" aria-pressed="false"></div>
-                            <div id="{{ c.id }}_loveliness_count" class="comment_rating c_number col-sm-1">{{ c.loveliness }}</div>
-                        </div>
-                    </div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ c.id }}_burnfactor" class="comment_rating c_icon fas fa-fire col-sm-1" role="button" aria-pressed="false"></div>
-                            <div id="{{ c.id }}_burnfactor_count" class="comment_rating c_number col-sm-1">{{ c.burnfactor }}</div>
-                        </div>
-                        </div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ c.id }}_logicRating" class="comment_rating c_icon fas fa-lightbulb col-sm-1" role="button" aria-pressed="false"></div>
-
-                            <div id="{{ c.id }}_logicRating_count" class="comment_rating c_number col-sm-1">{{ c.logicRating }}</div>
-                        </div>
-
-                    </div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ c.id }}_accuracyRating" class="comment_rating c_icon fas fa-bullseye col-sm-1" role="button" aria-pressed="false"></div>
-
-                            <div id="{{ c.id }}_accuracyRating_count" class="comment_rating c_number col-sm-1">{{ c.accuracyRating }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-    {% endfor %}
-    </ul>
-
-</div>
-{% if user.is_authenticated %}
-    <div class="row">
-        <form method = "post" id="post_{{ p.id }}" class="commentForm" data-postID="{{ p.id }}" data-user="{{ user }}">
-
-            <div class="col-sm-2">
-                {% csrf_token %}
-                {{ form }}
-            </div>
-            <div class="col-sm-1">
-                <button id="submitfield" class="text-black commentButton" type="submit">submit</button>
-            </div>
-            <div class="spaceholder col-sm-9"></div>
-        </form>
-    </div>
-{% endif %}
-{% endfor %}
-</div>
-</body>
-
-<!-- submit form -->
-<script type="text/javascript">
-$(document).ready(function() {
-
-$(".commentForm").submit(function(event) {
-
-    var source = event.target
-
-    var post_id = source.getAttribute('data-postID')
-    var user = source.getAttribute('data-user')
-    var text_form = $($($(source).children()[0]).children()[1]).children()[1]
-    var comment = $(source).val()
-    
-
-    var data = {
-        user:user,
-        post_id:post_id,
-    }
-
-    $.ajax({
-  				type: "POST",
-  				url: "{% url 'submit_comment' %}",
-  				data: data,
-  				success: function(responseData) {
-					alert(responseData)
-				},
-				error: function(){
-  				    alert("something went wrong")
-                }
-			});
-});
-
-
-
-});
-</script>
-
+    {% get_post_comment_submit posts comments user form %}
+{% endblock %}
 
 <!-- comment -->
 <script>
@@ -224,9 +22,7 @@ $(".commentForm").submit(function(event) {
 $('.report').click( function(){
 	alert("selected report")
 });
-$('.edit').click( function(source){
-	alert("selected edit")
-});
+
 
 $('.c_icon').click( function(source){
 
@@ -254,24 +50,6 @@ $('.c_icon').click( function(source){
 </script>
 
 
-<!-- post -->
-<script>
-    $('.r_icon').click( function(source){
-	var id = source.target.id+"_avg";
-	var count = document.getElementById(id).innerHTML;
 
-});
-
-$('.report').click( function(){
-	alert("selected report")
-});
-$('.edit').click( function(){
-	alert("selected edit")
-});
-
-$('.feel_pop').popover();
-</script>
-
-{% endblock %}
 
 

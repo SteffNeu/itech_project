@@ -1,5 +1,5 @@
 from django import template
-from antifu.models import Category
+from antifu.models import Category, Comment, Post
 
 register = template.Library()
 
@@ -11,12 +11,16 @@ def get_category_list(cat = None):
 # here we need one certain comment we should get via id
 @register.inclusion_tag('antifu/comment.html')
 def get_comment(commentID = None):
-    return{}
+    return{'comment':Comment.objects.get(id = commentID)}
 
 # here we need one certain post we should get via id
 @register.inclusion_tag('antifu/post.html')
-def get_post(cat = None, postID = None):
-    return{}
+def get_post(postID = None):
+    return{'post':Post.objects.get(id = postID)}
+
+@register.inclusion_tag('antifu/post_comment_submit.html')
+def get_post_comment_submit(posts, comments, user, form):
+    return{'posts':posts,'comments':comments, 'user':user, 'form':form}
 
 # here we need one certain comment rating we should get via the id of the comment we request the rating from
 @register.inclusion_tag('antifu/comment_rating.html')

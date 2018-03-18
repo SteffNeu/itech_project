@@ -17,7 +17,10 @@ from datetime import datetime
 # Create your views here.
 def home(request):
     category_list = Category.objects.all()
-    context_dict = {'categories': category_list}
+    posts = Post.objects.order_by('-date')[:5]
+    comments = Comment.objects.filter(post=posts)
+    form = CommentForm()
+    context_dict = {'categories': category_list, 'posts':posts, 'comments':comments,'form':form}
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.

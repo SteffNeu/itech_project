@@ -1,20 +1,39 @@
-
-  {% get_post %}
-
-  <!-- Comments Form -->
-  <div class="card my-4">
-    <h5 class="card-header">Leave a Comment:</h5>
-    <div class="card-body">
-      <form>
-        <div class="form-group">
-          <textarea class="form-control" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <!-- add a way to save comments-->
-      </form>
+{% load antifu_template_tags %}
+{% load widget_tweaks %}
+<div>
+{% for p in posts %}
+    {% get_post p.id %}
+    <div>
+        <ul>
+        {% for c in comments %}
+            {% get_comment c.id %}
+        {% endfor %}
+        </ul>
     </div>
-  </div>
 
-  {% for c in posts %}
-    {% get_comment%}
-  {% endfor %}
+
+{% if user.is_authenticated %}
+    <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+            <form method = "post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="fieldWrapper">
+                      <div class="row mt-2">
+                        <div class="col-10">
+                          {% render_field field placeholder=field.label class+="form-control" %}
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                <div class="col-sm-1">
+                    <button class="submit text-black" type="submit">submit</button>
+                </div>
+                <div class="spaceholder col-sm-9"></div>
+            </form>
+        </div>
+    </div>
+{% endif %}
+{% endfor %}
+</div>

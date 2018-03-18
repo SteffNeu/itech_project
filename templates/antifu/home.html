@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 {% extends 'antifu/base.html' %}
 {% load staticfiles %}
-
+{% load antifu_template_tags %}
 {% block link_block %}
+    <link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{%static "css/home.css"%}">
   <script src="{%static "js/home.js" %}"></script>
 {% endblock %}
@@ -27,6 +30,8 @@
               <h1 class="mt-4">New On Anti-FU</h1>
 
               <hr>
+                {% get_post_comment_submit posts comments user form %}
+
 
               <!-- Date/Time -->
               <p>Posted on January 1, 2018 at 12:00 PM</p>
@@ -46,27 +51,10 @@
                 </div>
               </div>
 
-              <!-- Single Comment -->
-              <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                  <h5 class="mt-0">Commenter Name</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Post Content Column -->
-            <div class="col-lg-5">
-
-              <!-- Title -->
-              <h1 class="mt-4">Your Last Uploads</h1>
-
             </div>
 
             <!-- Sidebar Widgets Column -->
-            <div class="col-md-2">
+            <div class="col-md-5">
 
               <!-- Search Widget -->
               <div class="card my-4">
