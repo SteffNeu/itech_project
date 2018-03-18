@@ -18,17 +18,16 @@
     <div class="card my-4">
         <h5 class="card-header">Leave a Comment:</h5>
         <div class="card-body">
-            <form method = "post">
+            <form method = "post" class ="commentForm" data-postID="{{ p.id }}" data-user="{{ user }}">
                     {% csrf_token %}
-                    {% for field in form %}
+
                     <div class="fieldWrapper">
                       <div class="row mt-2">
                         <div class="col-10">
-                          {% render_field field placeholder=field.label class+="form-control" %}
+                         <textarea id="{{ p.id }}_content"></textarea>
                         </div>
                       </div>
                     </div>
-                  {% endfor %}
                 <div class="col-sm-1">
                     <button class="submit text-black" type="submit">submit</button>
                 </div>

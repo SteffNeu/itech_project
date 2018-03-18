@@ -123,33 +123,17 @@ def submit_comment(request):
         #extract information
         post_id = data['post_id']
         username = data['user']
+        comment = data['comment']
 
         #get user profile
         user = User.objects.get(username=username)
         userProfile = UserProfile.objects.get(user=user)
 
-        #get the form
-        form = CommentForm(request.POST)
-
-
-        print(form)
-        print("missed something")
-
-        if form.is_valid():
-            print("The form is valid")
-            comment = form.cleaned_data['comment']
-            print("my comment :" + comment)
-            post = Post.objects.get(id=post_id)
-            new_comment = Comment.objects.create(post=post,user=userProfile, comment=comment)
-            new_comment.save()
-
-            return HttpResponse(new_comment)
-
         post = Post.objects.get(id=post_id)
-        new_comment = Comment.objects.create(post=post, user=userProfile, comment="hardcoded comment")
+        new_comment = Comment.objects.create(post=post,user=userProfile, comment=comment)
         new_comment.save()
-    response = HttpResponse(new_comment)
-    return response
+    return HttpResponse("success")
+
 
 @login_required
 def register_profile(request):
