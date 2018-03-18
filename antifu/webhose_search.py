@@ -21,14 +21,17 @@ def run_query(search_terms, size=10):
 
     root_url = "http://webhose.io/search"
 
+    antifu_url = "antifu.pythonanywhere.com/antifu/"
+
     query_string = urllib.parse.quote(search_terms)
 
     search_url = ('{root_url}?token={key}&format=json&q={query}'
-                '&sort=relevancy&size={size}').format(
+                '&sort=relevancy&size={size}&site={antifu_url}').format(
                 root_url=root_url,
                 key=webhose_api_key,
                 query=query_string,
-                size=size)
+                size=size,
+                site=antifu_url,)
 
     results = []
 

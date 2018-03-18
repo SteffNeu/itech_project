@@ -14,8 +14,13 @@ from datetime import datetime
 
 # Create your views here.
 def home(request):
+    context_dict = {}
+    context_dict.update(csrf(request))
+    
     category_list = Category.objects.all()
     context_dict = {'categories': category_list}
+
+
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
@@ -153,16 +158,34 @@ def profile(request, username):
         {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/','categories': category_list})
 
 
+# def search(request):
+#     result_list = []
+#     context_dict = {}
+#     if request.method == 'POST':
+#         query = request.POST['query'].strip()
+#         if query:
+#             # Run our Webhose search function to get the results list!
+#             result_list = run_query(query)
+#         context_dict['query'] = query
+#         context_dict['result_list'] = result_list
+#     return render(request, 'antifu/search.html', context_dict)
+
 def search(request):
-    result_list = []
+    if reqest.method == 'POST':
+        search_text = request.POST['search_text']
+    else:
+        search_text= ''
+
     context_dict = {}
-    if request.method == 'POST':
-        query = request.POST['query'].strip()
-        if query:
-            # Run our Webhose search function to get the results list!
-            result_list = run_query(query)
-        context_dict['query'] = query
-        context_dict['result_list'] = result_list
+    result_list_post_title = Post.objects.filter(title__contains=search_text)
+    result_list_post_context = Post.objects.filter(context__contains=search_text)
+    result_list_post_tags = Post.objects.filter(tags__contains=search_text)
+
+    context_dict['query'] = search_text
+    context_dict['posts_title'] = result_list_post_title
+    context_dict['posts_context'] = result_list_post_title
+    context_dict['posts_tags'] = result_list_post_title
+
     return render(request, 'antifu/search.html', context_dict)
 
 #for the nav tabs
