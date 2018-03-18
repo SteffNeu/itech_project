@@ -264,17 +264,27 @@ def uploadContent(request):
     return render(request, 'profile/UploadContentTab.html', {'form':form})
 
 
-def update_comment_feat(comment_id,feat,value):
-    comment = Comment.objects.get(id=comment_id)
+@csrf_protect
+@csrf_exempt
+def update_comment_feat(request):
 
-    if feat == "loveliness":
-        comment.loveliness = value
-    elif feat == "burnfactor":
-        comment.burnfactor = value
-    elif feat == "logicRating":
-        comment.logicRating = value
-    else:
-        comment.accuracyRating = value
+    if request.method == 'POST':
+        data = request.POST
+        comment_id = data['comment_id']
+        value = data['value']
+        feat = data['feat']
 
-    comment.save()
+        comment = Comment.objects.get(id=comment_id)
 
+        if feat == "loveliness":
+            comment.loveliness = value
+        elif feat == "burnfactor":
+            comment.burnfactor = value
+        elif feat == "logicRating":
+            comment.logicRating = value
+        else:
+            comment.accuracyRating = value
+
+        comment.save()
+
+    return HttpResponse("succes")
