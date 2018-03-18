@@ -192,6 +192,7 @@ $(".commentForm").submit(function(event) {
     var user = source.getAttribute('data-user')
     var text_form = $($($(source).children()[0]).children()[1]).children()[1]
     var comment = $(source).val()
+    
 
     var data = {
         user:user,

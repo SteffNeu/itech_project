@@ -35,8 +35,12 @@ class ContactForm(forms.ModelForm):
         model = ContactUsEmail
         fields = ('name', 'from_email', 'subject', 'message',)
 
-class CommentForm(forms.Form):
+class CommentForm(forms.ModelForm):
     comment = forms.CharField(widget=forms.Textarea, required=True, max_length=1000)
+    user = forms.IntegerField(widget=forms.HiddenInput())
+    post = forms.IntegerField(widget=forms.HiddenInput())
+
     class Meta:
         model = Comment
-        fields = ('comment',)
+        fields = ('comment','user','post')
+
