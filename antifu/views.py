@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FAQ
 from antifu.forms import UserProfileForm, ContactForm, CommentForm, uploadPostForm
 
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -15,7 +17,10 @@ from datetime import datetime
 # Create your views here.
 def home(request):
     category_list = Category.objects.all()
-    context_dict = {'categories': category_list}
+    posts = Post.objects.order_by('-date')[:5]
+    comments = Comment.objects.filter(post=posts)
+    form = CommentForm()
+    context_dict = {'categories': category_list, 'posts':posts, 'comments':comments,'form':form}
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
@@ -105,16 +110,46 @@ def post(request, postID):
     return render(request, 'antifu/post.html', context_dict)
 
 
-def submit_comment(request, post_id):
-    if reqest.method == 'POST':
-        post = Post.objects.get(id=post_id)
-        #new_comment = Comment(comment=request.POST['comment'])
-        new_comment = Comment()
-        new_comment.user = "TomCat"
-        new_comment.post = post
-        new_comment.save()
-        return new_comment
+@csrf_protect
+@csrf_exempt
+def submit_comment(request):
 
+    print("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!")
+    if request.method == 'POST':
+
+        #get the data
+        data = request.POST
+
+        #extract information
+        post_id = data['post_id']
+        username = data['user']
+
+        #get user profile
+        user = User.objects.get(username=username)
+        userProfile = UserProfile.objects.get(user=user)
+
+        #get the form
+        form = CommentForm(request.POST)
+
+
+        print(form)
+        print("missed something")
+
+        if form.is_valid():
+            print("The form is valid")
+            comment = form.cleaned_data['comment']
+            print("my comment :" + comment)
+            post = Post.objects.get(id=post_id)
+            new_comment = Comment.objects.create(post=post,user=userProfile, comment=comment)
+            new_comment.save()
+
+            return HttpResponse(new_comment)
+
+        post = Post.objects.get(id=post_id)
+        new_comment = Comment.objects.create(post=post, user=userProfile, comment="hardcoded comment")
+        new_comment.save()
+    response = HttpResponse(new_comment)
+    return response
 
 @login_required
 def register_profile(request):
@@ -227,3 +262,19 @@ def uploadContent(request):
 
 
     return render(request, 'profile/UploadContentTab.html', {'form':form})
+
+
+def update_comment_feat(comment_id,feat,value):
+    comment = Comment.objects.get(id=comment_id)
+
+    if feat == "loveliness":
+        comment.loveliness = value
+    elif feat == "burnfactor":
+        comment.burnfactor = value
+    elif feat == "logicRating":
+        comment.logicRating = value
+    else:
+        comment.accuracyRating = value
+
+    comment.save()
+

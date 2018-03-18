@@ -26,22 +26,6 @@
   text-align: center;
 }
 
-/* .navbar-background {
-  background: transparent;
-  border: none!important;
-}
-
-.navbar-inverse {
-  border: none!important;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.navbar-right {
-  float: right;
-} */
-
-
 h1 {
   margin-bottom: 20px;
   color: #021d31
@@ -118,3 +102,4 @@ h1 {
 #navbarItems li a {
     color: white;
 }
+

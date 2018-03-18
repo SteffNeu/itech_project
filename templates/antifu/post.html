@@ -1,34 +1,18 @@
-<!DOCTYPE html>
-{% extends 'antifu/base.html' %}
-{% load staticfiles %}
-{% block link_block %}
-
-    <link rel="stylesheet" type="text/css" href="{%static "css/content.css"%}">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.bundle.min.js"></script>
-	<script src="js/bootstrap-dropdownhover.min.js"></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-{% endblock %}
-
-
-{% block body_block %}
-<div class="colouring">
 <div class="post_container colouring">
-	<div class="post colouring">
+	<div class="post-{{ post.id }} colouring">
 	<div class="container">
 		<div class="row top">
-			<div class="col-sm-6">
+			<div class="col-lg-6 col-md-8">
 				<div class="post_image thin-border">
-					<img class="img-responsive post_image" src="{{MEDIA_URL}}{{ post.picturePost }}" alt="No Image" />
+					<img class="img-responsive post_image w-100" src="{{MEDIA_URL}}/media/{{ post.picturePost }}" alt="No Image" />
 				</div>
 			</div>
-			<div class="colouring col-sm-6">
+			<div class="colouring col-lg-6 col-md-4">
 				<div class="row">
-					<div class="post_header col-sm-11">
+					<div class="post_header col-11">
 						<h4>{{ post.title }}</h4>
 					</div>
-					<div class="options col-sm-1 ">
+					<div class="options col-1 ">
 						<div class="dropdown ">
 						  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
 						  <span class="glyphicon glyphicon-option-horizontal"></span>
@@ -41,208 +25,47 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="post_context thin-border col-sm-12">
-                {{ post.context }}
-          </div>
+					<div class="post_context thin-border col-12">
+                        {{ post.context }}
+                    </div>
 				</div>
 				<div class="row">
-					<div class="post_tags col-sm-12">
-            {% for tag in post.tags %}
-					    	<a href="#">{{ tag }}</a>
-						{% endfor %}
+					<div class="post_tags col-12">
+                        {{ post.tags }}
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="post_feeling col-sm-2 container">
+			<div class="post_feeling col-2 container">
 				<div id="feel_pop" data-toggle="popover" data-placement="top" data-content="yo" role="button">Feeling </div>
 			</div>
-			<div class="post_rating col-sm-1">
+			<div class="post_rating col-1">
 				<div class="row">
 					<div id="{{ post.id }}_grammFail" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
 					<div id="{{ post.id }}_grammFail_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
-			<div class="post_rating col-sm-1">
+			<div class="post_rating col-1">
 				<div class="row">
                     <div id="{{ post.id }}_logFail" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button"></div>
 					<div id="{{ post.id }}_logFail_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
-			<div class="post_rating col-sm-1">
+			<div class="post_rating col-1">
 				<div class="row">
 					<div id="{{ post.id }}_toxic" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
 					<div id="{{ post.id }}_toxic_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
-			<div class="post_rating col-sm-1">
+			<div class="post_rating col-1">
 				<div class="row">
 					<div id="{{ post.id }}_harm" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
 					<div id="{{ post.id }}_harm_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
-			<div class="spaceholder col-sm-6"></div>
+			<div class="spaceholder col-6"></div>
 		</div>
 	</div>
 	</div>
 </div>
-{% endblock %}
-
-<div>
-    <ul>
-    {% for c in comments %}
-        {% if c.post == post %}
-        <div class="comment_container ">
-            <div class="comment">
-            <div class="container">
-                <div class="row">
-                    <div class="user_info col-sm-1">
-                        <div class="row">
-                            <div class="comment_profile_pic col-sm-1">
-                                <img class="small_profile" src="{{ MEDIA_URL }}{{ c.user.picture }}" alt="No Image"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="comment_user col-sm-1">
-                                {{ c.user }}
-                            </div>
-                        </div>
-                    </div>
-                    <div id="postnr" class="comment_content thin-border col-sm-9">
-                      {{ c.comment }}
-                    </div>
-                    <div class="options col-sm-1">
-                        <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
-                          <span class="glyphicon glyphicon-option-horizontal"></span>
-                          </button>
-                          <ul class="dropdown-menu">
-                            <li class="report"><span class="glyphicon glyphicon-alert" role="button"> Report</span></li>
-                            <li class="edit"><span class="glyphicon glyphicon-pencil" role="button"> Edit</span></li>
-                          </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row top">
-                    <div class="spaceholder col-sm-1"></div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ c.id }}_loveliness" class="comment_rating c_icon glyphicon glyphicon-heart col-sm-1" role="button" aria-pressed="false"></div>
-                        </div>
-                        <div class="row">
-                            <div id="{{ c.id }}_loveliness_count" class="comment_rating c_number col-sm-1">{{ c.loveliness }}</div>
-                        </div>
-                    </div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ c.id }}_burnfactor" class="comment_rating c_icon glyphicon glyphicon-fire col-sm-1" role="button" aria-pressed="false"></div>
-                        </div>
-                        <div class="row">
-                            <div id="{{ c.id }}_burnfactor_count" class="comment_rating c_number col-sm-1">{{ c.burnfactor }}</div>
-                        </div>
-                        </div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ c.id }}_logicRating" class="comment_rating c_icon glyphicon glyphicon-eye-open col-sm-1" role="button" aria-pressed="false"></div>
-                        </div>
-                        <div class="row">
-                            <div id="{{ c.id }}_logicRating_count" class="comment_rating c_number col-sm-1">{{ c.logicRating }}</div>
-                        </div>
-
-                    </div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ c.id }}_accuracyRating" class="comment_rating c_icon glyphicon glyphicon-screenshot col-sm-1" role="button" aria-pressed="false"></div>
-                        </div>
-                        <div class="row">
-                            <div id="{{ c.id }}_accuracyRating_count" class="comment_rating c_number col-sm-1">{{ c.accuracyRating }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        {% endif %}
-    {% endfor %}
-    </ul>
-</div>
-</div>
-
-<div id="stars" class="star_rating container" style="display:none">
-	<div class="row">
-		<div class="star_rating glyphicon glyphicon-star-empty col-sm-1"></div>
-		<div class="star_rating glyphicon glyphicon-star-empty col-sm-1"></div>
-		<div class="star_rating glyphicon glyphicon-star-empty col-sm-1"></div>
-		<div class="star_rating glyphicon glyphicon-star-empty col-sm-1"></div>
-		<div class="star_rating glyphicon glyphicon-star-empty col-sm-1"></div>
-		<div class="spaceholder col-sm-8"></div>
-	</div>
-</div>
-
-<!-- comment -->
-<script>
-
-$('.report').click( function(){
-	alert("selected report")
-});
-$('.edit').click( function(source){
-	alert("selected edit")
-});
-
-$('.c_icon').click( function(source){
-
-    <!--get toggle status-->
-    var toggled = source.target.getAttribute("aria-pressed")
-    var id = source.target.id;
-
-    <!-- obtain information for database-->
-    var info = id.split("_");
-    var c_id = info[0]
-    var c_elem = info[1]
-
-    var count_id = id+"_count";
-    var count = document.getElementById(count_id).innerHTML;
-    if(toggled === "true"){
-	   count--;
-	   source.target.setAttribute("aria-pressed",false);
-    }
-    else{
-        count++;
-	   source.target.setAttribute("aria-pressed",true);
-    }
-	document.getElementById(count_id).innerHTML = count;
-
-    updateDB(c_id,c_elem);
-
-
-});
-
-
-
-</script>
-
-<!-- here goes the database update-->
-<script>
-const sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('itech_project/db.sqlite3');
-
-</script>
-
-<!-- post -->
-<script>
-    $('.r_icon').click( function(source){
-	var id = source.target.id+"_avg";
-	var count = document.getElementById(id).innerHTML;
-
-});
-
-$('.report').click( function(){
-	alert("selected report")
-});
-$('.edit').click( function(){
-	alert("selected edit")
-});
-
-$('.feel_pop').popover();
-</script>

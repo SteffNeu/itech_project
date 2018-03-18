@@ -36,10 +36,14 @@ class ContactForm(forms.ModelForm):
         fields = ('name', 'from_email', 'subject', 'message',)
 
 class CommentForm(forms.ModelForm):
-    comment = forms.CharField(widget=forms.Textarea, required=True, max_length=1000)
+    comment = forms.CharField(widget=forms.Textarea,required=True, max_length=2000, label="Comment")
+   # user = forms.IntegerField(widget=forms.HiddenInput())
+
+
     class Meta:
         model = Comment
         fields = ('comment',)
+
 
 class uploadPostForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=Category.objects.all())
@@ -51,3 +55,4 @@ class uploadPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('category','title','context','tags','picturePost',)
+
