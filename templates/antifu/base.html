@@ -129,7 +129,7 @@
 
 <!-- comment -->
 <script>
-
+    var currentEdit = "no_comment"
 
 $(function(){
 
@@ -168,8 +168,55 @@ $('.report').click( function(source){
 
 
 $('.edit').click( function(source){
-	alert("selected edit")
+
+    if (currentEdit == "no_comment"){
+        var input = source.target.id
+        var split = input.split("_")
+        var comment_id = split[0]
+        var reference = "#"+comment_id+"_comment"
+
+        currentEdit = reference
+
+        var data = $(reference)
+        data.attr("contentEditable","true")
+        data.css({"border-color": "#C1E0FF",
+             "border-width":"2px",
+             "border-style":"solid"});
+
+        var buttonID = comment_id+"_submit_change"
+        document.getElementById(buttonID).style.visibility = "visible"
+    }
 });
+
+$('.submit_change').click(function (source) {
+    var input = source.target.id
+    var split = input.split("_")
+    var comment_id = split[0]
+    var buttonID = comment_id+"_submit_change"
+    var data = $(currentEdit)
+    data.attr("contentEditable","false")
+    data.css({"border-style":"none"});
+    currentEdit = "no_comment"
+    document.getElementById(buttonID).style.visibility = "hidden"
+    var n_comment= data["0"].innerText
+
+    var info = {
+            comment_id:comment_id,
+            comment_content:n_comment,
+    }
+
+    $.ajax({
+  		type: "POST",
+  		url: "{% url 'update_comment_content' %}",
+  		data: info,
+  	    success: function(responseData) {
+			alert(responseData)
+		},
+		error: function(){
+  		    alert("something went wrong")
+        }
+    });
+})
 
 
 
