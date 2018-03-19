@@ -52,6 +52,7 @@ class Comment(models.Model):
     loveliness = models.IntegerField(default=0)
     burnfactor = models.IntegerField(default=0)
     logicRating = models.IntegerField(default=0)
+    report = models.IntegerField(default=0)
     accuracyRating = models.IntegerField(default=0)
 
     def __str__(self):

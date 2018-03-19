@@ -12,6 +12,10 @@
     <script src="{% static "js/antifu-ajax.js" %}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
     </script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     {% block link_block %}
     {% endblock %}
     <meta charset="UTF-8" />
@@ -125,12 +129,82 @@
 <!-- comment -->
 <script>
 
-$('.report').click( function(){
-	alert("selected report")
+
+$('.report').click( function(source){
+    var input = source.target.id
+    var split = input.split("_")
+    var id = split[0]
+    var flag = split[1]
+
+    var data = {
+        id:id,
+        flag: flag,
+    }
+
+    $.ajax({
+		type: "POST",
+		url: "{% url 'report' %}",
+		data: data,
+		success: function(responseData) {
+			alert(responseData)
+		},
+		error: function(){
+    	    alert("something went wrong")
+            }
+	});
+    document.getElementById(input).disabled
+
 });
+
+
 $('.edit').click( function(source){
 	alert("selected edit")
 });
+
+
+
+
+$('.r_icon').click(function (source) {
+
+        <!--get toggle status-->
+    var toggled = source.target.getAttribute("aria-pressed")
+    var id = source.target.id;
+
+    var split = id.split("_")
+    var post_id = split[0]
+    var feat = split[1]
+
+    var count_id = id+"_count";
+    var count = document.getElementById(count_id).innerHTML;
+    if(toggled === "true"){
+	   count--;
+	   source.target.setAttribute("aria-pressed",false);
+    }
+    else{
+        count++;
+	   source.target.setAttribute("aria-pressed",true);
+    }
+	document.getElementById(count_id).innerHTML = count;
+
+        var data = {
+        post_id:post_id,
+        feat:feat,
+        value: count,
+    }
+
+        $.ajax({
+  				type: "POST",
+  				url: "{% url 'update_post_feat' %}",
+  				data: data,
+  				success: function(responseData) {
+					alert(responseData)
+				},
+				error: function(){
+  				    alert("something went wrong")
+                }
+			});
+
+})
 
 $('.c_icon').click( function(source){
 
@@ -206,23 +280,5 @@ $(".commentForm").submit(function(event) {
 
 </script>
 
-
-<!-- post -->
-<script>
-    $('.r_icon').click( function(source){
-	var id = source.target.id+"_avg";
-	var count = document.getElementById(id).innerHTML;
-
-});
-
-$('.report').click( function(){
-	alert("selected report")
-});
-$('.edit').click( function(){
-	alert("selected edit")
-});
-
-$('.feel_pop').popover();
-</script>
 
 </html>
