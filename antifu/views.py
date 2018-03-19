@@ -31,7 +31,7 @@ def show_category(request, category_name):
     category_list = Category.objects.all()
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
-    comments = Comment.objects.filter(post=posts)
+    comments = Comment.objects.all()
     context_dict = {'category':category,'posts':posts,'comments':comments, 'categories': category_list}
 
 
