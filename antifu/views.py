@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FAQ
-from antifu.forms import UserProfileForm, ContactForm, CommentForm
+from antifu.forms import UserProfileForm, ContactForm, uploadPostForm
 
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
@@ -19,8 +19,7 @@ def home(request):
     category_list = Category.objects.all()
     posts = Post.objects.order_by('-date')[:5]
     comments = Comment.objects.all()
-    form = CommentForm()
-    context_dict = {'categories': category_list, 'posts':posts, 'comments':comments,'form':form}
+    context_dict = {'categories': category_list, 'posts':posts, 'comments':comments}
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.

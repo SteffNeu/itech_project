@@ -45,6 +45,4 @@ class uploadPostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-
-
-fields = ('category', 'title', 'context', 'tags', 'picturePost',)
+        fields = ('category', 'title', 'context', 'tags', 'picturePost',)
