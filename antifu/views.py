@@ -327,6 +327,7 @@ def report(request):
         else:
             comment = Comment.objects.get(id=id)
             comment.report = comment.report + 1
+            comment.save()
 
     return HttpResponse(" ")
 
