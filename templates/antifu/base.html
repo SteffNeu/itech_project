@@ -122,6 +122,7 @@
 
 <!-- comment -->
 <script>
+    var test = "hello"
 
 $('.report').click( function(){
 	alert("selected report")
@@ -130,9 +131,12 @@ $('.edit').click( function(source){
 	alert("selected edit")
 });
 
-$('.r_icon').click(function (event) {
+$('.post_rating').click(function (event) {
     var id = event.target.id
-
+    console.log(event.target)
+    test = id
+    alert(id)
+    alert(test)
 })
 
 $('.c_icon').click( function(source){
