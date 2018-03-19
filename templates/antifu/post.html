@@ -37,34 +37,40 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="post_feeling col-2 container">
-				<div id="feel_pop" data-toggle="popover" data-placement="top" data-content="yo" role="button">Feeling </div>
-			</div>
-			<div class="post_rating col-1">
+			<div class="post_rating col-2">
 				<div class="row">
-					<div id="{{ post.id }}_grammFail" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
-					<div id="{{ post.id }}_grammFail_avg" class="post_rating r_number col-sm-6">3/5</div>
+                    <div class="dropdown">
+                      <a type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <div id="{{ post.id }}_grammFail" class="post_rating r_icon fas fa-question-circle col-sm-6"></div>
+                      </a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Link 1</a>
+                        <a class="dropdown-item" href="#">Link 2</a>
+                        <a class="dropdown-item" href="#">Link 3</a>
+                      </div>
+                    </div>
+                    <div id="{{ post.id }}_grammFail_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
-			<div class="post_rating col-1">
+			<div class="post_rating col-2">
 				<div class="row">
-                    <div id="{{ post.id }}_logFail" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button"></div>
+                    <div id="{{ post.id }}_logFail" class="post_rating r_icon fas fa-comment-alt col-sm-6" role="button"></div>
 					<div id="{{ post.id }}_logFail_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
-			<div class="post_rating col-1">
+			<div class="post_rating col-2">
 				<div class="row">
-					<div id="{{ post.id }}_toxic" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
+					<div id="{{ post.id }}_toxic" class="post_rating r_icon fas fa-bug col-sm-6" role="button"></div>
 					<div id="{{ post.id }}_toxic_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
-			<div class="post_rating col-1">
+			<div class="post_rating col-2">
 				<div class="row">
-					<div id="{{ post.id }}_harm" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
+					<div id="{{ post.id }}_harm" class="post_rating r_icon fas fa-frown col-sm-6" role="button"></div>
 					<div id="{{ post.id }}_harm_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
 			</div>
-			<div class="spaceholder col-6"></div>
+			<div class="spaceholder col-4"></div>
 		</div>
 	</div>
 	</div>
