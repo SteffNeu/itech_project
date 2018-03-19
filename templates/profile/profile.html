@@ -7,38 +7,38 @@
 <link rel="stylesheet" type="text/css" href="{% static "css/userProfile.css" %}">
 {% endblock %}
 
-{% block title %}{{ selecteduser.username }} Profile{% endblock %}
-
+{% block title_block %}{{ selecteduser.username }} Profile{% endblock %}
+{% block header_block %}Your Profile{% endblock %}
 {% block body_block %}
 <div class="row">
     <!--Profile details left column-->
-    <div id="userDetails"class="col-lg-2 " style="background-color: aquamarine; max-width:100%; max-height:100%">
-        <h1>{{ selecteduser.username }} Profile</h1>
-        <img src="{{ MEDIA_URL }}{{userprofile.picture }}"
-             width="300"
-             height="300"
+    <div id="userDetails"class="card col-lg-3 rounded" style="max-width: 312px; max-height:100% ;padding: 10px; background-color: #85c7fa">
+        <h3 class="card-header">{{ selecteduser.username }}'s Profile</h3>
+        <img class="card-img-top" src="{{ MEDIA_URL }}{{userprofile.picture }}"
+             width="250"
+             height="250"
              alt="{{selecteduser.username}}" />
         <br/>
-        <div>
+        <div class="card-body">
             {% if selecteduser.username == user.username %}
                 <form method="post" action="." enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <input type="submit" value="Update" />
+                    <input type="submit" value="Update"/>
                 </form>
             {% endif %}
-            <h4>Email: {{ selecteduser.email }}</h4>
-            <h4>Total love: {{ selecteduser.totalLove }}</h4>
-            <h4><strong>{{ selecteduser.username }}</strong> spreading the love since: {{ selecteduser.date_joined }}</h4>
+            <p class="card-text" align="left"><strong>Email: </strong>{{ selecteduser.email }}</p>
+            <p class="card-text" align="left"><strong>Total love: </strong>{{ selecteduser.totalLove }}</p>
+            <p class="card-text" align="left"><strong>{{ selecteduser.username }}</strong> spreading the love since: {{ selecteduser.date_joined }}</p>
         </div>
     </div>
     <!--End of profile details-->
 
     <!--Profile content right column-->
-    <div id="userTabs"class="col-lg-9" style="background-color: red; max-width:100%; max-height:100%">
+    <div id="userTabs"class="col-lg-9" style="max-width:100%; max-height:100%; padding: 10px">
 
         <nav>
-            <div class="nav nav-tabs" id="myTab" role="tablist">
+            <div class="nav nav-tabs" id="myTab" role="tablist" >
                 <a class="nav-item nav-link active" id="nav-myContentTab" data-toggle="tab" href="#myContentTab" role="tab" aria-controls="nav-home" aria-selected="true">My Content</a>
                 <a class="nav-item nav-link" id="nav-myCommentsTab" data-toggle="tab" href="#myCommentsTab" role="tab" aria-controls="nav-profile" aria-selected="false">My Comments</a>
                 <a class="nav-item nav-link" id="nav-settingsTab" data-toggle="tab" href="#settingsTab" role="tab" aria-controls="nav-contact" aria-selected="false">Settings</a>
