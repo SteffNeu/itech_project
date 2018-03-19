@@ -35,12 +35,16 @@ class ContactForm(forms.ModelForm):
         model = ContactUsEmail
         fields = ('name', 'from_email', 'subject', 'message',)
 
-class CommentForm(forms.ModelForm):
-    comment = forms.CharField(widget=forms.Textarea,required=True, max_length=2000, label="Comment")
-   # user = forms.IntegerField(widget=forms.HiddenInput())
 
+class uploadPostForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
+    title = forms.CharField(max_length=64)
+    context = forms.CharField(max_length=512)
+    tags = forms.CharField(max_length=128)
+    picturePost = forms.ImageField(required=True)
 
     class Meta:
-        model = Comment
-        fields = ('comment',)
+        model = Post
 
+
+fields = ('category', 'title', 'context', 'tags', 'picturePost',)
