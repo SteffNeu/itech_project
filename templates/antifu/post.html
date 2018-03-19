@@ -37,34 +37,111 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="post_feeling col-2 container">
-				<div id="feel_pop" data-toggle="popover" data-placement="top" data-content="yo" role="button">Feeling </div>
-			</div>
-			<div class="post_rating col-1">
+			<div class="post_rating col-2">
 				<div class="row">
-					<div id="{{ post.id }}_grammFail" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
-					<div id="{{ post.id }}_grammFail_avg" class="post_rating r_number col-sm-6">3/5</div>
+                    <div class="dropdown">
+                      <a type="button" id="{{ post.id }}_grammFail" class="btn btn-primary dropdown-toggle colouring post_rating fas fa-question-circle" data-toggle="dropdown"></a>
+                      <div class="dropdown-menu">
+                        <div class="dropdown-item radio" >
+                            <label><input type="radio" name="optradio">1</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">2</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">3</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">4</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">5</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="{{ post.id }}_grammFail_avg" class="post_rating r_number col-6">3/5</div>
 				</div>
 			</div>
-			<div class="post_rating col-1">
+			<div class="post_rating col-2">
 				<div class="row">
-                    <div id="{{ post.id }}_logFail" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button"></div>
-					<div id="{{ post.id }}_logFail_avg" class="post_rating r_number col-sm-6">3/5</div>
+                    <div class="dropdown">
+                      <a type="button" id="{{ post.id }}_logFail" class="btn btn-primary dropdown-toggle colouring post_rating fas fa-comment-alt" data-toggle="dropdown"></a>
+                      <div class="dropdown-menu">
+                        <div class="dropdown-item radio" >
+                            <label><input type="radio" value="1" name="optradio">1</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" value="2" name="optradio">2</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" value="3" name="optradio">3</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" value="4" name="optradio">4</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" value="5" name="optradio">5</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <input type="hidden" id="radio-previous" name="radio-previous" />
+                        </div>
+                      </div>
+                    </div>
+					<div id="{{ post.id }}_logFail_avg" class="post_rating r_number col-6">4/5</div>
 				</div>
 			</div>
-			<div class="post_rating col-1">
+			<div class="post_rating col-2">
 				<div class="row">
-					<div id="{{ post.id }}_toxic" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
-					<div id="{{ post.id }}_toxic_avg" class="post_rating r_number col-sm-6">3/5</div>
+                    <div class="dropdown">
+                      <a type="button" id="{{ post.id }}_toxic" class="btn btn-primary dropdown-toggle colouring post_rating fas fa-bug" data-toggle="dropdown"></a>
+                      <div class="dropdown-menu">
+                        <div class="dropdown-item radio" >
+                            <label><input type="radio" name="optradio">1</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">2</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">3</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">4</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">5</label>
+                        </div>
+                      </div>
+                    </div>
+					<div id="{{ post.id }}_toxic_avg" class="post_rating r_number col-sm-6">5/5</div>
 				</div>
 			</div>
-			<div class="post_rating col-1">
+			<div class="post_rating col-2">
 				<div class="row">
-					<div id="{{ post.id }}_harm" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
+                    <div class="dropdown">
+                      <a type="button" id="{{ post.id }}_harm" class="btn btn-primary dropdown-toggle colouring fas fa-frown post_rating" data-toggle="dropdown"></a>
+                      <div class="dropdown-menu">
+                        <div class="dropdown-item radio" >
+                            <label><input type="radio" name="optradio">1</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">2</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">3</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">4</label>
+                        </div>
+                        <div class="dropdown-item radio">
+                            <label><input type="radio" name="optradio">5</label>
+                        </div>
+                      </div>
+                    </div>
 					<div id="{{ post.id }}_harm_avg" class="post_rating r_number col-sm-6">3/5</div>
 				</div>
+				</div>
 			</div>
-			<div class="spaceholder col-6"></div>
+			<div class="spaceholder col-4"></div>
 		</div>
 	</div>
 	</div>

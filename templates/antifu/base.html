@@ -12,6 +12,10 @@
     <script src="{% static "js/antifu-ajax.js" %}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
     </script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     {% block link_block %}
     {% endblock %}
     <meta charset="UTF-8" />
@@ -124,6 +128,7 @@
 
 <!-- comment -->
 <script>
+    var test = "hello"
 
 $('.report').click( function(){
 	alert("selected report")
@@ -131,6 +136,14 @@ $('.report').click( function(){
 $('.edit').click( function(source){
 	alert("selected edit")
 });
+
+$('.post_rating').click(function (event) {
+    var id = event.target.id
+    console.log(event.target)
+    test = id
+    var num = $( "input:checked" ).val()
+
+})
 
 $('.c_icon').click( function(source){
 
@@ -206,23 +219,5 @@ $(".commentForm").submit(function(event) {
 
 </script>
 
-
-<!-- post -->
-<script>
-    $('.r_icon').click( function(source){
-	var id = source.target.id+"_avg";
-	var count = document.getElementById(id).innerHTML;
-
-});
-
-$('.report').click( function(){
-	alert("selected report")
-});
-$('.edit').click( function(){
-	alert("selected edit")
-});
-
-$('.feel_pop').popover();
-</script>
 
 </html>
