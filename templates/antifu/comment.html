@@ -3,10 +3,10 @@
             <div class="comment">
             <div class="container">
                 <div class="row">
-                    <div class="user_info col-sm-1">
-                        <div class="row">
+                    <div class="user_info col-sm-2 border border-right-0 rounded-left">
+                        <div class="row justify-content-left">
                             <div class="comment_profile_pic col-sm-1">
-                                <img class="small_profile" src="{{ MEDIA_URL }}/media/{{ comment.user.picture }}" alt="No Image"/>
+                                <img class="small_profile border-0 rounded mt-1 mb-1 mr-2" src="{{ MEDIA_URL }}/media/{{ comment.user.picture }}" alt="No Image"/>
                             </div>
                         </div>
                         <div class="row">
@@ -15,8 +15,10 @@
                             </div>
                         </div>
                     </div>
-                    <div id="postnr" class="comment_content thin-border col-sm-9">
-                      {{ comment.comment }}
+                    <div class="col-sm-8 border border-left-0 rounded-right">
+                      <div id="postnr" class="comment_content row align-item-center justify-content-center">
+                        <p>{{ comment.comment }}</p>
+                      </div>
                     </div>
                     <div class="options col-sm-1">
                         <div class="dropdown">
@@ -32,31 +34,28 @@
                 </div>
                 <div class="row top">
                     <div class="spaceholder col-sm-1"></div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ comment.id }}_loveliness" class="comment_rating c_icon fa fa-heart col-sm-1" role="button" aria-pressed="false"></div>
-                            <div id="{{ comment.id }}_loveliness_count" class="comment_rating c_number col-sm-1">{{ comment.loveliness }}</div>
+                    <div class="comment_rating col-sm-2">
+                        <div class="row align-item-center">
+                            <span id="{{ comment.id }}_loveliness" class="comment_rating c_icon fa fa-heart col-sm-1" role="button" aria-pressed="false"></span>
+                            <span id="{{ comment.id }}_loveliness_count" class="comment_rating c_number col-sm-1">{{ comment.loveliness }}</span>
                         </div>
                     </div>
-                    <div class="comment_rating col-sm-1">
+                    <div class="comment_rating col-sm-2">
                         <div class="row">
-                            <div id="{{ comment.id }}_burnfactor" class="comment_rating c_icon fas fa-fire col-sm-1" role="button" aria-pressed="false"></div>
-                            <div id="{{ comment.id }}_burnfactor_count" class="comment_rating c_number col-sm-1">{{ comment.burnfactor }}</div>
+                            <span id="{{ comment.id }}_burnfactor" class="comment_rating c_icon fas fa-fire col-sm-1" role="button" aria-pressed="false"></span>
+                            <span id="{{ comment.id }}_burnfactor_count" class="comment_rating c_number col-sm-1">{{ comment.burnfactor }}</span>
                         </div>
-                        </div>
-                    <div class="comment_rating col-sm-1">
-                        <div class="row">
-                            <div id="{{ comment.id }}_logicRating" class="comment_rating c_icon fas fa-lightbulb col-sm-1" role="button" aria-pressed="false"></div>
-
-                            <div id="{{ comment.id }}_logicRating_count" class="comment_rating c_number col-sm-1">{{ comment.logicRating }}</div>
-                        </div>
-
                     </div>
-                    <div class="comment_rating col-sm-1">
+                    <div class="comment_rating col-sm-2">
                         <div class="row">
-                            <div id="{{ comment.id }}_accuracyRating" class="comment_rating c_icon fas fa-bullseye col-sm-1" role="button" aria-pressed="false"></div>
-
-                            <div id="{{ comment.id }}_accuracyRating_count" class="comment_rating c_number col-sm-1">{{ comment.accuracyRating }}</div>
+                            <span id="{{ comment.id }}_logicRating" class="comment_rating c_icon fas fa-lightbulb col-sm-1" role="button" aria-pressed="false"></span>
+                            <span id="{{ comment.id }}_logicRating_count" class="comment_rating c_number col-sm-1">{{ comment.logicRating }}</span>
+                        </div>
+                    </div>
+                    <div class="comment_rating col-sm-2">
+                        <div class="row">
+                            <span id="{{ comment.id }}_accuracyRating" class="comment_rating c_icon fas fa-bullseye col-sm-1" role="button" aria-pressed="false"></span>
+                            <span id="{{ comment.id }}_accuracyRating_count" class="comment_rating c_number col-sm-1">{{ comment.accuracyRating }}</span>
                         </div>
                     </div>
                 </div>

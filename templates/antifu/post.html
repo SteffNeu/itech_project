@@ -1,16 +1,16 @@
-<div class="post_container colouring">
+<div class="post_container colouring border rounded">
 	<div class="post-{{ post.id }} colouring">
 	<div class="container">
 		<div class="row top">
-			<div class="col-lg-6 col-md-8">
-				<div class="post_image thin-border">
-					<img class="img-responsive post_image w-100" src="{{MEDIA_URL}}/media/{{ post.picturePost }}" alt="No Image" />
+			<div class="col-lg-6 col-md-8 mr-2">
+				<div class="post_image">
+					<img class="img-responsive post_image w-100 border-0 rounded" src="{{MEDIA_URL}}/media/{{ post.picturePost }}" alt="No Image" />
 				</div>
 			</div>
-			<div class="colouring col-lg-6 col-md-4">
+			<div class="colouring col-lg-5 col-md-4 border border-light mr-2 ml-1 justify-content-center">
 				<div class="row">
-					<div class="post_header col-11">
-						<h4><a href="{% url 'show_post' post.id %}">{{ post.title }}</a> </h4>
+					<div class="post_header col-9">
+						<h4><a class="text-white" href="{% url 'show_post' post.id %}">{{ post.title }}</a> </h4>
 					</div>
 					<div class="options col-1 ">
 						<div class="dropdown ">
@@ -25,14 +25,9 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="post_context thin-border col-12">
-                        {{ post.context }}
-                    </div>
-				</div>
-				<div class="row">
-					<div class="post_tags col-12">
-                        {{ post.tags }}
-					</div>
+					<div class="post_context border-top col-12">
+              {{ post.context }}
+          </div>
 				</div>
 			</div>
 		</div>
