@@ -14,69 +14,56 @@
     <hr>
     <div class="row">
         <!-- left column -->
-        <div class="col-md-3">
-            <div class="text-center">
-                <img src="{{ user.picture }}" class="avatar img-circle" alt="avatar">
-                <h6>Upload a different photo...</h6>
-
-                <input type="file" class="form-control">
-
-            </div>
-        </div>
-
-        <!-- edit form column -->
-        <div class="col-md-9 personal-info">
-
-            <h3>Personal info</h3>
-
-            <form class="form-horizontal" role="form">
+        <div class="col-md-6">
+            <form method="post" action="." enctype="multipart/form-data">
+                <div class="form-group">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">First name:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" value="{{ user.first_name }}">
+                        <input class="form-control" name='fname' type="text" value="{{ user.first_name }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Last name:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" value="{{ user.last_name }}">
+                        <input class="form-control" name='lname' type="text" value="{{ user.last_name }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Email:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" value="{{ user.email }}">
+                        <input class="form-control" name='email' type="text" value="{{ user.email }}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-3 control-label">Username:</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="text" value="{{ user.username }}">
+                        <input class="form-control" name='username' type="text" value="{{ user.username }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Old password:</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="password" placeholder="Enter current password">
+                        <input class="form-control" name="oldpassword"  type="password" placeholder="Enter current password">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">New password:</label>
                     <div class="col-md-8">
-                        <input class="form-control" type="password" placeholder="Enter a new password">
+                        <input class="form-control" name="newpassword" type="password" placeholder="Enter a new password">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label"></label>
-                    <div class="col-md-8">
-                        <input type="button" class="btn btn-primary" value="Save Changes">
-                        <span></span>
-                        <input type="reset" class="btn btn-default" value="Cancel">
-                        <span></span>
-                        <input type="button" class="btn btn-primary btn pull-right" value="Delete Account">
-                    </div>
-                </div>
+
+                <button onclick='window.top.location.href="/antifu/"' type="submit" class="btn btn-primary" value="Save Changes">Save Changes</button>
+
+                <button type="reset" class="btn btn-default" value="Cancel">Cancel</button>
+
+                <button type="button" class="btn btn-primary btn pull-right" value="Delete Account">Delete Account</button>
+
             </form>
         </div>
     </div>

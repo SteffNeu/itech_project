@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from antifu.models import Category, UserProfile, Comment, Post, PersonalHelp, FAQ
-from antifu.forms import UserProfileForm, ContactForm, uploadPostForm
+from antifu.forms import UserProfileForm, ContactForm, uploadPostForm, UserForm
 
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.template.response import TemplateResponse
 from django.core.urlresolvers import reverse
 
 from itertools import chain
@@ -21,15 +22,14 @@ def home(request):
     context_dict = {'posts':posts, 'comments':comments}
     result_list = []
     if request.method == 'POST':
-        if 'query' in request.POST:
-            query = request.POST['query'].strip()
-            title_list = Post.objects.filter(title__contains=query)
-            context_list = (Post.objects.filter(context__contains=query))
-            value_list = list(chain(title_list, context_list))
-            result_list = remove_duplicates(value_list)
-            context_dict['query'] = query
-            context_dict['result_list'] = result_list
-            return render(request, 'antifu/search.html', context_dict)
+        query = request.POST['query'].strip()
+        title_list = Post.objects.filter(title__contains=query)
+        context_list = (Post.objects.filter(context__contains=query))
+        value_list = list(chain(title_list, context_list))
+        result_list = remove_duplicates(value_list)
+        context_dict['query'] = query
+        context_dict['result_list'] = result_list
+        return render(request, 'antifu/search.html', context_dict)
     return render(request, 'antifu/home.html', context_dict)
 
 def remove_duplicates(values):
@@ -40,6 +40,7 @@ def remove_duplicates(values):
             output.append(value)
             seen.add(value)
     return output
+
 
 def show_category(request, category_name):
     category = Category.objects.get(name=category_name)
@@ -170,13 +171,6 @@ def profile(request, username):
         return redirect('/antifu/')
     userprofile = UserProfile.objects.get_or_create(user=user)[0]
     form = UserProfileForm({'picture': userprofile.picture})
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
-        if form.is_valid():
-            form.save(commit=True)
-            return redirect('profile', user.username)
-        else:
-            print(form.errors)
 
     return render(request, 'profile/profile.html',
         {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/'})
@@ -238,10 +232,32 @@ def myComments(request, username):
     return render(request, 'profile/MyCommentsTab.html', context_dict)
 
 def settings(request):
-    return render(request, 'profile/MySettingsTab.html', {})
+    userprofile = UserProfile.objects.get_or_create(user=request.user)[0]
+    form = UserProfileForm({'picture': userprofile.picture})
+    #userform = UserForm(request.POST)
+
+    if request.method=='POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        user = request.user
+        user.first_name = request.POST.get('fname', '')
+        user.last_name = request.POST.get('lname', '')
+        user.email = request.POST.get('email', '')
+        user.username = request.POST.get('username', '')
+        user.save()
+
+        #    if
+        #    user.password =
+        if form.is_valid():
+            userprofile.user.first_name = request.POST.get('fname', '')
+            userprofile.save()
+            form.save(commit=True)
+        else:
+            print('NOT VALID')
+    return render(request, 'profile/MySettingsTab.html', {'form':form,
+                                                          'selecteduser':request.user})
+
 
 def uploadContent(request):
-
     form=uploadPostForm()
     if request.method== 'POST':
         form = UserProfileForm(request.POST,request.FILES)
@@ -282,7 +298,6 @@ def update_comment_feat(request):
         comment.save()
 
     return HttpResponse("succes")
-
 
 @csrf_protect
 @csrf_exempt
