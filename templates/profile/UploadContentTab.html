@@ -1,6 +1,6 @@
 {% load staticfiles %}
 
-{% block header_block %}
+{% block link_block %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{% static "css/uploadContentTab.css" %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,7 +12,7 @@
 
 {% block body_block %}
 
-<div class="container">
+<div class="container" style="margin-top: 10px">
     <div id="contentDets">
 
         <form method="post" action="." enctype="multipart/form-data">
