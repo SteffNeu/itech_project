@@ -94,12 +94,11 @@ def personalHelp(request):
         if e.preventionTitle is not '':
             prev_list.append({e.preventionTitle:e.preventionHref})
         if e.interventionTitle is not '':
-            interv_list.append({e.interventionTitle,e.interventionHref})
+            interv_list.append({e.interventionTitle:e.interventionHref})
         if e.helpTitle is not '':
-            help_list.append({e.helpTitle,e.helpHref})
+            help_list.append({e.helpTitle:e.helpHref})
         if e.suiPrevTitle is not '':
-            suiPrev_list.append({e.suiPrevTitle,e.suiPrevHref})
-
+            suiPrev_list.append({e.suiPrevTitle:e.suiPrevHref})
 
     context_dict = {"help":help_list,
                     "cb":cb_list,
