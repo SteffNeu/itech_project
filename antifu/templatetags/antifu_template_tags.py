@@ -10,8 +10,8 @@ def get_category_list(cat = None):
 
 # here we need one certain comment we should get via id
 @register.inclusion_tag('antifu/comment.html')
-def get_comment(commentID = None):
-    return{'comment':Comment.objects.get(id = commentID)}
+def get_comment(commentID = None, user=None):
+    return{'comment':Comment.objects.get(id = commentID),'user':user}
 
 # here we need one certain post we should get via id
 @register.inclusion_tag('antifu/post.html')

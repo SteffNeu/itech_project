@@ -24,8 +24,10 @@
                           <span class="glyphicon glyphicon-option-horizontal"></span>
                           </button>
                           <ul class="dropdown-menu">
-                            <li class="report"><span class="glyphicon glyphicon-alert" role="button" id="{{ comment.id }}_comment"> Report</span></li>
-                            <li class="edit"><span class="glyphicon glyphicon-pencil" role="button"> Edit</span></li>
+                            <li class="report"><span class="fas fa-exclamation-triangle" role="button" id="{{ comment.id }}_comment" aria-disabled="false"> Report</span></li>
+                            {% if comment.user.user == user %}
+                                <li class="edit"><span class="fas fa-edit" role="button"> Edit</span></li>
+                            {% endif %}
                           </ul>
                         </div>
                     </div>
