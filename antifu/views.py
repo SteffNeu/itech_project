@@ -353,3 +353,17 @@ def report(request):
             comment.save()
 
     return HttpResponse(" ")
+
+@csrf_protect
+@csrf_exempt
+def update_comment_content(request):
+
+    if request.method == 'POST':
+        data = request.POST
+        comment_id = data['comment_id']
+        new_comment = data['comment_content']
+
+        comment = Comment.objects.get(id=comment_id)
+        comment.comment = new_comment
+        comment.save()
+    return HttpResponse(" ")

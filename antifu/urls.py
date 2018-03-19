@@ -15,6 +15,7 @@ urlpatterns = [
 	url(r'^submit_comment/$',views.submit_comment,name='submit_comment'),
 	url(r'^update_comment_feat/$', views.update_comment_feat, name='update_comment_feat'),
 	url(r'^update_post_feat/$', views.update_post_feat, name='update_post_feat'),
+	url(r'^update_comment_content/$', views.update_comment_content, name='update_comment_content'),
 	url(r'^report/$', views.report, name='report'),
 	url(r'^post/#(?P<post_id>[\w\-]+)/$',views.show_post,name='show_post'),
 	url(r'^post/(?P<postID>[\w\-]+)/$',views.post,name='post'),

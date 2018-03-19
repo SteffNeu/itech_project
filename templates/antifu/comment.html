@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="col-sm-8 border border-left-0 rounded-right">
-                      <div id="postnr" class="comment_content row align-item-center justify-content-center">
+                      <div id="{{ comment.id }}_comment" class="comment_content row align-item-center justify-content-center">
                         <p>{{ comment.comment }}</p>
                       </div>
                     </div>
@@ -28,10 +28,13 @@
                           <ul class="dropdown-menu">
                             <li class="report"><span class="fas fa-exclamation-triangle" role="button" id="{{ comment.id }}_comment" aria-disabled="false"> Report</span></li>
                             {% if comment.user.user == user %}
-                                <li class="edit"><span class="fas fa-edit" role="button"> Edit</span></li>
+                                <li class="edit"><span id="{{ comment.id }}_edit" class="fas fa-edit" role="button"> Edit</span></li>
                             {% endif %}
                           </ul>
                         </div>
+                        {% if comment.user.user == user %}
+                              <button id="{{ comment.id }}_submit_change" class="submit_change colouring btn btn-default" style="visibility: hidden">change</button>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row top">
