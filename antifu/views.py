@@ -32,8 +32,7 @@ def show_category(request, category_name):
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
     comments = Comment.objects.filter(post=posts)
-    form = CommentForm()
-    context_dict = {'category':category,'posts':posts,'comments':comments, 'form':form,'categories': category_list}
+    context_dict = {'category':category,'posts':posts,'comments':comments,'categories': category_list}
 
     return render(request,'antifu/category.html',context_dict)
 
