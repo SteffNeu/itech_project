@@ -311,3 +311,22 @@ def update_post_feat(request):
 
     return HttpResponse("yo")
 
+@csrf_protect
+@csrf_exempt
+def report(request):
+
+    if request.method == 'POST':
+        data = request.POST
+        id = data['id']
+        flag = data['flag']
+
+        if flag == "post":
+            post = Post.objects.get(id=id)
+            post.report = post.report+1
+            post.save()
+        else:
+            comment = Comment.objects.get(id=id)
+            comment.report = comment.report + 1
+
+    return HttpResponse(" ")
+

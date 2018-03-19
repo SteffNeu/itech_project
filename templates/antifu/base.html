@@ -128,13 +128,36 @@
 
 <!-- comment -->
 <script>
-    var test = "hello"
-    var clicksToxic = new Array();
-    clicksToxic[0] = 0 //this should be the default value, if there is one
 
-$('.report').click( function(){
-	alert("selected report")
+
+$('.report').click( function(source){
+    alert("selected report")
+    var input = source.target.id
+    var split = input.split("_")
+    var id = split[0]
+    var flag = split[1]
+	alert(id + " " + flag)
+
+    var data = {
+        id:id,
+        flag: flag,
+    }
+
+    $.ajax({
+		type: "POST",
+		url: "{% url 'report' %}",
+		data: data,
+		success: function(responseData) {
+			alert(responseData)
+		},
+		error: function(){
+    	    alert("something went wrong")
+            }
+	});
+
 });
+
+
 $('.edit').click( function(source){
 	alert("selected edit")
 });
