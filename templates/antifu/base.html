@@ -129,6 +129,8 @@
 <!-- comment -->
 <script>
     var test = "hello"
+    var clicksToxic = new Array();
+    clicksToxic[0] = 0 //this should be the default value, if there is one
 
 $('.report').click( function(){
 	alert("selected report")
@@ -137,11 +139,36 @@ $('.edit').click( function(source){
 	alert("selected edit")
 });
 
-$('.post_rating').click(function (event) {
-    var id = event.target.id
-    console.log(event.target)
-    test = id
-    var num = $( "input:checked" ).val()
+
+
+
+$('.r_icon').click(function (source) {
+
+        <!--get toggle status-->
+    var toggled = source.target.getAttribute("aria-pressed")
+    var id = source.target.id;
+
+    var split = id.split("_")
+    var comment_id = split[0]
+    var feat = split[1]
+
+    var count_id = id+"_count";
+    var count = document.getElementById(count_id).innerHTML;
+    if(toggled === "true"){
+	   count--;
+	   source.target.setAttribute("aria-pressed",false);
+    }
+    else{
+        count++;
+	   source.target.setAttribute("aria-pressed",true);
+    }
+	document.getElementById(count_id).innerHTML = count;
+
+        var data = {
+        comment_id:comment_id,
+        feat:feat,
+        value: count,
+    }
 
 })
 
@@ -188,12 +215,12 @@ $('.c_icon').click( function(source){
 
 });
 
-$(".commentForm").submit(function(event) {
+$(".commentForm").submit(function(source) {
 
 
-    var source = event.target
-    var post_id = source.getAttribute('data-postID')
-    var user = source.getAttribute('data-user')
+    var eventsource = source.target
+    var post_id = eventsource.getAttribute('data-postID')
+    var user = eventsource.getAttribute('data-user')
     var comment = document.getElementById(post_id+'_content').value
 
     var data = {
