@@ -130,21 +130,157 @@ def populate():
          "harmful": 3,
          "report": 1,
          "views": 260,
-         "picturePost": "post_pictures/ryan-gosling-tweets.jpg",
+         "picturePost": "post_pictures/ryangosling.jpg",
+         },
+    ]
+
+    ableism_post = [
+        {"title": "Handicap parking spot",
+         "context": "taking up spaces designated for handicapped people",
+         "user": "",
+         "date": "2015-12-12",
+         "grammarFail": 1,
+         "logicFail": 100,
+         "toxicity": 99,
+         "harmful": 75,
+         "report": 0,
+         "views": 160,
+         "picturePost": "post_pictures/ableist.jpg",
+         },
+    ]
+
+
+    racism_post = [
+        {"title": "AIDS in Africa?",
+         "context": "misinformation from white privilege",
+         "user": "",
+         "date": "2014-01-01",
+         "grammarFail": 1,
+         "logicFail": 300,
+         "toxicity": 231,
+         "harmful": 100,
+         "report": 0,
+         "views": 370,
+         "picturePost": "post_pictures/racistrace.jpg",
+         },
+    ]
+
+    politics_post = [
+        {"title": "Hillary Clinton",
+         "context": "smear campaign misinformation",
+         "user": "",
+         "date": "2017-12-01",
+         "grammarFail": 2,
+         "logicFail": 300,
+         "toxicity": 354,
+         "harmful": 77,
+         "report": 0,
+         "views": 355,
+         "picturePost": "post_pictures/politics.jpg",
+         },
+    ]
+
+    troll_post = [
+        {"title": "I Hate everything",
+         "context": "person goes off hating everything for no apparent reason",
+         "user": "",
+         "date": "2016-09-09",
+         "grammarFail": 5,
+         "logicFail": 99,
+         "toxicity": 229,
+         "harmful": 189,
+         "report": 0,
+         "views": 255,
+         "picturePost": "post_pictures/everything.jpg",
+         },
+    ]
+
+    passiveAgressive_post = [
+        {"title": "Just you wait, mom",
+         "context": "friend does this when mad at their mom",
+         "user": "",
+         "date": "2018-02-09",
+         "grammarFail": 1,
+         "logicFail": 90,
+         "toxicity": 209,
+         "harmful": 181,
+         "report": 0,
+         "views": 155,
+         "picturePost": "post_pictures/passiveAgressive.jpg",
+         },
+    ]
+
+    missinformation_post = [
+        {"title": "Thanks Obama",
+         "context": "came across this little gem",
+         "user": "",
+         "date": "2017-04-13",
+         "grammarFail": 90,
+         "logicFail": 401,
+         "toxicity": 20,
+         "harmful": 20,
+         "report": 0,
+         "views": 555,
+         "picturePost": "post_pictures/rascism_politics.jpg",
+         },
+    ]
+
+    selfHate_post = [
+        {"title": "Hate myself",
+         "context": "a classmate said this while talking about mental issues",
+         "user": "",
+         "date": "2017-05-13",
+         "grammarFail": 0,
+         "logicFail": 101,
+         "toxicity": 2,
+         "harmful": 54,
+         "report": 0,
+         "views": 172,
+         "picturePost": "post_pictures/selfhate.jpg",
+         },
+    ]
+
+    relationship_post = [
+        {"title": "Cheating",
+         "context": "someone offering their opinion on cheating",
+         "user": "",
+         "date": "2017-05-13",
+         "grammarFail": 1,
+         "logicFail": 299,
+         "toxicity": 399,
+         "harmful": 399,
+         "report": 0,
+         "views": 400,
+         "picturePost": "post_pictures/relationship.jpg",
+         },
+    ]
+
+    religion_post = [
+        {"title": "Muslim hate",
+         "context": "in reaction to the muslim ban",
+         "user": "",
+         "date": "2017-02-11",
+         "grammarFail": 5,
+         "logicFail": 202,
+         "toxicity": 299,
+         "harmful": 297,
+         "report": 0,
+         "views": 305,
+         "picturePost": "post_pictures/religion.jpg",
          },
     ]
 
     cats = {"People": {"posts": people_post},
-            "Racism": {"posts": ""},
+            "Racism": {"posts":racism_post},
             "LGBTQ": {"posts": lgbtq_post},
-            "Politics": {"posts": ""},
-            "Troll": {"posts": ""},
-            "PassiveAggressive": {"posts": ""},
-            "Missinformation": {"posts": ""},
-            "Ableism": {"posts": ""},
-            "SelfHate": {"posts": ""},
-            "Relationships": {"posts": ""},
-            "Religious": {"posts": ""}}
+            "Politics": {"posts": politics_post},
+            "Troll": {"posts": troll_post},
+            "PassiveAggressive": {"posts": passiveAgressive_post},
+            "Missinformation": {"posts": missinformation_post},
+            "Ableism": {"posts": ableism_post},
+            "SelfHate": {"posts": selfHate_post},
+            "Relationships": {"posts": relationship_post},
+            "Religious": {"posts": religion_post}}
 
 
     user = create_su(users[0]["username"],users[0]["email"],users[0]["password"],users[0]["picture"])
@@ -154,7 +290,7 @@ def populate():
         c = add_cat(cat)
         for p in cat_data["posts"]:
             if cat_data["posts"] == people_post:
-                post = add_post(c, p["title"], p["context"], user,p["date"], p["tags"],p["grammarFail"],
+                post = add_post(c, p["title"], p["context"], user,p["date"], p["grammarFail"],
                             p["logicFail"],p["toxicity"],p["harmful"],p["report"],
                             p["views"],p["picturePost"]
                          )
@@ -162,10 +298,48 @@ def populate():
                 add_comm(post,comment[2],user)
 
             elif cat_data["posts"] == lgbtq_post:
-                post = add_post(c, p["title"], p["context"], user2,p["date"], p["tags"], p["grammarFail"],
+                post = add_post(c, p["title"], p["context"], user2,p["date"], p["grammarFail"],
                          p["logicFail"], p["toxicity"], p["harmful"], p["report"],
                          p["views"], p["picturePost"])
                 add_comm(post, comment[0], user)
+
+            elif cat_data["posts"] == racism_post:
+                post = add_post(c, p["title"], p["context"], user, p["date"], p["grammarFail"],
+                                p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                                p["views"], p["picturePost"])
+            elif cat_data["posts"] == politics_post:
+                post = add_post(c, p["title"], p["context"], user2, p["date"], p["grammarFail"],
+                                p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                                p["views"], p["picturePost"])
+            elif cat_data["posts"] == troll_post:
+                post = add_post(c, p["title"], p["context"], user, p["date"], p["grammarFail"],
+                                p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                                p["views"], p["picturePost"])
+            elif cat_data["posts"] == passiveAgressive_post:
+                post = add_post(c, p["title"], p["context"], user2, p["date"], p["grammarFail"],
+                                p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                                p["views"], p["picturePost"])
+            elif cat_data["posts"] == missinformation_post:
+                post = add_post(c, p["title"], p["context"], user, p["date"], p["grammarFail"],
+                                p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                                p["views"], p["picturePost"])
+            elif cat_data["posts"] == ableism_post:
+                post = add_post(c, p["title"], p["context"], user2, p["date"], p["grammarFail"],
+                                p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                                p["views"], p["picturePost"])
+            elif cat_data["posts"] == selfHate_post:
+                post = add_post(c, p["title"], p["context"], user, p["date"], p["grammarFail"],
+                                p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                                p["views"], p["picturePost"])
+            elif cat_data["posts"] == relationship_post:
+                post = add_post(c, p["title"], p["context"], user2, p["date"], p["grammarFail"],
+                                p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                                p["views"], p["picturePost"])
+            elif cat_data["posts"] == religion_post:
+                post = add_post(c, p["title"], p["context"], user, p["date"], p["grammarFail"],
+                                p["logicFail"], p["toxicity"], p["harmful"], p["report"],
+                                p["views"], p["picturePost"])
+
 
     for q,value in faqs.items():
         add_faq(q,value)
@@ -196,11 +370,10 @@ def add_cat(name):
     return c
 
 #Adding posts
-def add_post(cat, title, context, user, date, tags, grammarFail,
+def add_post(cat, title, context, user, date, grammarFail,
             logicFail, toxicity, harmful, report, views, picturePost):
     p = Post.objects.get_or_create(category=cat, title=title)[0]
     p.context=context
-    p.tags=tags
     p.user=user
     p.date=date
     p.grammarFail=grammarFail
