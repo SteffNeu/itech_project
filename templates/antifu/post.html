@@ -40,25 +40,25 @@
 			<div class="post_rating col-1">
 				<div class="row">
 					<div id="{{ post.id }}_grammarFail" class="post_rating r_icon fas fa-question-circle col-6" role="button" aria-pressed="false"></div>
-					<div id="{{ post.id }}_grammarFail_count" class="post_rating r_number col-6">6</div>
+					<div id="{{ post.id }}_grammarFail_count" class="post_rating r_number col-6">{{ post.grammarFail }}</div>
 				</div>
 			</div>
 			<div class="post_rating col-1">
 				<div class="row">
                     <div id="{{ post.id }}_logicFail" class="post_rating r_icon fas fa-comment-alt col-6" role="button" aria-pressed="false"></div>
-					<div id="{{ post.id }}_logicFail_count" class="post_rating r_number col-6">6</div>
+					<div id="{{ post.id }}_logicFail_count" class="post_rating r_number col-6">{{ post.logicFail }}</div>
 				</div>
 			</div>
 			<div class="post_rating col-1">
 				<div class="row">
 					<div id="{{ post.id }}_toxicity" class="post_rating r_icon fas fa-bug col-6" role="button" aria-pressed="false"></div>
-					<div id="{{ post.id }}_toxicity_count" class="post_rating r_number col-6">6</div>
+					<div id="{{ post.id }}_toxicity_count" class="post_rating r_number col-6">{{ post.toxicity }}</div>
 				</div>
 			</div>
 			<div class="post_rating col-1">
 				<div class="row">
 					<div id="{{ post.id }}_harm" class="post_rating r_icon fas fa-frown col-6" role="button" aria-pressed="false"></div>
-					<div id="{{ post.id }}_harm_count" class="post_rating r_number col-6">3</div>
+					<div id="{{ post.id }}_harm_count" class="post_rating r_number col-6">{{ post.harmful }}</div>
 				</div>
 			</div>
 			<div class="spaceholder col-6"></div>
