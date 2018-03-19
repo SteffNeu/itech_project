@@ -149,7 +149,7 @@ $('.r_icon').click(function (source) {
     var id = source.target.id;
 
     var split = id.split("_")
-    var comment_id = split[0]
+    var post_id = split[0]
     var feat = split[1]
 
     var count_id = id+"_count";
@@ -165,10 +165,22 @@ $('.r_icon').click(function (source) {
 	document.getElementById(count_id).innerHTML = count;
 
         var data = {
-        comment_id:comment_id,
+        post_id:post_id,
         feat:feat,
         value: count,
     }
+
+        $.ajax({
+  				type: "POST",
+  				url: "{% url 'update_post_feat' %}",
+  				data: data,
+  				success: function(responseData) {
+					alert(responseData)
+				},
+				error: function(){
+  				    alert("something went wrong")
+                }
+			});
 
 })
 
@@ -215,12 +227,12 @@ $('.c_icon').click( function(source){
 
 });
 
-$(".commentForm").submit(function(source) {
+$(".commentForm").submit(function(event) {
 
 
-    var eventsource = source.target
-    var post_id = eventsource.getAttribute('data-postID')
-    var user = eventsource.getAttribute('data-user')
+    var source = event.target
+    var post_id = source.getAttribute('data-postID')
+    var user = source.getAttribute('data-user')
     var comment = document.getElementById(post_id+'_content').value
 
     var data = {
