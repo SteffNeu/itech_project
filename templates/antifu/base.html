@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-
+{% load antifu_template_tags %}
 <html lang="en">
 <head >
   <link rel="shortcut icon" href="{%static "images/icon.png"%}" type="image/x-icon" />
@@ -89,9 +89,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="CategoryDropdown">
                             {% if categories %}
-                                {% for cat in categories %}
-                                    <a class="dropdown-item" href="{% url 'show_category' cat.name %}">{{ cat.name }}</a>
-                                {% endfor %}
+                                {% get_category_list %}
                             {% else %}
                                 <a class="dropdown-item" href="#">No categories</a>
                             {% endif %}

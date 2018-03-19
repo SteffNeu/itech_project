@@ -162,6 +162,16 @@ def register_profile(request):
     context_dict = {'form':form}
     return render(request, 'registration/profile_registration.html', context_dict)
 
+
+def calc_total_love(userprofile):
+    comments = Comment.objects.filter(user=userprofile)
+
+    love = 0
+    for c in comments:
+        love = c.loveliness + love
+    return love
+
+
 @login_required
 def profile(request, username):
     try:
@@ -171,6 +181,8 @@ def profile(request, username):
     userprofile = UserProfile.objects.get_or_create(user=user)[0]
     form = UserProfileForm({'picture': userprofile.picture})
 
+    userprofile.totallove = calc_total_love(userprofile)
+    
     return render(request, 'profile/profile.html',
         {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/'})
 
@@ -187,10 +199,12 @@ def search(request):
         context_dict['result_list'] = result_list
     return render(request, 'antifu/search.html', context_dict)
 
+
 #for the nav tabs
 def myContents(request, username):
     user=User.objects.get(username=username)
     userprofile=UserProfile.objects.get(user=user)
+
     post_list=[]
     post_comment_list=[]
 
@@ -233,7 +247,6 @@ def myComments(request, username):
 def settings(request):
     userprofile = UserProfile.objects.get_or_create(user=request.user)[0]
     form = UserProfileForm({'picture': userprofile.picture})
-    #userform = UserForm(request.POST)
 
     if request.method=='POST':
         form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
@@ -244,8 +257,6 @@ def settings(request):
         user.username = request.POST.get('username', '')
         user.save()
 
-        #    if
-        #    user.password =
         if form.is_valid():
             userprofile.user.first_name = request.POST.get('fname', '')
             userprofile.save()

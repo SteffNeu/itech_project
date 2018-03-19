@@ -20,15 +20,8 @@
              alt="{{selecteduser.username}}" />
         <br/>
         <div class="card-body">
-            {% if selecteduser.username == user.username %}
-                <form method="post" action="." enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Update"/>
-                </form>
-            {% endif %}
             <p class="card-text" align="left"><strong>Email: </strong>{{ selecteduser.email }}</p>
-            <p class="card-text" align="left"><strong>Total love: </strong>{{ selecteduser.totalLove }}</p>
+            <p class="card-text" align="left"><strong>Total love: </strong>{{ userprofile.totallove }}</p>
             <p class="card-text" align="left"><strong>{{ selecteduser.username }}</strong> spreading the love since: {{ selecteduser.date_joined }}</p>
         </div>
     </div>

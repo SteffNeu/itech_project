@@ -24,7 +24,7 @@
                 <tbody>
                 {% for c in comments %}
                   <tr id="comment_details">
-                      <td><a target="_parent" href="{% url 'post' c.post.id %}">{{c.post}}</a></td>
+                      <td><a target="_parent" href="{% url 'show_post' c.post.id %}">{{c.post}}</a></td>
                       <td>{{c.comment}}</td>
                       <td>{{c.date}}</td>
                       <td>Loveliness: {{c.loveliness}}
@@ -36,6 +36,4 @@
                 </tbody>
             </table>
         </div>
-
-
 {% endblock %}
