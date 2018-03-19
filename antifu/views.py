@@ -12,8 +12,6 @@ from django.core.urlresolvers import reverse
 
 from itertools import chain
 
-from antifu.webhose_search import run_query
-
 from datetime import datetime
 
 # Create your views here.
@@ -330,4 +328,3 @@ def report(request):
             comment.save()
 
     return HttpResponse(" ")
-
