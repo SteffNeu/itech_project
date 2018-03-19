@@ -32,25 +32,6 @@
               <hr>
                 {% get_post_comment_submit posts comments user %}
 
-
-              <!-- Date/Time -->
-              <p>Posted on January 1, 2018 at 12:00 PM</p>
-
-              <hr>
-
-              <!-- Comments Form -->
-              <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <div class="card-body">
-                  <form>
-                    <div class="form-group">
-                      <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-                </div>
-              </div>
-
             </div>
 
             <!-- Sidebar Widgets Column -->
@@ -60,12 +41,16 @@
               <div class="card my-4">
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-secondary" type="button">Go!</button>
-                    </span>
-                  </div>
+                  <form class="form-inline" id="user_form"
+                    method="post" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                    <input class="form-control" type="text" size="20"
+                    name="query" value="{{ query }}" id="query" />
+                    </div>
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" name="submit"
+                    value="Search">Search</button>
+                  </form>
                 </div>
               </div>
 
@@ -89,7 +74,10 @@
               <div class="card my-4">
                 <h5 class="card-header">Quote of the Day</h5>
                 <div class="card-body">
-                  You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                  <blockquote class="blockquote mb-0">
+                    <p>I shall allow no man to belittle my soul by making me hate him.</p>
+                    <footer class="blockquote-footer">Booker T. Washington in his book: <cite title="Source Title">Up From Slavery</cite></footer>
+                  </blockquote>
                 </div>
               </div>
 

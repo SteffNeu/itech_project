@@ -10,29 +10,43 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.core.urlresolvers import reverse
 
+from itertools import chain
+
 from antifu.webhose_search import run_query
 
 from datetime import datetime
 
 # Create your views here.
 def home(request):
-    category_list = Category.objects.all()
     posts = Post.objects.order_by('-date')[:5]
     comments = Comment.objects.all()
-    context_dict = {'categories': category_list, 'posts':posts, 'comments':comments}
-    # Return a rendered response to send to the client.
-    # We make use of the shortcut function to make our lives easier.
-    # Note that the first parameter is the template we wish to use.
-    #return render(request, 'antifu/home.html', context_dict)
+    context_dict = {'posts':posts, 'comments':comments}
+    result_list = []
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        title_list = Post.objects.filter(title__contains=query)
+        context_list = (Post.objects.filter(context__contains=query))
+        value_list = list(chain(title_list, context_list))
+        result_list = remove_duplicates(value_list)
+        context_dict['query'] = query
+        context_dict['result_list'] = result_list
+        return render(request, 'antifu/search.html', context_dict)
     return render(request, 'antifu/home.html', context_dict)
 
+def remove_duplicates(values):
+    output = []
+    seen = set()
+    for value in values:
+        if value not in seen:
+            output.append(value)
+            seen.add(value)
+    return output
 
 def show_category(request, category_name):
-    category_list = Category.objects.all()
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
     comments = Comment.objects.all()
-    context_dict = {'category':category,'posts':posts,'comments':comments, 'categories': category_list}
+    context_dict = {'category':category,'posts':posts,'comments':comments}
 
 
     return render(request,'antifu/category.html',context_dict)
@@ -44,13 +58,11 @@ def show_post(request, post_id):
     return render(request,'antifu/show_post.html',context_dict)
 
 def aboutUs(request):
-    category_list = Category.objects.all()
-    context_dict = {'categories': category_list}
+    context_dict = {}
     return render(request, 'antifu/aboutUs.html',context_dict)
 
 def contactUs(request):
-    category_list = Category.objects.all()
-    context_dict = {'categories': category_list}
+    context_dict = {}
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -64,11 +76,10 @@ def contactUs(request):
             form = ContactForm()
     else:
         form = ContactForm()
-    return render(request, 'antifu/contactUs.html', {'form': form,'categories': category_list})
+    return render(request, 'antifu/contactUs.html', {'form': form})
 
 
 def personalHelp(request):
-    category_list = Category.objects.all()
     help_obj = PersonalHelp.objects.all()
 
     cb_list = []
@@ -94,25 +105,21 @@ def personalHelp(request):
                     "cb":cb_list,
                     "prev":prev_list,
                     "interv":interv_list,
-                    "sui":suiPrev_list,
-                    'categories': category_list}
+                    "sui":suiPrev_list,}
     return render(request, 'antifu/personalHelp.html',context_dict)
 
 
 def faq(request):
-    category_list = Category.objects.all()
     faqs = FAQ.objects.all()
-    context_dict = {"faqs": faqs,
-                    'categories': category_list}
+    context_dict = {"faqs": faqs}
     return render(request, 'antifu/FAQ.html',context_dict)
 
 
 
 def post(request, postID):
-    category_list = Category.objects.all()
     post = Post.objects.get(id=postID)
     comments = Comment.objects.filter(post=post)
-    context_dict = {'comments': comments, 'post':post,'categories': category_list}
+    context_dict = {'comments': comments, 'post':post}
     return render(request, 'antifu/post.html', context_dict)
 
 
@@ -143,7 +150,6 @@ def submit_comment(request):
 
 @login_required
 def register_profile(request):
-    category_list = Category.objects.all()
     form = UserProfileForm()
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES)
@@ -154,12 +160,11 @@ def register_profile(request):
         return redirect('home')
     else:
         print(form.errors)
-    context_dict = {'form':form,'categories': category_list}
+    context_dict = {'form':form}
     return render(request, 'registration/profile_registration.html', context_dict)
 
 @login_required
 def profile(request, username):
-    category_list = Category.objects.all()
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
@@ -175,7 +180,7 @@ def profile(request, username):
             print(form.errors)
 
     return render(request, 'profile/profile.html',
-        {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/','categories': category_list})
+        {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/'})
 
 
 def search(request):
