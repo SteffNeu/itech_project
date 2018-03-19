@@ -12,8 +12,6 @@ from django.core.urlresolvers import reverse
 
 from itertools import chain
 
-from antifu.webhose_search import run_query
-
 from datetime import datetime
 
 # Create your views here.
@@ -23,14 +21,15 @@ def home(request):
     context_dict = {'posts':posts, 'comments':comments}
     result_list = []
     if request.method == 'POST':
-        query = request.POST['query'].strip()
-        title_list = Post.objects.filter(title__contains=query)
-        context_list = (Post.objects.filter(context__contains=query))
-        value_list = list(chain(title_list, context_list))
-        result_list = remove_duplicates(value_list)
-        context_dict['query'] = query
-        context_dict['result_list'] = result_list
-        return render(request, 'antifu/search.html', context_dict)
+        if 'query' in request.POST:
+            query = request.POST['query'].strip()
+            title_list = Post.objects.filter(title__contains=query)
+            context_list = (Post.objects.filter(context__contains=query))
+            value_list = list(chain(title_list, context_list))
+            result_list = remove_duplicates(value_list)
+            context_dict['query'] = query
+            context_dict['result_list'] = result_list
+            return render(request, 'antifu/search.html', context_dict)
     return render(request, 'antifu/home.html', context_dict)
 
 def remove_duplicates(values):
@@ -283,3 +282,49 @@ def update_comment_feat(request):
         comment.save()
 
     return HttpResponse("succes")
+
+
+@csrf_protect
+@csrf_exempt
+def update_post_feat(request):
+
+    if request.method == 'POST':
+        data = request.POST
+        post_id = data['post_id']
+        value = data['value']
+        feat = data['feat']
+
+        post = Post.objects.get(id=post_id)
+
+        if feat == "logicFail":
+            post.logicFail = value
+        elif feat == "grammarFail":
+            post.grammarFail = value
+        elif feat == "harmful":
+            post.harmful = value
+        else:
+            post.toxicity = value
+
+        post.save()
+
+    return HttpResponse("yo")
+
+@csrf_protect
+@csrf_exempt
+def report(request):
+
+    if request.method == 'POST':
+        data = request.POST
+        id = data['id']
+        flag = data['flag']
+
+        if flag == "post":
+            post = Post.objects.get(id=id)
+            post.report = post.report+1
+            post.save()
+        else:
+            comment = Comment.objects.get(id=id)
+            comment.report = comment.report + 1
+            comment.save()
+
+    return HttpResponse(" ")

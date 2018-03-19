@@ -1,16 +1,16 @@
-<div class="post_container colouring">
+<div class="post_container colouring border rounded">
 	<div class="post-{{ post.id }} colouring">
 	<div class="container">
 		<div class="row top">
-			<div class="col-lg-6 col-md-8">
-				<div class="post_image thin-border">
-					<img class="img-responsive post_image w-100" src="{{MEDIA_URL}}/media/{{ post.picturePost }}" alt="No Image" />
+			<div class="col-lg-6 col-md-8 mr-2">
+				<div class="post_image">
+					<img class="img-responsive post_image w-100 border-0 rounded" src="{{MEDIA_URL}}/media/{{ post.picturePost }}" alt="No Image" />
 				</div>
 			</div>
-			<div class="colouring col-lg-6 col-md-4">
+			<div class="colouring col-lg-5 col-md-4 border border-light mr-2 ml-1 mb-1 justify-content-center">
 				<div class="row">
-					<div class="post_header col-11">
-						<h4><a href="{% url 'show_post' post.id %}">{{ post.title }}</a> </h4>
+					<div class="post_header col-9">
+						<h4><a class="text-white" href="{% url 'show_post' post.id %}">{{ post.title }}</a> </h4>
 					</div>
 					<div class="options col-1 ">
 						<div class="dropdown ">
@@ -18,53 +18,44 @@
 						  <span class="glyphicon glyphicon-option-horizontal"></span>
 						  </button>
 						  <ul class="dropdown-menu">
-							<li class="report"><span class="glyphicon glyphicon-alert" role="button"> Report</span></li>
-							<li class="edit"><span class="glyphicon glyphicon-pencil" role="button"> Edit</span></li>
+							<li class="report"><span class="fas fa-exclamation-triangle" aria-disabled="false" role="button" id="{{ post.id }}_post"> Report</span></li>
 						  </ul>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="post_context thin-border col-12">
-                        {{ post.context }}
-                    </div>
+				<div class="row border-bottom mb-2">
+					<div class="post_context border-top col-12">
+              {{ post.context }}
+          </div>
 				</div>
-				<div class="row">
-					<div class="post_tags col-12">
-                        {{ post.tags }}
+
+				<div class="row justify-content-center mt-2 mb-2">
+					<div class="post_rating col-2">
+						<div class="row">
+							<span id="{{ post.id }}_grammarFail" class="post_rating r_icon fas fa-question-circle col-6" role="button" aria-pressed="false"></span>
+							<span id="{{ post.id }}_grammarFail_count" class="post_rating r_number col-6">{{ post.grammarFail }}</span>
+						</div>
+					</div>
+					<div class="post_rating col-2">
+						<div class="row">
+							<span id="{{ post.id }}_logicFail" class="post_rating r_icon fas fa-low-vision col-6" role="button" aria-pressed="false"></span>
+							<span id="{{ post.id }}_logicFail_count" class="post_rating r_number col-6">{{ post.logicFail }}</span>
+						</div>
+					</div>
+					<div class="post_rating col-2">
+						<div class="row">
+							<span id="{{ post.id }}_toxicity" class="post_rating r_icon fas fa-flask col-6" role="button" aria-pressed="false"></span>
+							<span id="{{ post.id }}_toxicity_count" class="post_rating r_number col-6">{{ post.toxicity }}</span>
+						</div>
+					</div>
+					<div class="post_rating col-2">
+						<div class="row">
+							<span id="{{ post.id }}_harm" class="post_rating r_icon fas fa-bolt col-6" role="button" aria-pressed="false"></span>
+							<span id="{{ post.id }}_harm_count" class="post_rating r_number col-6">{{ post.harmful }}</span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="post_feeling col-2 container">
-				<div id="feel_pop" data-toggle="popover" data-placement="top" data-content="yo" role="button">Feeling </div>
-			</div>
-			<div class="post_rating col-1">
-				<div class="row">
-					<div id="{{ post.id }}_grammFail" class="post_rating r_icon glyphicon glyphicon-font col-sm-6" role="button"></div>
-					<div id="{{ post.id }}_grammFail_avg" class="post_rating r_number col-sm-6">3/5</div>
-				</div>
-			</div>
-			<div class="post_rating col-1">
-				<div class="row">
-                    <div id="{{ post.id }}_logFail" class="post_rating r_icon glyphicon glyphicon-tint col-sm-6" role="button"></div>
-					<div id="{{ post.id }}_logFail_avg" class="post_rating r_number col-sm-6">3/5</div>
-				</div>
-			</div>
-			<div class="post_rating col-1">
-				<div class="row">
-					<div id="{{ post.id }}_toxic" class="post_rating r_icon glyphicon glyphicon-trash col-sm-6" role="button"></div>
-					<div id="{{ post.id }}_toxic_avg" class="post_rating r_number col-sm-6">3/5</div>
-				</div>
-			</div>
-			<div class="post_rating col-1">
-				<div class="row">
-					<div id="{{ post.id }}_harm" class="post_rating r_icon glyphicon glyphicon-pushpin col-sm-6" role="button"></div>
-					<div id="{{ post.id }}_harm_avg" class="post_rating r_number col-sm-6">3/5</div>
-				</div>
-			</div>
-			<div class="spaceholder col-6"></div>
 		</div>
 	</div>
 	</div>
