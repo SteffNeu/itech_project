@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{%static "js/MySettingsTab.js" %}"></script>
 {% endblock %}
 
 {% block body_block %}
@@ -47,7 +48,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary" value="Save Changes">Save Changes</button>
-                    <button type="button" id='myBtn' class="btn btn-primary btn pull-right"  value="Delete Account">Delete Account</button>
+                    <button type="button" id='myBtn' class="btn btn-primary btn pull-right" onclick="clickityClick()" value="Delete Account">Delete Account</button>
                 </form>
             </div>
 
@@ -56,8 +57,8 @@
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <p>Are you sure you want to delete you account?</p>
-                    <button id="yesBtn" class="btn btn-primary">Yes</button>
-                    <button id='noBtn' class="btn btn-primary" onclick="">No</button>
+                    <button id="yesBtn" onclick="location.href = '{% url "del_user" %}'" class="btn btn-primary">Yes</button>
+                    <button id='noBtn' onclick="modal.style.display = 'none'" class="btn btn-primary" onclick="">No</button>
                 </div>
 
             </div>
@@ -65,46 +66,6 @@
         <hr>
     </div>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById('myModal');
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        //////Content inside modal window///////
-        //If the user pressed yes
-        var yesBtn = document.getElementById('yesBtn');
-        yesBtn.onclick = function(){
-            location.href='{% url 'del_user' %}';
-        }
-
-        var noBtn = document.getElementById('noBtn');
-        //If the user pressed no
-        noBtn.onclick = function(){
-            modal.style.display = 'none';
-        }
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-        //////////////////////////////////////////
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 {% endblock %}
 
