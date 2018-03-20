@@ -418,5 +418,5 @@ def add_help(h,value,i):
 
 # Start execution here!
 if __name__ == '__main__':
-    print("Starting Rango population script...")
+    print("Starting Anti-FU population script...")
     populate()
