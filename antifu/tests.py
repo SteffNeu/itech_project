@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from antifu.models import Post,Comment,Category,UserProfile
+from antifu.models import Post,Comment,Category,UserProfile, ContactUsEmail
 from datetime import date
 
 # Create your tests here.
@@ -182,3 +182,53 @@ class CommentModelTests(TestCase):
         comment = Comment(post=self.post, user=self.u_profile)
         comment.save()
         self.assertEqual(self.post, comment.post)
+
+class ContactUsEmailTests(TestCase):
+
+    def test_confirm_name_of_contactUs_exists(self):
+        testName = "testName"
+        contactUs = ContactUsEmail(name=testName)
+        contactUs.save()
+        self.assertIsNotNone(contactUs.name)
+
+    def test_confirm_content_of_name(self):
+        testName = "testName"
+        contactUs = ContactUsEmail(name=testName)
+        contactUs.save()
+        self.assertEqual(testName,contactUs.name)
+
+    def test_confirm_emai_of_contactUs_exists(self):
+        testEmail = "test@email.com"
+        contactUs = ContactUsEmail(from_email=testEmail)
+        contactUs.save()
+        self.assertIsNotNone(contactUs.from_email)
+
+    def test_confirm_content_of_from_email(self):
+        testEmail = "test@email.com"
+        contactUs = ContactUsEmail(from_email=testEmail)
+        contactUs.save()
+        self.assertEqual(testEmail,contactUs.from_email)
+
+    def test_confirm_subject_of_contactUs_exists(self):
+        testSubject = "testSubject"
+        contactUs = ContactUsEmail(subject=testSubject)
+        contactUs.save()
+        self.assertIsNotNone(contactUs.subject)
+
+    def test_confirm_content_of_subject(self):
+        testSubject = "testSubject"
+        contactUs = ContactUsEmail(subject=testSubject)
+        contactUs.save()
+        self.assertEqual(testSubject,contactUs.subject)
+
+    def test_confirm_message_of_contactUs_exists(self):
+        testMessage = "test-message"
+        contactUs = ContactUsEmail(message=testMessage)
+        contactUs.save()
+        self.assertIsNotNone(contactUs.message)
+
+    def test_confirm_content_of_message(self):
+        testMessage = "test-message"
+        contactUs = ContactUsEmail(message=testMessage)
+        contactUs.save()
+        self.assertEqual(testMessage,contactUs.message)
