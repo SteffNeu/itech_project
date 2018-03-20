@@ -126,8 +126,6 @@ def post(request, postID):
 @csrf_protect
 @csrf_exempt
 def submit_comment(request):
-
-    print("!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!")
     if request.method == 'POST':
 
         #get the data

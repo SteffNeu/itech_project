@@ -168,7 +168,6 @@ $('.report').click( function(source){
             url: "{% url 'report' %}",
             data: data,
             success: function(responseData) {
-                alert(responseData + "report")
             },
             error: function(){
                 alert("something went wrong")
@@ -222,7 +221,6 @@ $('.submit_change').click(function (source) {
   		url: "{% url 'update_comment_content' %}",
   		data: info,
   	    success: function(responseData) {
-			alert(responseData)
 		},
 		error: function(){
   		    alert("something went wrong")
@@ -237,7 +235,6 @@ $('.r_icon').click(function (source) {
     if(!user_authenticated){
         return
     }
-
         <!--get toggle status-->
     var toggled = source.target.getAttribute("aria-pressed")
     var id = source.target.id;
@@ -269,7 +266,6 @@ $('.r_icon').click(function (source) {
   				url: "{% url 'update_post_feat' %}",
   				data: data,
   				success: function(responseData) {
-					alert(responseData)
 				},
 				error: function(){
   				    alert("something went wrong")
@@ -314,7 +310,6 @@ $('.c_icon').click( function(source){
   				url: "{% url 'update_comment_feat' %}",
   				data: data,
   				success: function(responseData) {
-					alert(responseData)
 				},
 				error: function(){
   				    alert("something went wrong")
@@ -343,7 +338,6 @@ $(".commentForm").submit(function(event) {
   				url: "{% url 'submit_comment' %}",
   				data: data,
   				success: function(responseData) {
-					alert(responseData)
 				},
 				error: function(){
   				    alert("something went wrong")
