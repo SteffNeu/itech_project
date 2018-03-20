@@ -358,10 +358,26 @@ def add_cat(name):
     cat.save()
     return cat
 
-def add_post(cat):
-    post = Post(category=cat)
+def add_post(cat,title):
+    post = Post(category=cat,title=title)
     post.save()
     return post
+
+def add_comment(u_profile,post,content):
+    comment = Comment(user=u_profile, post=post, comment=content)
+    comment.save()
+    return comment
+
+def add_user_profile(name):
+    # create test user
+    user = User.objects.create_user(name, "test@email.com", "testPassword")
+    user.save()
+
+    # create profile for the user
+    u_profile = UserProfile(user=user)
+    u_profile.save()
+
+    return u_profile
 
 ####tests for the views############
 class HomeViewTests(TestCase):
@@ -423,24 +439,47 @@ class Show_PostTests(TestCase):
 
     def setUp(self):
         self.cat = add_cat("Test")
-        self.post = add_post(self.cat)
+        self.post = add_post(self.cat,"Title")
 
     def test_single_post_display(self):
         response = self.client.get(reverse('show_post', kwargs={'post_id': self.post.id}))
         self.assertEqual(response.status_code, 200)
 
-class User_ProfileTests(TestCase):
-
+class User_Profile_ContentTests(TestCase):
     def setUp(self):
         self.cat = add_cat("Test")
-        self.post = add_post(self.cat)
+        self.post = add_post(self.cat, "Title")
+        self.u_profile = add_user_profile("user1")
+        self.c = add_comment(self.u_profile, self.post, "comment content")
 
-        #create test user
-        self.user = User.objects.create_user("testUser", "test@email.com", "testPassword")
-        self.user.save()
+    def test_profile_content_display(self):
+        response = self.client.get(reverse('myContents', kwargs={'username': self.u_profile.user}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Title")
+        self.assertContains(response, "Upload Date")
+        self.assertContains(response, "No. of Comments")
+        self.assertContains(response, "Reactions")
+        self.assertContains(response, "Category")
+        self.assertContains(response, self.post.title)
+        self.assertContains(response, 1)
 
-        #create profile for the user
-        self.u_profile = UserProfile(user=self.user)
-        self.u_profile.save()
+
+class User_Profile_CommentsTests(TestCase):
+
+    def setUp(self):
+        self.cat = add_cat("TestCategory")
+        self.post = add_post(self.cat,"TestTitle")
+        self.u_profile=add_user_profile("user2")
+        self.c = add_comment(self.u_profile,self.post,"comment content")
+
+
+    def test_profile_comments_display(self):
+        response = self.client.get(reverse('myComments', kwargs={'username': self.u_profile.user}))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Post")
+        self.assertContains(response, "Comment")
+        self.assertContains(response, self.post.title)
+        self.assertContains(response, self.c.comment)
+
 
 

@@ -16,3 +16,4 @@ virtualenv-clone==0.2.6
 virtualenvwrapper==4.7.2
 virtualenvwrapper-win==1.2.1
 wincertstore==0.2
+coverage
