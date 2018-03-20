@@ -263,6 +263,8 @@ def settings(request):
             form.save(commit=True)
         else:
             print('NOT VALID')
+        print("gamwwwww")
+        return HttpResponseRedirect(reverse('settings'))
     return render(request, 'profile/MySettingsTab.html', {'form':form,
                                                           'selecteduser':request.user})
 
@@ -368,14 +370,17 @@ def update_comment_content(request):
 
 
 def del_user(request):
+    print('lalalalala')
     try:
         u = User.objects.get(username=request.user)
         u.delete()
 
     except User.DoesNotExist:
-        return render(request, 'antifu/home.html')
+        print('does not exist')
+        return HttpResponseRedirect(reverse('home'))
 
     except Exception as e:
-        return render(request, 'antifu/home.html')
+        print('error')
+        return HttpResponseRedirect(reverse('home'))
 
-    return render(request, 'antifu/home.html')
+    return HttpResponseRedirect(reverse('home'))
