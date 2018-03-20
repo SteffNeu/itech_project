@@ -45,7 +45,7 @@ h1 {
   overflow: hidden;
   div {
     display: inline;
-  } */
+  }
 }
 /* .navbar-nav-bottom {
   width: 100%;
@@ -72,7 +72,7 @@ h1 {
     font-size: 20px !important;
   }
 }
-
+/*
 @grid-breakpoints{
   // Extra small screen / phone
   xs: 500px,
@@ -84,7 +84,7 @@ h1 {
   lg: 992px,
   // Extra large screen / wide desktop
   xl: 1200px
-}
+}*/
 
 .text-white{
   color:white!important;
@@ -104,6 +104,6 @@ h1 {
 }
 
 .hidden-element{
-  visibility: hidden;
+  visibility: hidden!important;
 }
 

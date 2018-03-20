@@ -377,3 +377,9 @@ class HomeViewTests(TestCase):
         num_cats = len(response.context['categories'])
         self.assertEqual(num_cats, 3)
 
+class ContactUsTest(TestCase):
+
+    def test_default_view(self):
+        response = self.client.get(reverse('contactUs'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Welcome to Anti-FU!")
