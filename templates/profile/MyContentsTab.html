@@ -11,33 +11,35 @@
 <!--table with content summary-->
 {% block body_block %}
 
-        <div class="table-responsive">
-            <table id="myContentsTable" class="table table-hover table-bordered">
-                <thead style="background-color: #85c7fa">
-                <tr>
-                    <th>Title</th>
-                    <th>Upload Date</th>
-                    <th>Reactions</th>
-                    <th>No. of Comments</th>
-                    <th>Category</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for p in posts %}
-                <tr id="post_details">
-                    <td><a target="_parent" href="{% url 'show_post' p.id %}">{{ p.title }}</a></td>
-                    <td>{{ p.date }}</td>
-                    <td>Grammar Fail: {{ p.grammarFail }}
-                        Logic Fail: {{ p.logicFail }}
-                        Toxicity: {{ p.toxicity }}
-                        Harmful: {{ p.harmful }}</td>
-                    <td>{{ numComments }}</td>
-                    <td>{{ p.category }}</td>
-                </tr>
+    <div class="table-responsive">
+        <table id="myContentsTable" class="table table-hover table-bordered">
+            <thead style="background-color: #85c7fa">
+            <tr>
+                <th>Title</th>
+                <th>Upload Date</th>
+                <th>Reactions</th>
+                <th>No. of Comments</th>
+                <th>Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in numComments %}
+                {% for post, comm in p.items %}
+                    <tr id="post_details">
+                        <td><a target="_parent" href="{% url 'show_post' post.id %}">{{ post.title }}</a></td>
+                        <td>{{ post.date }}</td>
+                        <td>Grammar Fail: {{ post.grammarFail }}
+                            Logic Fail: {{ post.logicFail }}
+                            Toxicity: {{ post.toxicity }}
+                            Harmful: {{ post.harmful }}</td>
+                        <td>{{ comm }}</td>
+                        <td>{{ post.category }}</td>
+                    </tr>
                 {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 
 {% endblock %}

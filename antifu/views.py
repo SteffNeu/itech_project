@@ -183,7 +183,7 @@ def profile(request, username):
     form = UserProfileForm({'picture': userprofile.picture})
 
     userprofile.totallove = calc_total_love(userprofile)
-    
+
     return render(request, 'profile/profile.html',
         {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/'})
 
@@ -203,11 +203,10 @@ def search(request):
 
 #for the nav tabs
 def myContents(request, username):
-    user=User.objects.get(username=username)
-    userprofile=UserProfile.objects.get(user=user)
+    user = User.objects.get(username=username)
+    userprofile = UserProfile.objects.get(user=user)
 
-    post_list=[]
-    post_comment_list=[]
+    post_list = []
 
     #Posts the user made
     try:
@@ -216,23 +215,23 @@ def myContents(request, username):
     except Post.DoesNotExist:
         print('no posts')
 
+    numComments = []
+
     #Comments of each post
     try:
         for p in post_list:
             post_comment_list = Comment.objects.filter(post=p)
+            numComments.append({p: len(post_comment_list)})
     except Comment.DoesNotExist:
         print('no comments')
 
-    numComments = len(post_comment_list)
-    context_dict={"posts":post_list,
-                "numComments":numComments,
-                "postComments":post_comment_list}
+    context_dict = {"numComments": numComments, }
     return render(request, 'profile/MyContentsTab.html', context_dict)
 
 
 def myComments(request, username):
-    user=User.objects.get(username=username)
-    userprofile=UserProfile.objects.get(user=user)
+    user = User.objects.get(username=username)
+    userprofile = UserProfile.objects.get(user=user)
     user_comment_list=[]
 
     #Comments the user made
@@ -241,9 +240,9 @@ def myComments(request, username):
     except Comment.DoesNotExist:
         print('no comments')
 
-
     context_dict={"comments":user_comment_list}
     return render(request, 'profile/MyCommentsTab.html', context_dict)
+
 
 def settings(request):
     userprofile = UserProfile.objects.get_or_create(user=request.user)[0]
@@ -280,8 +279,6 @@ def uploadContent(request):
             form = UserProfileForm(instance=post)
             post = form.save(commit=False)
             post.save()
-
-
     return render(request, 'profile/UploadContentTab.html', {'form':form})
 
 

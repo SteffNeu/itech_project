@@ -104,6 +104,6 @@ h1 {
 }
 
 .hidden-element{
-  visibility: hidden;
+  visibility: hidden!important;
 }
 

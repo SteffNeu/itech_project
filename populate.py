@@ -106,7 +106,6 @@ def populate():
     lgbtq_post = [
         {"title": "Adam and Steve",
          "context": "in tweeter",
-         "tags": "#tag1 #tag2",
          "user": "",
          "date": "2007-05-10",
          "grammarFail": 5,
@@ -121,7 +120,6 @@ def populate():
     people_post = [
         {"title": "Ryan Gosling",
          "context": "celebrities read mean tweets",
-         "tags": "#theotherryan #not-deadpool #perfectcheekbone",
          "user": "",
          "date": "2015-07-22",
          "grammarFail": 2,
