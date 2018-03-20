@@ -13,14 +13,18 @@
 						<h4><a class="text-white" href="{% url 'show_post' post.id %}">{{ post.title }}</a> </h4>
 					</div>
 					<div class="options col-1 ">
+                        {% if user.is_authenticated %}
 						<div class="dropdown ">
 						  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
 						  <span class="glyphicon glyphicon-option-horizontal"></span>
 						  </button>
+
 						  <ul class="dropdown-menu">
 							<li class="report"><span class="fas fa-exclamation-triangle" aria-disabled="false" role="button" id="{{ post.id }}_post"> Report</span></li>
 						  </ul>
+
 						</div>
+                        {% endif %}
 					</div>
 				</div>
 				<div class="row border-bottom mb-2">

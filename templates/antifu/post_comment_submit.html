@@ -3,7 +3,7 @@
 <div>
 
 {% for p in posts %}
-    {% get_post p.id %}
+    {% get_post p.id user %}
     <div>
         <ul>
         {% for c in comments %}

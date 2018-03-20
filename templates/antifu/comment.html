@@ -21,20 +21,22 @@
                       </div>
                     </div>
                     <div class="options col-sm-1">
+                    {% if user.is_authenticated %}
                         <div class="dropdown">
                           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
                           <span class="glyphicon glyphicon-option-horizontal"></span>
                           </button>
                           <ul class="dropdown-menu">
-                            <li class="report"><span class="fas fa-exclamation-triangle" role="button" id="{{ comment.id }}_comment" aria-disabled="false"> Report</span></li>
-                            {% if comment.user.user == user %}
-                                <li class="edit"><span id="{{ comment.id }}_edit" class="fas fa-edit" role="button"> Edit</span></li>
-                            {% endif %}
+                              <li class="report"><span class="fas fa-exclamation-triangle" role="button" id="{{ comment.id }}_comment" aria-disabled="false"> Report</span></li>
+                              {% if comment.user.user == user %}
+                                  <li class="edit"><span id="{{ comment.id }}_edit" class="fas fa-edit" role="button"> Edit</span></li>
+                              {% endif %}
                           </ul>
                         </div>
-                        {% if comment.user.user == user %}
-                              <button id="{{ comment.id }}_submit_change" class="submit_change colouring btn btn-default">change</button>
-                        {% endif %}
+                    {% endif %}
+                    {% if comment.user.user == user %}
+                        <button id="{{ comment.id }}_submit_change" class="submit_change colouring btn btn-default" style="visibility: hidden;">change</button>
+                    {% endif %}
                     </div>
                 </div>
                 <div class="row top">

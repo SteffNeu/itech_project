@@ -15,8 +15,8 @@ def get_comment(commentID = None, user=None):
 
 # here we need one certain post we should get via id
 @register.inclusion_tag('antifu/post.html')
-def get_post(postID = None):
-    return{'post':Post.objects.get(id = postID)}
+def get_post(postID = None, user=None):
+    return{'post':Post.objects.get(id = postID),'user':user}
 
 @register.inclusion_tag('antifu/post_comment_submit.html')
 def get_post_comment_submit(posts, comments, user):

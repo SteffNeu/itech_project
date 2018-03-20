@@ -143,6 +143,12 @@ $(document).ready(function(){
 
 
 $('.report').click( function(source){
+    var r = confirm("Do you want to report this content?");
+    if (r == true) {
+        alert("The content was reported")
+    } else {
+        return
+    }
 
     var input = source.target.id
     var split = input.split("_")
