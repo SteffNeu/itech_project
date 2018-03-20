@@ -358,6 +358,11 @@ def add_cat(name):
     cat.save()
     return cat
 
+def add_post(cat):
+    post = Post(category=cat)
+    post.save()
+    return post
+
 ####tests for the views############
 class HomeViewTests(TestCase):
 
@@ -403,13 +408,39 @@ class AboutUsTest(TestCase):
 class FAQTest(TestCase):
 
     def test_default_view_FAQ(self):
-        response = self.client.get(reverse('aboutUs'))
+        response = self.client.get(reverse('FAQ'))
+        self.assertEqual(response.status_code, 200)
+
+class Show_CategoryTests(TestCase):
+
+    def test_category_catname_display(self):
+        add_cat("Test")
+        response = self.client.get(reverse('show_category', kwargs={'category_name': "Test"}))
         self.assertEqual(response.status_code, 200)
 
 
+class Show_PostTests(TestCase):
 
+    def setUp(self):
+        self.cat = add_cat("Test")
+        self.post = add_post(self.cat)
 
+    def test_single_post_display(self):
+        response = self.client.get(reverse('show_post', kwargs={'post_id': self.post.id}))
+        self.assertEqual(response.status_code, 200)
 
+class User_ProfileTests(TestCase):
 
+    def setUp(self):
+        self.cat = add_cat("Test")
+        self.post = add_post(self.cat)
+
+        #create test user
+        self.user = User.objects.create_user("testUser", "test@email.com", "testPassword")
+        self.user.save()
+
+        #create profile for the user
+        self.u_profile = UserProfile(user=self.user)
+        self.u_profile.save()
 
 
