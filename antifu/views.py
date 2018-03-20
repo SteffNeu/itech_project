@@ -365,3 +365,17 @@ def update_comment_content(request):
         comment.comment = new_comment
         comment.save()
     return HttpResponse(" ")
+
+
+def del_user(request):
+    try:
+        u = User.objects.get(username=request.user)
+        u.delete()
+
+    except User.DoesNotExist:
+        return render(request, 'antifu/home.html')
+
+    except Exception as e:
+        return render(request, 'antifu/home.html')
+
+    return render(request, 'antifu/home.html')

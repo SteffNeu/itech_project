@@ -6,7 +6,11 @@
                     <div class="user_info col-sm-2 border border-right-0 rounded-left">
                         <div class="row justify-content-left">
                             <div class="comment_profile_pic col-sm-1">
-                                <img class="small_profile border-0 rounded mt-1 mb-1 mr-2" src="{{ MEDIA_URL }}/media/{{ comment.user.picture }}" alt="No Image"/>
+                                {% if comment.user %}
+                                    <img class="small_profile border-0 rounded mt-1 mb-1 mr-2" src="{{ MEDIA_URL }}/media/{{ comment.user.picture }}" alt="No Image"/>
+                                {% else %}
+                                    <img class="small_profile border-0 rounded mt-1 mb-1 mr-2" src="/media/profile_images/question-mark-man-Idea-go-freedigital.jpg" alt="No Image"/>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="row">
