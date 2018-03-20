@@ -101,6 +101,12 @@
         </div>
     </div>
 </nav>
+{% if user.is_authenticated %}
+    <div id="user_authentication" class="hidden-element">true</div>
+{% else %}
+    <div id="user_authentication" class="hidden-element">false</div>
+{% endif %}
+
 
 <div class="container-all">
     {% block body_block %}
@@ -128,10 +134,12 @@
 <!-- comment -->
 <script>
     var currentEdit = "no_comment"
+    var user_authenticated = false
 
-$(function(){
-
-})
+$(document).ready(function(){
+    var user_stauts = user_authenticated=document.getElementById("user_authentication").innerHTML
+    user_authenticated = (user_stauts == 'true')
+});
 
 
 $('.report').click( function(source){
@@ -220,6 +228,9 @@ $('.submit_change').click(function (source) {
 
 
 $('.r_icon').click(function (source) {
+    if(!user_authenticated){
+        return
+    }
 
         <!--get toggle status-->
     var toggled = source.target.getAttribute("aria-pressed")
@@ -262,6 +273,9 @@ $('.r_icon').click(function (source) {
 })
 
 $('.c_icon').click( function(source){
+    if(!user_authenticated){
+        return
+    }
 
     <!--get toggle status-->
     var toggled = source.target.getAttribute("aria-pressed")

@@ -103,3 +103,7 @@ h1 {
     color: white;
 }
 
+.hidden-element{
+  visibility: hidden;
+}
+

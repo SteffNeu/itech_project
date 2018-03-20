@@ -65,3 +65,7 @@
 .text-black{
   color:black!important;
 }
+
+.submit_change{
+    visibility: hidden;
+}
