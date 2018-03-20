@@ -247,7 +247,7 @@ def myComments(request, username):
 
 
 def settings(request):
-    userprofile = UserProfile.objects.get(user=request.user)[0]
+    userprofile = UserProfile.objects.get(user=request.user)
     form = UserProfileForm({'picture': userprofile.picture})
 
     if request.method=='POST':
