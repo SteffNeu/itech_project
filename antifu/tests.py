@@ -445,7 +445,7 @@ class Show_PostTests(TestCase):
         response = self.client.get(reverse('show_post', kwargs={'post_id': self.post.id}))
         self.assertEqual(response.status_code, 200)
 
-class User_Profile_ContentTests(TestCase):
+class UserProfile_ContentTests(TestCase):
     def setUp(self):
         self.cat = add_cat("Test")
         self.post = add_post(self.cat, "Title")
@@ -464,7 +464,7 @@ class User_Profile_ContentTests(TestCase):
         self.assertContains(response, 1)
 
 
-class User_Profile_CommentsTests(TestCase):
+class UserProfile_CommentsTests(TestCase):
 
     def setUp(self):
         self.cat = add_cat("TestCategory")
@@ -481,5 +481,8 @@ class User_Profile_CommentsTests(TestCase):
         self.assertContains(response, self.post.title)
         self.assertContains(response, self.c.comment)
 
-
+class UserProfile_UploadContenTests(TestCase):
+    def test_profile_settings_displays(self):
+        response = self.client.get(reverse('uploadContent'))
+        self.assertEqual(response.status_code, 200)
 
