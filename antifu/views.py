@@ -370,17 +370,16 @@ def update_comment_content(request):
 
 
 def del_user(request):
-    print('lalalalala')
     try:
         u = User.objects.get(username=request.user)
         u.delete()
 
     except User.DoesNotExist:
         print('does not exist')
-        return HttpResponseRedirect(reverse('home'))
+        return render(request, 'profile/redirect_template.html', {'selecteduser': request.user})
 
     except Exception as e:
         print('error')
-        return HttpResponseRedirect(reverse('home'))
+        return render(request, 'profile/redirect_template.html', {'selecteduser': request.user})
 
-    return HttpResponseRedirect(reverse('home'))
+    return render(request, 'profile/redirect_template.html', {'selecteduser': request.user})

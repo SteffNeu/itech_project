@@ -30,13 +30,11 @@ class Post(models.Model):
     date = models.DateField(default=datetime.date.today)
     title = models.CharField(max_length=64)
     context = models.TextField(max_length=512)
-    tags = models.CharField(max_length=128)
     grammarFail = models.IntegerField(default=0)
     logicFail = models.IntegerField(default=0)
     toxicity = models.IntegerField(default=0)
     harmful = models.IntegerField(default=0)
     report = models.IntegerField(default=0)
-    views = models.IntegerField(default=0)
     picturePost = models.ImageField(upload_to='post_pictures')
 
     def __str__(self):
