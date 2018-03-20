@@ -232,3 +232,16 @@ class ContactUsEmailTests(TestCase):
         contactUs = ContactUsEmail(message=testMessage)
         contactUs.save()
         self.assertEqual(testMessage,contactUs.message)
+
+class CategoryModelTests(TestCase):
+    def test_confirm_name_of_category_exists(self):
+        testCategory = "category-name"
+        category = Category(name=testCategory)
+        category.save()
+        self.assertIsNotNone(category.name)
+
+    def test_confirm_content_of_name(self):
+        testCategory = "category-name"
+        category = Category(name=testCategory)
+        category.save()
+        self.assertEqual(testCategory,category.name)
