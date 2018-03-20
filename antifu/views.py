@@ -138,8 +138,12 @@ def submit_comment(request):
 
         #get user profile
         user = User.objects.get(username=username)
-        userProfile = UserProfile.objects.get(user=user)
+        try:
+            userProfile = UserProfile.objects.get(user=request.user)
+        except UserProfile.DoesNotExist:
+            userProfile = UserProfile.objects.create(user=user)
 
+        print(userProfile)
         post = Post.objects.get(id=post_id)
         new_comment = Comment.objects.create(post=post,user=userProfile, comment=comment)
         new_comment.save()
@@ -243,7 +247,7 @@ def myComments(request, username):
 
 
 def settings(request):
-    userprofile = UserProfile.objects.get_or_create(user=request.user)[0]
+    userprofile = UserProfile.objects.get(user=request.user)[0]
     form = UserProfileForm({'picture': userprofile.picture})
 
     if request.method=='POST':

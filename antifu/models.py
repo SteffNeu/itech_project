@@ -16,7 +16,7 @@ class Category(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True, default="profile_images/no_avatar.jpg")
     totallove = models.IntegerField(default = 0)
 
     def __str__(self):
