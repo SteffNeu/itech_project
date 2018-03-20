@@ -289,6 +289,64 @@ class FAQModelTest(TestCase):
         faq.save()
         self.assertEqual(testAnswers,faq.answers)
 
+class PersonalHelpModelTest(TestCase):
+
+    def test_confirm_cbTitle_of_personalHelp_exists(self):
+        testTitle = "testTitle"
+        personalhelp = PersonalHelp(cbTitle=testTitle)
+        personalhelp.save()
+        self.assertIsNotNone(personalhelp.cbTitle)
+
+    def test_confirm_cbHref_of_personalHelp_exists(self):
+        testHref = "testHref"
+        personalhelp = PersonalHelp(cbHref=testHref)
+        personalhelp.save()
+        self.assertIsNotNone(personalhelp.cbHref)
+
+    def test_confirm_preventionTitle_of_personalHelp_exists(self):
+        testTitle = "testTitle"
+        personalhelp = PersonalHelp(preventionTitle=testTitle)
+        personalhelp.save()
+        self.assertIsNotNone(personalhelp.preventionTitle)
+
+    def test_confirm_preventionHref_of_personalHelp_exists(self):
+        testHref = "testHref"
+        personalhelp = PersonalHelp(preventionHref=testHref)
+        personalhelp.save()
+        self.assertIsNotNone(personalhelp.preventionHref)
+
+    def test_confirm_helpTitle_of_personalHelp_exists(self):
+        testTitle = "testTitle"
+        personalhelp = PersonalHelp(helpTitle=testTitle)
+        personalhelp.save()
+        self.assertIsNotNone(personalhelp.helpTitle)
+
+    def test_confirm_helpHref_of_personalHelp_exists(self):
+        testHref = "testHref"
+        personalhelp = PersonalHelp(helpHref=testHref)
+        personalhelp.save()
+        self.assertIsNotNone(personalhelp.helpHref)
+
+    def test_confirm_suiPrevTitle_of_personalHelp_exists(self):
+        testTitle = "testTitle"
+        personalhelp = PersonalHelp(suiPrevTitle=testTitle)
+        personalhelp.save()
+        self.assertIsNotNone(personalhelp.suiPrevTitle)
+
+    def test_confirm_suiPrevHref_of_personalHelp_exists(self):
+        testHref = "testHref"
+        personalhelp = PersonalHelp(suiPrevHref=testHref)
+        personalhelp.save()
+        self.assertIsNotNone(personalhelp.suiPrevHref)
+
+    def test_confirm_content_of_suiPrevHref(self):
+        testHref = "testHref"
+        personalhelp = PersonalHelp(suiPrevHref=testHref)
+        personalhelp.save()
+        self.assertEqual(testHref,personalhelp.suiPrevHref)
+
+
+
 
 
 
