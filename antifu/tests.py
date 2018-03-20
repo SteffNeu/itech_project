@@ -1,9 +1,10 @@
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from antifu.models import Post,Comment,Category,UserProfile, ContactUsEmail
+from antifu.models import Post,Comment,Category,UserProfile, ContactUsEmail, FAQ, PersonalHelp
 from datetime import date
 
-# Create your tests here.
+#####Tests for the model######
 class PostModelTests(TestCase):
 
     def setUp(self):
@@ -57,11 +58,6 @@ class PostModelTests(TestCase):
         second_post = Post(category=self.cat)
         second_post.save()
         self.assertIs(1,second_post.id-first_post.id)
-
-    def test_ensure_category(self):
-        i = 3
-        #post = Post()
-        #post.save()
 
     def test_confirm_user_post(self):
         post = Post(category=self.cat,user=self.u_profile)
@@ -245,3 +241,81 @@ class CategoryModelTests(TestCase):
         category = Category(name=testCategory)
         category.save()
         self.assertEqual(testCategory,category.name)
+
+class UserProfileModelTests(TestCase):
+
+    def setUp(self):
+        #create test user
+        self.user = User.objects.create_user("testUser", "test@email.com", "testPassword")
+        self.user.save()
+
+    def test_confirm_user_of_profile_exists(self):
+        userprofile = UserProfile(user = self.user)
+        userprofile.save()
+        self.assertIsNotNone(userprofile.user)
+
+    def test_confirm_content_of_user_of_userprofile(self):
+        userprofile = UserProfile(user = self.user)
+        userprofile.save()
+        self.assertEqual(self.user,userprofile.user)
+
+    def test_ensure_totallove_is_positive(self):
+        userprofile = UserProfile(user = self.user,totallove=0)
+        userprofile.save()
+        self.assertEqual((userprofile.totallove >= 0), True)
+
+class FAQModelTest(TestCase):
+    def test_confirm_questios_of_FAQ_exists(self):
+        testQuestion = "testQuest"
+        faq = FAQ(questions=testQuestion)
+        faq.save()
+        self.assertIsNotNone(faq.questions)
+
+    def test_confirm_content_of_questions(self):
+        testQuestion = "testQuest"
+        faq = FAQ(questions=testQuestion)
+        faq.save()
+        self.assertEqual(testQuestion,faq.questions)
+
+    def test_confirm_answers_of_FAQ_exists(self):
+        testAnswer = "testAnswer"
+        faq = FAQ(answers=testAnswer)
+        faq.save()
+        self.assertIsNotNone(faq.answers)
+
+    def test_confirm_content_of_answers(self):
+        testAnswers = "testanswer"
+        faq = FAQ(answers=testAnswers)
+        faq.save()
+        self.assertEqual(testAnswers,faq.answers)
+
+
+
+
+####helper methods for the views############
+
+#helper function to add category
+def add_cat(name):
+    cat = Category(name=name)
+    cat.save()
+    return cat
+
+####tests for the views############
+class HomeViewTests(TestCase):
+
+    def test_home_view_with_no_categories(self):
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "There are no categories present.")
+        self.assertQuerysetEqual(response.context['categories'], [])
+
+    def test_index_view_with_categories(self):
+        add_cat('c1')
+        add_cat('c2')
+        add_cat('c3')
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "c3")
+        num_cats = len(response.context['categories'])
+        self.assertEqual(num_cats, 3)
+
