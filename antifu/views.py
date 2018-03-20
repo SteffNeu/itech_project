@@ -22,14 +22,15 @@ def home(request):
     context_dict = {'posts':posts, 'comments':comments}
     result_list = []
     if request.method == 'POST':
-        query = request.POST['query'].strip()
-        title_list = Post.objects.filter(title__contains=query)
-        context_list = (Post.objects.filter(context__contains=query))
-        value_list = list(chain(title_list, context_list))
-        result_list = remove_duplicates(value_list)
-        context_dict['query'] = query
-        context_dict['result_list'] = result_list
-        return render(request, 'antifu/search.html', context_dict)
+        if 'query' in request.POST:
+            query = request.POST['query'].strip()
+            title_list = Post.objects.filter(title__contains=query)
+            context_list = (Post.objects.filter(context__contains=query))
+            value_list = list(chain(title_list, context_list))
+            result_list = remove_duplicates(value_list)
+            context_dict['query'] = query
+            context_dict['result_list'] = result_list
+            return render(request, 'antifu/search.html', context_dict)
     return render(request, 'antifu/home.html', context_dict)
 
 def remove_duplicates(values):
