@@ -379,7 +379,37 @@ class HomeViewTests(TestCase):
 
 class ContactUsTest(TestCase):
 
-    def test_default_view(self):
+    def test_default_view_contactUs(self):
         response = self.client.get(reverse('contactUs'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Welcome to Anti-FU!")
+
+
+class PersonalHelpTest(TestCase):
+
+    def test_default_view_personalHelp(self):
+        response = self.client.get(reverse('personalHelp'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "This is where you can get help")
+
+class AboutUsTest(TestCase):
+
+    def test_default_view_aboutUs(self):
+        response = self.client.get(reverse('aboutUs'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Welcome to Anti-FU!")
+
+
+class FAQTest(TestCase):
+
+    def test_default_view_FAQ(self):
+        response = self.client.get(reverse('aboutUs'))
+        self.assertEqual(response.status_code, 200)
+
+
+
+
+
+
+
+
