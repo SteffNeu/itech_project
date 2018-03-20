@@ -263,8 +263,7 @@ def settings(request):
             form.save(commit=True)
         else:
             print('NOT VALID')
-        print("gamwwwww")
-        return HttpResponseRedirect(reverse('settings'))
+        return render(request, 'profile/redirect_template.html', {'selecteduser':request.user})
     return render(request, 'profile/MySettingsTab.html', {'form':form,
                                                           'selecteduser':request.user})
 
@@ -281,6 +280,7 @@ def uploadContent(request):
             form = UserProfileForm(instance=post)
             post = form.save(commit=False)
             post.save()
+        return render(request, 'profile/redirect_template.html', {'selecteduser': request.user})
     return render(request, 'profile/UploadContentTab.html', {'form':form})
 
 
