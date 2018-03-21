@@ -32,12 +32,6 @@ $(document).ready(function() {
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    }
-
-
-    $('.submit_profile_changes').submit(function (source) {
-        alert(source.target.value)
-
-    })
+    };
 
 });
