@@ -5,11 +5,9 @@
 <head >
   <link rel="shortcut icon" href="{%static "images/icon.png"%}" type="image/x-icon" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="{%static "css/base.css"%}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{% static "js/antifu-jquery.js" %}"></script>
-    <script src="{% static "js/antifu-ajax.js" %}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
     </script>
 
@@ -143,12 +141,7 @@ $(document).ready(function(){
 
 
 $('.report').click( function(source){
-    var r = confirm("Do you want to report this content?");
-    if (r == true) {
-        alert("The content was reported")
-    } else {
-        return
-    }
+
 
     var input = source.target.id
     var split = input.split("_")
@@ -157,6 +150,12 @@ $('.report').click( function(source){
 
     var wasPressed =  document.getElementById(input).disabled
     if(!wasPressed){
+            var r = confirm("Do you want to report this content?");
+            if (r == true) {
+                alert("The content was reported")
+            } else {
+                return
+            }
 
         var data = {
             id:id,
@@ -174,6 +173,9 @@ $('.report').click( function(source){
                 }
         });
         document.getElementById(input).disabled = true;
+    }
+    else{
+        alert("Content is already reported!")
     }
 });
 
