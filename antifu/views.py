@@ -16,6 +16,8 @@ from itertools import chain
 from datetime import datetime
 
 # Create your views here.
+@csrf_protect
+@csrf_exempt
 def home(request):
     posts = Post.objects.order_by('-date')[:5]
     comments = Comment.objects.all()
@@ -42,7 +44,8 @@ def remove_duplicates(values):
             seen.add(value)
     return output
 
-
+@csrf_protect
+@csrf_exempt
 def show_category(request, category_name):
     category = Category.objects.get(name=category_name)
     posts = Post.objects.filter(category=category)
@@ -52,6 +55,8 @@ def show_category(request, category_name):
 
     return render(request,'antifu/category.html',context_dict)
 
+@csrf_protect
+@csrf_exempt
 def show_post(request, post_id):
     selected_post = Post.objects.filter(id=post_id)
     comments = Comment.objects.all()
@@ -62,6 +67,8 @@ def aboutUs(request):
     context_dict = {}
     return render(request, 'antifu/aboutUs.html',context_dict)
 
+@csrf_protect
+@csrf_exempt
 def contactUs(request):
     context_dict = {}
     if request.method == 'POST':
@@ -151,6 +158,8 @@ def submit_comment(request):
         return render(request, 'antifu/comment.html', {'comment': new_comment})
 
 
+@csrf_protect
+@csrf_exempt
 @login_required
 def register_profile(request):
     form = UserProfileForm()
@@ -190,7 +199,8 @@ def profile(request, username):
     return render(request, 'profile/profile.html',
         {'userprofile': userprofile, 'selecteduser': user, 'form': form,'profile_url':'/media/'})
 
-
+@csrf_protect
+@csrf_exempt
 def search(request):
     result_list = []
     context_dict = {}
@@ -246,7 +256,8 @@ def myComments(request, username):
     context_dict={"comments":user_comment_list}
     return render(request, 'profile/MyCommentsTab.html', context_dict)
 
-
+@csrf_protect
+@csrf_exempt
 def settings(request):
     userprofile = UserProfile.objects.get(user=request.user)
     form = UserProfileForm({'picture': userprofile.picture})
@@ -273,7 +284,8 @@ def settings(request):
     return render(request, 'profile/MySettingsTab.html', {'form':form,
                                                           'selecteduser':request.user})
 
-
+@csrf_protect
+@csrf_exempt
 def uploadContent(request):
     form=uploadPostForm()
     if request.method== 'POST':
