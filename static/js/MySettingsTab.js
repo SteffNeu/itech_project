@@ -33,5 +33,11 @@ $(document).ready(function() {
             modal.style.display = "none";
         }
     }
-}
-);
+
+
+    $('.submit_profile_changes').submit(function (source) {
+        alert(source.target.value)
+
+    })
+
+});

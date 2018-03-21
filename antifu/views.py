@@ -256,7 +256,10 @@ def settings(request):
         user.first_name = request.POST.get('fname', '')
         user.last_name = request.POST.get('lname', '')
         user.email = request.POST.get('email', '')
-        user.username = request.POST.get('username', '')
+        new_name = request.POST.get('username', '')
+
+        if not User.objects.filter(username=new_name).exists():
+            user.username = request.POST.get('username', '')
         user.save()
 
         if form.is_valid():
