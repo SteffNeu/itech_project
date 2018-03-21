@@ -186,13 +186,17 @@ $(document).ready(function(){
 
     });
 
+    //send a comment to the database
     $(".commentForm").submit(function(event) {
 
-
+        event.preventDefault()
         var source = event.target
         var post_id = source.getAttribute('data-postID')
         var user = source.getAttribute('data-user')
         var comment = document.getElementById(post_id+'_content').value
+
+        //after submitting the statement empty the textfield
+        document.getElementById(post_id+'_content').value = ""
 
         var data = {
             user:user,
@@ -212,5 +216,6 @@ $(document).ready(function(){
                 });
 
     });
+
 
 });
