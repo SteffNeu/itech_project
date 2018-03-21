@@ -34,7 +34,7 @@ $(document).ready(function(){
                 success: function(responseData) {
                 },
                 error: function(){
-                    alert("something went wrong")
+                    alert("something went wrong with reporting the content")
                     }
             });
             document.getElementById(input).disabled = true;
@@ -72,6 +72,9 @@ $(document).ready(function(){
         var comment_id = split[0]
         var buttonID = comment_id+"_submit_change"
         var data = $(currentEdit)
+
+        var url = source.target.getAttribute('data-url')
+
         data.attr("contentEditable","false")
         data.css({"border-style":"none"});
         currentEdit = "no_comment"
@@ -85,12 +88,12 @@ $(document).ready(function(){
 
         $.ajax({
             type: "POST",
-            url: "update_comment_content/",
+            url: url,
             data: info,
             success: function(responseData) {
             },
             error: function(){
-                alert("something went wrong")
+                alert("something went wrong with updating the comment")
             }
         });
     })
@@ -135,7 +138,7 @@ $(document).ready(function(){
                     success: function(responseData) {
                     },
                     error: function(){
-                        alert("something went wrong")
+                        alert("something went wrong with updating post ratings")
                     }
                 });
 
@@ -179,7 +182,7 @@ $(document).ready(function(){
                     success: function(responseData) {
                     },
                     error: function(){
-                        alert("something went wrong")
+                        alert("something went wrong with updating comment rating")
                     }
                 });
 
@@ -210,7 +213,7 @@ $(document).ready(function(){
                     success: function(responseData) {
                     },
                     error: function(){
-                        alert("something went wrong")
+                        alert("something went wrong with submitting the comment")
                     }
                 });
     });
