@@ -1,11 +1,12 @@
 {% load antifu_template_tags %}
 {% load widget_tweaks %}
+{% load static %}
 <div>
 
 {% for p in posts %}
     {% get_post p.id user %}
     <div>
-        <ul>
+        <ul class="comments_for_post" data-postid="{{ p.id }}">
         {% for c in comments %}
             {% if c.post == p %}
                 {% get_comment c.id user%}

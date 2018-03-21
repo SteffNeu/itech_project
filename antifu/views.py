@@ -147,7 +147,8 @@ def submit_comment(request):
         post = Post.objects.get(id=post_id)
         new_comment = Comment.objects.create(post=post,user=userProfile, comment=comment)
         new_comment.save()
-    return HttpResponse(new_comment)
+
+        return render(request, 'antifu/comment.html', {'comment': new_comment})
 
 
 @login_required
