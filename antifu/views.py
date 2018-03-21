@@ -333,7 +333,7 @@ def update_post_feat(request):
             post.grammarFail = value
         elif feat == "harmful":
             post.harmful = value
-        else:
+        elif feat == "toxicity":
             post.toxicity = value
 
         post.save()
