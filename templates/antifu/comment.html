@@ -31,7 +31,7 @@
                           <span class="glyphicon glyphicon-option-horizontal"></span>
                           </button>
                           <ul class="dropdown-menu">
-                              <li class="report" data-url="{% url 'report' %}"><span class="fas fa-exclamation-triangle" role="button" id="{{ comment.id }}_comment" aria-disabled="false" > Report</span></li>
+                              <li class="report" ><span class="fas fa-exclamation-triangle" role="button" id="{{ comment.id }}_comment" aria-disabled="false" data-url="{% url 'report' %}"> Report</span></li>
                               {% if comment.user.user == user %}
                                   <li class="edit"><span id="{{ comment.id }}_edit" class="fas fa-edit" role="button"> Edit</span></li>
                               {% endif %}

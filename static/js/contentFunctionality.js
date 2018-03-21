@@ -23,7 +23,7 @@ $(document).ready(function(){
                 } else {
                     return
                 }
-
+            
             var data = {
                 id:id,
                 flag: flag,

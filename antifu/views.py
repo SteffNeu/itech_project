@@ -364,13 +364,15 @@ def report(request):
         if flag == "post":
             post = Post.objects.get(id=id)
             post.report = post.report+1
+            print(post.report)
+
             post.save()
         else:
             comment = Comment.objects.get(id=id)
             comment.report = comment.report + 1
             comment.save()
 
-    return HttpResponse(" ")
+    return HttpResponse("")
 
 @csrf_protect
 @csrf_exempt
