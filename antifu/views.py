@@ -309,7 +309,7 @@ def update_comment_feat(request):
 
         comment.save()
 
-    return HttpResponse("succes")
+    return HttpResponse(" ")
 
 @csrf_protect
 @csrf_exempt
@@ -334,7 +334,7 @@ def update_post_feat(request):
 
         post.save()
 
-    return HttpResponse("yo")
+    return HttpResponse(" ")
 
 @csrf_protect
 @csrf_exempt
