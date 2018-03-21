@@ -8,7 +8,7 @@
                         <div class="row justify-content-left">
                             <div class="comment_profile_pic col-sm-1">
                                 {% if comment.user %}
-                                    <img class="small_profile border-0 rounded mt-1 mb-1 mr-2" src="{% get_media_prefix %}{{ comment.user.picture }}" alt="No Image"/>
+                                    <img class="small_profile border-0 rounded mt-1 mb-1 mr-2" src="{% get_media_prefix %}{{ comment.user.picture }}"/>
                                 {% else %}
                                     <img class="small_profile border-0 rounded mt-1 mb-1 mr-2" src="{%static "images/deleted_user.jpg"%}" alt="No Image"/>
                                 {% endif %}
