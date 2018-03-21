@@ -13,6 +13,8 @@ $(document).ready(function(){
         var id = split[0];
         var flag = split[1];
 
+        var url = source.target.getAttribute('data-url');
+
         var wasPressed =  document.getElementById(input).disabled;
         if(!wasPressed){
                 var r = confirm("Do you want to report this content?");
@@ -29,7 +31,7 @@ $(document).ready(function(){
 
             $.ajax({
                 type: "POST",
-                url: "report/",
+                url: url,
                 data: data,
                 success: function(responseData) {
                 },
