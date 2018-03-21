@@ -37,25 +37,25 @@
 				<div class="row justify-content-center mt-2 mb-2">
 					<div class="post_rating col-2">
 						<div class="row">
-							<span id="{{ post.id }}_grammarFail" class="post_rating r_icon fas fa-question-circle col-6" role="button" aria-pressed="false"></span>
+							<span id="{{ post.id }}_grammarFail" class="post_rating r_icon fas fa-question-circle col-6" role="button" aria-pressed="false" data-url="{% url 'update_post_feat' %}"></span>
 							<span id="{{ post.id }}_grammarFail_count" class="post_rating r_number col-6">{{ post.grammarFail }}</span>
 						</div>
 					</div>
 					<div class="post_rating col-2">
 						<div class="row">
-							<span id="{{ post.id }}_logicFail" class="post_rating r_icon fas fa-low-vision col-6" role="button" aria-pressed="false"></span>
+							<span id="{{ post.id }}_logicFail" class="post_rating r_icon fas fa-low-vision col-6" role="button" aria-pressed="false" data-url="{% url 'update_post_feat' %}" ></span>
 							<span id="{{ post.id }}_logicFail_count" class="post_rating r_number col-6">{{ post.logicFail }}</span>
 						</div>
 					</div>
 					<div class="post_rating col-2">
 						<div class="row">
-							<span id="{{ post.id }}_toxicity" class="post_rating r_icon fas fa-flask col-6" role="button" aria-pressed="false"></span>
+							<span id="{{ post.id }}_toxicity" class="post_rating r_icon fas fa-flask col-6" role="button" aria-pressed="false" data-url="{% url 'update_post_feat' %}"></span>
 							<span id="{{ post.id }}_toxicity_count" class="post_rating r_number col-6">{{ post.toxicity }}</span>
 						</div>
 					</div>
 					<div class="post_rating col-2">
 						<div class="row">
-							<span id="{{ post.id }}_harm" class="post_rating r_icon fas fa-bolt col-6" role="button" aria-pressed="false"></span>
+							<span id="{{ post.id }}_harm" class="post_rating r_icon fas fa-bolt col-6" role="button" aria-pressed="false" data-url="{% url 'update_post_feat' %}"></span>
 							<span id="{{ post.id }}_harm_count" class="post_rating r_number col-6">{{ post.harmful }}</span>
 						</div>
 					</div>

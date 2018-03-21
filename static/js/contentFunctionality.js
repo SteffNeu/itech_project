@@ -108,6 +108,7 @@ $(document).ready(function(){
             <!--get toggle status-->
         var toggled = source.target.getAttribute("aria-pressed");
         var id = source.target.id;
+        var url = event.target.getAttribute('data-url');
 
         var split = id.split("_");
         var post_id = split[0];
@@ -133,7 +134,7 @@ $(document).ready(function(){
 
             $.ajax({
                     type: "POST",
-                    url: "update_post_feat/",
+                    url: url,
                     data: data,
                     success: function(responseData) {
                     },
@@ -156,6 +157,7 @@ $(document).ready(function(){
         var split = id.split("_");
         var comment_id = split[0];
         var feat = split[1];
+        var url = event.target.getAttribute('data-url');
 
         var count_id = id+"_count";
         var count = document.getElementById(count_id).innerHTML;
@@ -177,7 +179,7 @@ $(document).ready(function(){
 
         $.ajax({
                     type: "POST",
-                    url: "update_comment_feat/",
+                    url: url,
                     data: data,
                     success: function(responseData) {
                     },
